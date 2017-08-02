@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pk.shareabook.ProfileInfo">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Details"
+        android:textStyle="bold"
+        android:id="@+id/imageTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:textSize="20sp"/>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_Email"
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/imageTitle"
+        android:paddingTop="10dp"
+        android:textColorHint="#BFBFBF"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/input_watever"
+            android:layout_width="match_parent"
+            android:hint="First Name"
+            android:backgroundTint="#fff"
+            android:textColor="#555"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lastName"
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/input_layout_Email"
+        android:paddingTop="20dp"
+        android:textColorHint="#BFBFBF"
+        android:layout_height="wrap_content">
+
+        <EditText
+
+            android:layout_width="match_parent"
+            android:hint="Last Name"
+            android:backgroundTint="#fff"
+            android:textColor="#555"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/displayName"
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/lastName"
+        android:paddingTop="20dp"
+        android:textColorHint="#BFBFBF"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:hint="Display Name"
+            android:backgroundTint="#fff"
+            android:textColor="#555"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/institute"
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/displayName"
+        android:paddingTop="20dp"
+        android:textColorHint="#BFBFBF"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:hint="Institute"
+            android:backgroundTint="#fff"
+            android:textColor="#555"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/region"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:paddingRight="20dp"-->
+        <!--android:layout_below="@+id/institute"-->
+        <!--android:paddingTop="20dp"-->
+        <!--android:textColorHint="#BFBFBF"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<EditText-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:hint="Region"-->
+            <!--android:backgroundTint="#fff"-->
+            <!--android:textColor="#555"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+            android:id="@+id/region"
+        android:layout_below="@+id/institute"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_spinner_profile"
+
+
+        />
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/city"
+        android:layout_below="@+id/region"
+
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+
+
+        android:background="@drawable/bg_spinner_profile"
+
+
+        />
+
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/city"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:paddingRight="20dp"-->
+        <!--android:layout_below="@+id/region"-->
+        <!--android:paddingTop="20dp"-->
+        <!--android:textColorHint="#BFBFBF"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:hint="City"-->
+            <!--android:backgroundTint="#fff"-->
+            <!--android:textColor="#555"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+
+    <Button
+        android:id="@+id/btnSignUo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:background="@drawable/bg_btn_login"
+        android:text="Submit"
+        android:layout_margin="20dp"
+        android:textColor="#fff"
+        android:layout_below="@+id/city"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

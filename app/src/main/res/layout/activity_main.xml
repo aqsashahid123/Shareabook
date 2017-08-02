@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.pk.shareabook.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/imageTitle"
+
+        android:background="#000"/>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:alpha="0.2"
+        android:src="@drawable/r_bg_login"
+
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOGIN TO ACCOUNT"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_marginRight="62dp"
+        android:layout_marginEnd="62dp"
+        android:layout_alignTop="@+id/imageTitle"
+
+        android:layout_marginTop="36dp" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@+id/imageTitle"
+    android:layout_marginTop="40dp"
+    android:background="@drawable/bg_spinner_profile"
+    android:layout_alignParentLeft="true"
+    android:padding="40dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_alignParentStart="true">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_Email"
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/imageTitle"
+        android:paddingTop="20dp"
+        android:textColorHint="#BFBFBF"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/input_watever"
+            android:layout_width="match_parent"
+            android:hint="Email or Username"
+            android:backgroundTint="#fff"
+            android:textColor="#555"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_password"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/input_layout_Email"
+        android:textColorHint="#BFBFBF"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:textColor="#555"
+            android:hint="Password"
+            android:backgroundTint="#fff"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#fff"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/bg_btn_login"
+    android:layout_below="@+id/input_layout_password"
+    android:text="Submit"
+    android:id="@+id/btnSignUo" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Dont't have an accout?" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lost your Password?"
+               
+            android:gravity="right"
+                android:layout_gravity="right"/>
+</LinearLayout>
+</LinearLayout>
+
+</RelativeLayout>
