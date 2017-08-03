@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pk.shareabook.SignUp">
+    tools:context="com.pk.shareabook.Activities.SignUp">
 
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/imageTitle"
-        android:layout_marginTop="30dp"
         android:background="#000"/>
 
 
@@ -35,82 +34,118 @@
     android:layout_marginTop="36dp"
     android:id="@+id/textView2" />
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/imageTitle"
+
+    android:background="@drawable/bg_spinner_profile"
+
+
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="40dp"
+    android:paddingTop="20dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="20dp"
+    android:orientation="vertical">
+
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="REGISTER"
         android:id="@+id/tvRegister"
         android:textColor="#555"
+        android:gravity="center"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:layout_below="@+id/imageTitle"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_marginTop="21dp" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_Email"
-        android:layout_width="match_parent"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_below="@+id/tvRegister"
-        android:paddingTop="20dp"
-        android:textColorHint="#BFBFBF"
-        android:layout_height="wrap_content">
+
+        android:layout_marginTop="10dp" />
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/input_layout_Email"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:paddingRight="20dp"-->
+        <!--android:layout_below="@+id/tvRegister"-->
+        <!--android:paddingTop="20dp"-->
+        <!--android:textColorHint="#BFBFBF"-->
+        <!--android:layout_height="wrap_content">-->
 
         <EditText
-            android:id="@+id/input_watever"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
-            android:hint="Email or Username"
+            android:drawableLeft="@drawable/img_email"
+            android:drawablePadding="10dp"
+            android:hint="|   Email or Username"
             android:backgroundTint="#fff"
             android:textColor="#555"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             />
 
-    </android.support.design.widget.TextInputLayout>
+    <!--</android.support.design.widget.TextInputLayout>-->
 
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_password"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/input_layout_Email"
-        android:textColorHint="#BFBFBF"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/input_layout_password"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_below="@+id/input_layout_Email"-->
+        <!--android:textColorHint="#BFBFBF"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:paddingRight="20dp"-->
 
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/input_password"
-            android:layout_width="match_parent"
-            android:textColor="#555"
-            android:hint="Password"
-            android:backgroundTint="#fff"
-            android:layout_height="wrap_content"
-            />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/input_layout_password"
-        android:layout_width="match_parent"
-        android:id="@+id/input_layout_reTypePass"
-        android:textColorHint="#BFBFBF"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-
-        android:layout_height="wrap_content">
+        <!--android:layout_height="wrap_content">-->
 
         <EditText
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:textColor="#555"
-            android:hint="Retype Password"
+            android:hint="|   Password"
+            android:drawableLeft="@drawable/img_password"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:drawablePadding="10dp"
+
+            android:layout_marginTop="20dp"
             android:backgroundTint="#fff"
             android:layout_height="wrap_content"
             />
 
-    </android.support.design.widget.TextInputLayout>
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_below="@+id/input_layout_password"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/input_layout_reTypePass"-->
+        <!--android:textColorHint="#BFBFBF"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:paddingRight="20dp"-->
+
+        <!--android:layout_height="wrap_content">-->
+
+        <EditText
+            android:layout_width="match_parent"
+            android:textColor="#555"
+            android:hint="|   Retype Password"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"
+            android:paddingRight="20dp"
+            android:id="@+id/etConfirmPassword"
+
+            android:drawableLeft="@drawable/img_password"
+
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#fff"
+            android:layout_height="wrap_content"
+            />
+
+    <!--</android.support.design.widget.TextInputLayout>-->
 
     <Button
         android:layout_width="match_parent"
@@ -122,8 +157,9 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/bg_btn_login"
         android:layout_below="@+id/input_layout_reTypePass"
-        android:text="SIGNUP"
+        android:text="REGISTER"
+        android:layout_marginBottom="20dp"
         android:id="@+id/btnSignUo" />
 
-
+</LinearLayout>
 </RelativeLayout>

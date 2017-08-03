@@ -1,9 +1,11 @@
-package com.pk.shareabook;
+package com.pk.shareabook.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.pk.shareabook.R;
 
 import java.util.ArrayList;
 
