@@ -1,5 +1,6 @@
-package com.pk.shareabook.Activities;
+package com.pk.shareabook;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -17,9 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.pk.shareabook.MainScreen;
 import com.pk.shareabook.Network.END_POINTS;
-import com.pk.shareabook.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         tvSignUp = (TextView)findViewById(R.id.tvSignUp);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
-        btnSubmit = (Button) findViewById(R.id.btnSignUo);
+        btnSubmit = (Button) findViewById(R.id.btnUpdateProfile);
 
 
 
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
 
+
                 if (email.length()==0|| password.length()==0){
 
 
@@ -67,48 +67,92 @@ public class MainActivity extends AppCompatActivity {
 
                 else {
 
+
+                    final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+                    progressDialog.setMessage("Loading");
+                    progressDialog.show();
+
                     StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.LOGIN, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
 
+                            progressDialog.dismiss();
                             try {
                                 JSONObject object = new JSONObject(response);
                               success   =  object.get("success").toString();
-                               id       = object.get("id").toString();
-                              isActive  =  object.get("isActive").toString();
-                                city_id = object.get("city_id").toString();
-                                regionId = object.get("region_id").toString();
-                                firstName = object.get("first_name").toString();
-                                LastName = object.get("last_name").toString();
-                                institute = object.get("institute").toString();
-                              //  displayPic = object.get().toString();
-                                display_name = object.get("display_name").toString();
+                             //   String message = object.get("message").toString();
 
+                                if (success.equals("0")){
 
-                              SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                   Toast.makeText(getApplicationContext(),"Login Failed",Toast.LENGTH_SHORT).show();
+
+                                }
+                            if (success.equals("0.5")){
+
+                                id = object.get("id").toString();
+                                isActive = object.get("isActive").toString();
+
+                                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                                 SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("id",id);
-                                editor.putString("isActive",isActive);
-                                editor.putString("city_id",city_id);
-                                editor.putString("region_id",regionId);
-                                editor.putString("first_name",firstName);
-                                editor.putString("last_name",LastName);
-                                editor.putString("display_name",display_name);
+                                editor.putString("id", id);
+                                editor.putString("isActive", isActive);
                                 editor.apply();
 
 
-                                if (Integer.valueOf(isActive) == 0.5){
+                                Intent intent = new Intent(MainActivity.this, ProfileInfo.class);
+                                startActivity(intent);
 
-                                    Intent intent = new Intent(MainActivity.this,ProfileInfo.class);
-                                    startActivity(intent);
+
+
+
+                            }
+
+                                if (success.equals("1")) {
+                                    id = object.get("id").toString();
+                                    isActive = object.get("isActive").toString();
+
+                                    //   if (isActive.equals(1)){
+                                    city_id = object.get("city_id").toString();
+                                    regionId = object.get("region_id").toString();
+                                    firstName = object.get("first_name").toString();
+                                    LastName = object.get("last_name").toString();
+                                    institute = object.get("institute").toString();
+                                    //  displayPic = object.get().toString();
+                                    display_name = object.get("display_name").toString();
+
+
+                                    //      }
+
+
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putString("id", id);
+                                    editor.putString("isActive", isActive);
+                                    editor.putString("city_id", city_id);
+                                    editor.putString("region_id", regionId);
+                                    editor.putString("first_name", firstName);
+                                    editor.putString("last_name", LastName);
+                                    editor.putString("institute", institute);
+                                    editor.putString("display_name", display_name);
+                                    editor.apply();
+
+
+                                    if (Integer.valueOf(isActive) == 0.5) {
+
+                                        Intent intent = new Intent(MainActivity.this, ProfileInfo.class);
+                                        startActivity(intent);
+
+                                    }
+                                    if (Integer.valueOf(isActive) == 1) {
+
+                                        Intent intent = new Intent(MainActivity.this, MainScreen.class);
+                                        startActivity(intent);
+
+                                    }
 
                                 }
-                                if (Integer.valueOf(isActive) == 1){
 
-                                    Intent intent = new Intent(MainActivity.this,MainScreen.class);
-                                    startActivity(intent);
-
-                                }
+//                                if ()
 
 
 

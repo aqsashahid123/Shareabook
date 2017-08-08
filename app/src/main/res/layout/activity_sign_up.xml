@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pk.shareabook.Activities.SignUp">
+    tools:context="com.pk.shareabook.SignUp">
 
 
     <ImageView
@@ -159,7 +159,7 @@
         android:layout_below="@+id/input_layout_reTypePass"
         android:text="REGISTER"
         android:layout_marginBottom="20dp"
-        android:id="@+id/btnSignUo" />
+        android:id="@+id/btnUpdateProfile" />
 
 </LinearLayout>
 </RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.pk.shareabook.Activities.MainActivity">
+    tools:context="com.pk.shareabook.MainActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -111,7 +111,7 @@
     android:background="@drawable/bg_btn_login"
     android:layout_below="@+id/input_layout_password"
     android:text="Submit"
-    android:id="@+id/btnSignUo" />
+    android:id="@+id/btnUpdateProfile" />
 
 
     <LinearLayout

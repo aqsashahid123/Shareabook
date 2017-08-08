@@ -1,4 +1,4 @@
-package com.pk.shareabook.Activities;
+package com.pk.shareabook;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +16,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Network.END_POINTS;
-import com.pk.shareabook.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +44,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        btnSignUp = (Button) findViewById(R.id.btnSignUo);
+        btnSignUp = (Button) findViewById(R.id.btnUpdateProfile);
         etEmail = (EditText)findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
@@ -115,8 +114,13 @@ public class SignUp extends AppCompatActivity {
                                         }
                                         if (result.equals("1")){
 
-                                            Intent intent = new Intent(SignUp.this,ProfileInfo.class);
+//                                            Intent intent = new Intent(SignUp.this,ProfileInfo.class);
+//                                            startActivity(intent);
+
+
+                                            Intent intent = new Intent(SignUp.this,MainActivity.class);
                                             startActivity(intent);
+
 
                                         }
 

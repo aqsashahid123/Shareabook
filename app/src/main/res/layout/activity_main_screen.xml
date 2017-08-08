@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pk.shareabook.MainScreen">
 
-</android.support.constraint.ConstraintLayout>
+    tools:context="com.pk.shareabook.MainScreen">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+
+    android:background="#333"
+    >
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Book Title"
+        android:layout_marginBottom="10dp"
+        android:drawablePadding="10dp"
+        android:padding="5dp"
+        android:drawableLeft="@drawable/search"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:hint="Book Author"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="10dp"
+        android:background="#fff"
+        android:textSize="20sp"
+        android:layout_margin="10dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="10dp"
+        android:hint="Institute"
+        android:background="#fff"
+        android:textSize="20sp"
+        android:layout_margin="10dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:drawablePadding="10dp"
+        android:padding="5dp"
+        android:hint="Location"
+        android:drawableLeft="@drawable/search"
+        android:textSize="20sp"
+        android:layout_margin="10dp"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:id="@+id/getRegions"
+android:background="#fff"
+
+        />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:id="@+id/getCity"
+
+        android:background="#fff"
+
+        />
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:text="SEARCH"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="40dp"
+    android:textColor="#fff"
+    android:background="#3498db"/>
+
+
+</LinearLayout>
+
+
+
+
+</RelativeLayout>

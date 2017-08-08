@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pk.shareabook.Activities.ProfileInfo">
+    tools:context="com.pk.shareabook.ProfileInfo">
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/input_watever"
+            android:id="@+id/etFname"
             android:layout_width="match_parent"
             android:hint="First Name"
             android:backgroundTint="#fff"
@@ -57,6 +57,7 @@
             android:hint="Last Name"
             android:backgroundTint="#fff"
             android:textColor="#555"
+            android:id="@+id/etLname"
             android:layout_height="wrap_content"
             />
 
@@ -75,6 +76,7 @@
         <EditText
             android:layout_width="match_parent"
             android:hint="Display Name"
+            android:id="@+id/etDisplayName"
             android:backgroundTint="#fff"
             android:textColor="#555"
             android:layout_height="wrap_content"
@@ -96,6 +98,7 @@
             android:layout_width="match_parent"
             android:hint="Institute"
             android:backgroundTint="#fff"
+            android:id="@+id/etIname"
             android:textColor="#555"
             android:layout_height="wrap_content"
             />
@@ -178,7 +181,7 @@
 
 
     <Button
-        android:id="@+id/btnSignUo"
+        android:id="@+id/btnUpdateProfile"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
