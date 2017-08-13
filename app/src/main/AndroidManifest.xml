@@ -19,15 +19,21 @@
         </activity>
         <activity android:name=".Activities.SignUp" />
         <activity android:name=".Activities.ProfileInfo">
+          /////
+
+
+        </activity>
+        <activity android:name=".Activities.MainScreen" />
+        <activity android:name=".UploadBook"></activity>
+        <activity android:name=".UploadedBooks">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".Activities.MainScreen" />
-        <activity android:name=".UploadBook"></activity>
-        <activity android:name=".UploadedBooks"></activity>
     </application>
 
 </manifest>

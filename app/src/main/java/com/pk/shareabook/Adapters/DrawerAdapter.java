@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.pk.shareabook.Pojo.DrawerPojo;
 import com.pk.shareabook.R;
 import com.pk.shareabook.UploadBook;
+import com.pk.shareabook.UploadedBooks;
 
 import java.util.List;
 
@@ -88,8 +89,12 @@ public class DrawerAdapter extends BaseAdapter {
 
                         break;
 
-                    case "Upload Books" :
-                        Toast.makeText(context,"2",Toast.LENGTH_SHORT).show();
+                    case "My Uploaded Books" :
+                       // Toast.makeText(context,"2",Toast.LENGTH_SHORT).show();
+
+                        Intent intent2 = new Intent(context.getApplicationContext(), UploadedBooks.class);
+                        context.startActivity(intent2);
+
                         break;
 
                     case "Requested Books" :

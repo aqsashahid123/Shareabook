@@ -119,7 +119,7 @@ public class ProfileInfo extends AppCompatActivity {
 
 
         drawerList.add(new DrawerPojo("Details"));
-        drawerList.add(new DrawerPojo("Upload Books"));
+        drawerList.add(new DrawerPojo("My Uploaded Books"));
         drawerList.add(new DrawerPojo("Requested Books"));
         drawerList.add(new DrawerPojo("Sharing Requests"));
         drawerList.add(new DrawerPojo("Shared Books"));

@@ -20,5 +20,9 @@ public class END_POINTS {
 
     public static String UPDATE_PRO_USER_INACTIVE = BASE_URL + "updateProfileInfo";
 
+    public static String GET_MY_UPLOADEBOOKS = BASE_URL + "myUploadedBooks";
+
+    public static String GET_BOOK_LOGO = "http://share-a-book.pk/beta/uploads/book_logo/";
+
 
 }
