@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.pk.shareabook.MainScreen">
+    tools:context="com.pk.shareabook.Activities.MainScreen">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"

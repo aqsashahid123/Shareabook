@@ -1,4 +1,4 @@
-package com.pk.shareabook;
+package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Network.END_POINTS;
+import com.pk.shareabook.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

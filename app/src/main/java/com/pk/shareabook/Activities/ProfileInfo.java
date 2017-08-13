@@ -1,15 +1,20 @@
-package com.pk.shareabook;
+package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,7 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.pk.shareabook.Adapters.DrawerAdapter;
 import com.pk.shareabook.Network.END_POINTS;
+import com.pk.shareabook.Pojo.DrawerPojo;
+import com.pk.shareabook.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProfileInfo extends AppCompatActivity {
@@ -35,6 +44,9 @@ public class ProfileInfo extends AppCompatActivity {
     Spinner spinnerRegion,spinnerCity;
     ArrayList<String> spinnerDataCity, spinnerDataCountry;
 
+    Toolbar toolbar;
+
+
     String f_name,l_name,i_name,d_name,cityId,regionId;
     EditText etFname,etLname,etIname,etD_name;
     Button btnUpdateProfile;
@@ -42,13 +54,19 @@ public class ProfileInfo extends AppCompatActivity {
     String id;
     String isActive;
 
+    DrawerAdapter drawerAdapter;
+
     HashMap<String,String> regionMap;
     HashMap<String,String> citiesMap;
 
     String regionKey;
     String cityKey;
     SharedPreferences pref;
+    private ListView mDrawerList;
 
+    ///////////////DRAWER////////////////////
+    List<DrawerPojo> drawerList;
+        DrawerLayout drawerLayout;
 
  //   List<HashMap<String,String>> regionsMapList;
  //   List<HashMap<String,String>> citiesMapList;
@@ -58,11 +76,59 @@ public class ProfileInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_info);
 
+
+        toolbar = (Toolbar) findViewById(R.id.appbar);
+        toolbar.setTitle("MY DETAILS");
+        toolbar.inflateMenu(R.menu.toolbar_menu);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                int id = item.getItemId();
+
+                switch (id){
+
+                    case R.id.openMenu:
+
+                        drawerLayout.openDrawer(Gravity.RIGHT);
+                   //     openDrawer();
+                        break;
+
+                }
+
+
+                return true;
+            }
+        });
+
+
+
         btnUpdateProfile = (Button)findViewById(R.id.btnUpdateProfile);
         etD_name= (EditText) findViewById(R.id.etDisplayName);
         etFname = (EditText) findViewById(R.id.etFname);
         etLname = (EditText) findViewById(R.id.etLname);
         etIname = (EditText) findViewById(R.id.etIname);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+
+       // drawerLayout.openDrawer(Gravity.RIGHT);
+        drawerList = new ArrayList<>();
+        openDrawer();
+        //////////////////DRAWER////////////////////
+
+
+        drawerList.add(new DrawerPojo("Details"));
+        drawerList.add(new DrawerPojo("Upload Books"));
+        drawerList.add(new DrawerPojo("Requested Books"));
+        drawerList.add(new DrawerPojo("Sharing Requests"));
+        drawerList.add(new DrawerPojo("Shared Books"));
+        drawerList.add(new DrawerPojo("Received Books"));
+        drawerList.add(new DrawerPojo("Upload Book"));
+        drawerList.add(new DrawerPojo("Logout"));
+
+
+
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -164,6 +230,14 @@ public class ProfileInfo extends AppCompatActivity {
 
 
     }
+
+    public void  openDrawer(){
+        drawerAdapter = new DrawerAdapter(this,drawerList,R.layout.drawer_list_item);
+        mDrawerList.setAdapter( drawerAdapter);
+
+    }
+
+
 
     public void getRegionsData(){
 
