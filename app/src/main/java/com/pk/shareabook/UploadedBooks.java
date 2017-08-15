@@ -34,8 +34,8 @@ public class UploadedBooks extends AppCompatActivity {
 
     ListView lvMyUploadedBooks;
     ProgressDialog pd;
-    ArrayList<HashMap<String,String>> mapList;
-    HashMap<String,String> map;
+   public ArrayList<HashMap<String,String>> mapList;
+  public   HashMap<String,String> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class UploadedBooks extends AppCompatActivity {
 
                         for (int i = 0; i < regionArray.length(); i++) {
 
-                            JSONObject obj = new JSONObject(regionArray.getString(i));
+                            JSONObject obj =(regionArray.getJSONObject(i));
 
                             map.put("id",obj.getString("id"));
                             map.put("title",obj.getString("title"));
@@ -97,11 +97,13 @@ public class UploadedBooks extends AppCompatActivity {
                            // spinnerDataCountry.add(lmn);
                         }
 
+                        MyUploadedBooksAdapter adapter = new MyUploadedBooksAdapter(getApplicationContext(), mapList);
+
+                        lvMyUploadedBooks.setAdapter(adapter);
+
+
+
                     }
-
-                    MyUploadedBooksAdapter adapter = new MyUploadedBooksAdapter(getApplicationContext(), mapList);
-
-                    lvMyUploadedBooks.setAdapter(adapter);
 
 
                     lvMyUploadedBooks.setLongClickable(true);

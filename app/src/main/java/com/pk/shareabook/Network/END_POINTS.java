@@ -24,5 +24,7 @@ public class END_POINTS {
 
     public static String GET_BOOK_LOGO = "http://share-a-book.pk/beta/uploads/book_logo/";
 
+    public static String DELETE_BOOK = BASE_URL + "deleteBook";
+
 
 }

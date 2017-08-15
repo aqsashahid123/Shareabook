@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+
+    android:layout_height="match_parent"
+    tools:context="com.pk.shareabook.UploadBook">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload Book"
+        android:gravity="center"
+        android:id="@+id/tvHeading"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:textColor="#3498db"/>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_bookTitle"
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/tvHeading"
+        android:paddingTop="10dp"
+        android:textColorHint="#BFBFBF"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etBookTitle"
+            android:layout_width="match_parent"
+            android:hint="Book Title"
+            android:backgroundTint="#fff"
+            android:textColor="#555"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:id="@+id/input_bookAutor"
+        android:layout_marginTop="10dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/input_bookTitle"
+        android:paddingTop="10dp"
+        android:textColorHint="#BFBFBF"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:hint="Book Author"
+            android:backgroundTint="#fff"
+            android:id="@+id/etBookAuthor"
+            android:textColor="#555"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLocations"
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/input_bookAutor"
+        android:paddingTop="10dp"
+        android:textColorHint="#BFBFBF"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etLocations"
+            android:layout_width="match_parent"
+            android:hint="Near by Locations where book is available"
+            android:backgroundTint="#fff"
+            android:textColor="#555"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/app_icon"
+        android:id="@+id/bookFront"
+
+        android:layout_below="@+id/inputLocations"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:background="@drawable/bg_btn_login"
+        android:layout_below="@+id/bookFront"
+        android:text="Upload Book Front"
+        android:id="@+id/uploadImage"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:background="@drawable/bg_btn_uploadbook"
+        android:layout_below="@+id/uploadImage"
+        android:text="Upload Book"
+        android:id="@+id/uploadBook"/>
+
+
+
+    </RelativeLayout>
+
+</ScrollView>
