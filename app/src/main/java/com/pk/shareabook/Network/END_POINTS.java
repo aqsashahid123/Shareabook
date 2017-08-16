@@ -26,5 +26,8 @@ public class END_POINTS {
 
     public static String DELETE_BOOK = BASE_URL + "deleteBook";
 
+    public  static  String GET_BOOK_DETAILS = BASE_URL + "bookDetails";
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.pk.shareabook;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -34,16 +35,14 @@ public class UploadedBooks extends AppCompatActivity {
 
     ListView lvMyUploadedBooks;
     ProgressDialog pd;
-   public ArrayList<HashMap<String,String>> mapList;
-  public   HashMap<String,String> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uploaded_books);
         lvMyUploadedBooks = (ListView) findViewById(R.id.lvMyUploadedBooks);
-        map = new HashMap<>();
-        mapList = new ArrayList<>();
+//        map = new HashMap<>();
+//        mapList = new ArrayList<>();
 
 
          pd = new ProgressDialog(UploadedBooks.this);
@@ -54,6 +53,9 @@ public class UploadedBooks extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GET_MY_UPLOADEBOOKS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
+              final   ArrayList<HashMap<String,String>> mapList = new ArrayList<>();
+
 
                 pd.dismiss();
                 try {
@@ -67,31 +69,37 @@ public class UploadedBooks extends AppCompatActivity {
                     //    String regions =   object.get("regions").toString();
 
                     else {
-                        JSONArray regionArray = object.getJSONArray("myUploadedBooks");
+                        JSONArray myUploadedBooks = object.getJSONArray("myUploadedBooks");
 
-                        for (int i = 0; i < regionArray.length(); i++) {
+                        for (int i = 0; i < myUploadedBooks.length(); i++) {
 
-                            JSONObject obj =(regionArray.getJSONObject(i));
+                            HashMap<String,String> map = new HashMap<>();
 
-                            map.put("id",obj.getString("id"));
-                            map.put("title",obj.getString("title"));
-                            map.put("author",obj.getString("author"));
-                            map.put("logo",obj.getString("logo"));
-                            map.put("institute",obj.getString("institute"));
-                            map.put("city_id",obj.getString("city_id"));
-                            map.put("region_id",obj.getString("region_id"));
-                            map.put("owner_id",obj.getString("owner_id"));
-                            map.put("status",obj.getString("status"));
-                            map.put("shared_with",obj.getString("shared_with"));
-                            map.put("updated_at",obj.getString("updated_at"));
-                            map.put("created_at",obj.getString("created_at"));
+                            //  JSONObject bookDetail =(myUploadedBooks.getJSONObject(i));
+
+                         //   JSONObject bookDetail =  myUploadedBooks.getJSONObject(i);
+
+                            JSONObject bookDetail =new JSONObject( myUploadedBooks.getString(i));
+
+                            map.put("id",bookDetail.getString("id"));
+                            map.put("title",bookDetail.getString("title"));
+                            map.put("author",bookDetail.getString("author"));
+                            map.put("logo",bookDetail.getString("logo"));
+                            map.put("institute",bookDetail.getString("institute"));
+                            map.put("city_id",bookDetail.getString("city_id"));
+                            map.put("region_id",bookDetail.getString("region_id"));
+                            map.put("owner_id",bookDetail.getString("owner_id"));
+                            map.put("status",bookDetail.getString("status"));
+                            map.put("shared_with",bookDetail.getString("shared_with"));
+                            map.put("updated_at",bookDetail.getString("updated_at"));
+                            map.put("created_at",bookDetail.getString("created_at"));
 
                             mapList.add(map);
+                          //  map.clear();
 
 
-
-//                            String abc = obj.getString("region_id");
-//                            String lmn = obj.getString("region_name");
+//                            String abc = bookDetail.getString("region_id");
+//                            String lmn = bookDetail.getString("region_name");
                         //    regionMap.put(abc, lmn);
                             //regionsMapList.add(regionMap);
                            // spinnerDataCountry.add(lmn);
@@ -106,14 +114,28 @@ public class UploadedBooks extends AppCompatActivity {
                     }
 
 
-                    lvMyUploadedBooks.setLongClickable(true);
-                    lvMyUploadedBooks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                        @Override
-                        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                    lvMyUploadedBooks.setLongClickable(true);
+//                    lvMyUploadedBooks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//                        @Override
+//                        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                            Toast.makeText(getApplicationContext(),mapList.get(position).get("id"),Toast.LENGTH_SHORT).show();
+//
+//                            return true;
+//                        }
+//                    });
 
+                    lvMyUploadedBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Toast.makeText(getApplicationContext(),mapList.get(position).get("id"),Toast.LENGTH_SHORT).show();
 
-                            return true;
+                            Intent intent = new Intent(getApplicationContext(),BookDetail.class);
+                            intent.putExtra("bookId",mapList.get(position).get("id"));
+                            startActivity(intent);
+
+
+
                         }
                     });
 

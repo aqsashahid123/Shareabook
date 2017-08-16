@@ -4,13 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
+import android.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -44,9 +45,10 @@ import java.util.Map;
 public class MyUploadedBooksAdapter extends BaseAdapter {
 
 
-
+    HashMap<String,String> mmmm;
     Context context;
     ArrayList<HashMap<String,String>> Lmap;
+    int p;
     HashMap<String, String> result = new HashMap<String, String>();
     LayoutInflater inflater;
 
@@ -81,11 +83,32 @@ public MyUploadedBooksAdapter(Context mContext,ArrayList<HashMap<String,String>>
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
+        mmmm = new HashMap<>();
+        mmmm = Lmap.get(position);
+        inflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        p = position;
+
+
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.list_item_my_uploaded_books,parent,false);
+
+        }
+
+       // result = Lmap.get(position);
+//        if (position<Lmap.size()){
+//            position++;
+//        }
+
+//        else {
+//            result = convertView;
+//        }
+
+
+
+
         TextView tvAuthorName,tvBookName;
         final ImageView ivBookCover, ivEditDelete;
-        inflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(R.layout.list_item_my_uploaded_books,parent,false);
-        result = Lmap.get(position);
+
 
         tvAuthorName = (TextView)convertView.findViewById(R.id.tvAuthorName);
         tvBookName = (TextView)convertView.findViewById(R.id.tvBookTitle);
@@ -93,11 +116,11 @@ public MyUploadedBooksAdapter(Context mContext,ArrayList<HashMap<String,String>>
         ivEditDelete = (ImageView) convertView.findViewById(R.id.ivEditDelete);
 
 
-        Picasso.with(context).load(END_POINTS.GET_BOOK_LOGO + result.get("logo")).into(ivBookCover);
+        Picasso.with(context).load(END_POINTS.GET_BOOK_LOGO + mmmm.get("logo")).into(ivBookCover);
 
-        tvAuthorName.setText( result.get("author"));
+        tvAuthorName.setText( mmmm.get("author"));
 
-         tvBookName.setText( result.get("title"));
+         tvBookName.setText( mmmm.get("title"));
         ivEditDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,18 +137,21 @@ public MyUploadedBooksAdapter(Context mContext,ArrayList<HashMap<String,String>>
                         {
                             case R.id.edit:
 
-                                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.remove("bookTitle");
-                                editor.remove("bookAuthor");
-                                editor.remove("bookCover");
-                                editor.putString("bookTitle",result.get("title"));
-                                editor.putString("bookAuthor",result.get("author"));
-                                editor.putString("bookCover",result.get("logo"));
-                                editor.apply();
+//                                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+//
+//                                SharedPreferences.Editor editor = preferences.edit();
+//                                editor.remove("bookTitle");
+//                                editor.remove("bookAuthor");
+//                                editor.remove("bookCover");
+//                                editor.putString("bookTitle",mmmm.get("title"));
+//                                editor.putString("bookAuthor",mmmm.get("author"));
+//                                editor.putString("bookCover",mmmm.get("logo"));
+//                                editor.apply();
 
                                 Intent intent = new Intent(context, UploadBook.class);
+                                intent.putExtra("bookTitle",mmmm.get("title"));
+                                intent.putExtra("bookAuthor",mmmm.get("author"));
+                                intent.putExtra("bookCover",mmmm.get("logo"));
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.getApplicationContext().startActivity(intent);
 
@@ -134,44 +160,57 @@ public MyUploadedBooksAdapter(Context mContext,ArrayList<HashMap<String,String>>
                                 break;
                             case R.id.delete:
 
+
+                                mmmm = Lmap.get(position);
                                 Toast.makeText(context,"delete",Toast.LENGTH_SHORT).show();
-
-//                            LayoutInflater inflater = LayoutInflater.from(context.getApplicationContext());
-//                              View view=  inflater.inflate(R.layout.custom_alert_edit_deletebooks,null);
-//                                AlertDialog editDeleteDialo = new AlertDialog.Builder(context.getApplicationContext()).create();
-//                                editDeleteDialo.setView(view);
 //
-//                                TextView tvDelete = (TextView) view.findViewById(R.id.yes);
-//                                TextView tvNo = (TextView) view.findViewById(R.id.no);
-
-
-//                                tvDelete.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View v) {
-//                                        Toast.makeText(context.getApplicationContext(),"Delete",Toast.LENGTH_SHORT).show();
-
-
-                                        deleteBooks();
-                                        removeAt(position);
-
-
-
-
-
-//                                    }
-//                                });
-
-//                                tvNo.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View v) {
+                           LayoutInflater inflater = LayoutInflater.from(context.getApplicationContext());
+                              View view=  inflater.inflate(R.layout.custom_alert_edit_deletebooks,null);
+                                final AlertDialog editDeleteDialo = new AlertDialog.Builder(context.getApplicationContext()).create();
+                                editDeleteDialo.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 //
-//                                        Toast.makeText(context.getApplicationContext(),"Delete",Toast.LENGTH_SHORT).show();
+//    editDeleteDialo.setView(view);
+
+             //                   android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                             //   View view = context.getApplicationContext()
+
+                                TextView tvDelete = (TextView) view.findViewById(R.id.yes);
+                                TextView tvNo = (TextView) view.findViewById(R.id.no);
+
+
+                                tvDelete.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                      //  Toast.makeText(context.getApplicationContext(),"Delete",Toast.LENGTH_SHORT).show();
+
+
+                                      //  deleteBooks();
+//                                        mmmm.clear();
+//                                        mmmm = Lmap.get(position);
+
+                                        Toast.makeText(context,mmmm.get("id"),Toast.LENGTH_SHORT).show();
+                                        deleteBooks(mmmm.get("id"));
+                                        removeAt(p);
+                                        editDeleteDialo.dismiss();
+
+
+
+
+                                    }
+                                });
+
+                                tvNo.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
 //
-//
-//                                    }
-//                                });
-//
-//                                editDeleteDialo.show();
+                                      //  Toast.makeText(context.getApplicationContext(),"Delete",Toast.LENGTH_SHORT).show();
+                                    editDeleteDialo.dismiss();
+
+                                    }
+                                });
+
+                                editDeleteDialo.setView(view);
+                                    editDeleteDialo.show();
 
 
                                 break;
@@ -192,11 +231,10 @@ public MyUploadedBooksAdapter(Context mContext,ArrayList<HashMap<String,String>>
 
       //  final PopupMenu popup = new PopupMenu(v.getContext(), holder.CommentMenu);
 
-
         return convertView;
     }
 
-    public void deleteBooks(){
+    public void deleteBooks(final String id){
 
         StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.DELETE_BOOK, new Response.Listener<String>() {
             @Override
@@ -242,7 +280,10 @@ public MyUploadedBooksAdapter(Context mContext,ArrayList<HashMap<String,String>>
                // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
              //   preferences.getString("id","");
 
-                params.put("bookId", result.get("id"));
+          //      params.put("bookId", result.get("id"));
+
+                params.put("bookId", id);
+
 //                params.put("password", password);
 //
                 return params;
@@ -258,7 +299,8 @@ public MyUploadedBooksAdapter(Context mContext,ArrayList<HashMap<String,String>>
     }
     public void removeAt(int position){
 
-        Lmap.remove(position);
+      //  Lmap.remove(position);
+        Lmap.remove(mmmm);
         notifyDataSetChanged();
 
 //        cardCommenList.remove(position);

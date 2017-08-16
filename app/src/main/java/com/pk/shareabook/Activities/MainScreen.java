@@ -1,11 +1,16 @@
 package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -15,7 +20,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.pk.shareabook.Adapters.DrawerAdapter;
 import com.pk.shareabook.Network.END_POINTS;
+import com.pk.shareabook.Pojo.DrawerPojo;
 import com.pk.shareabook.R;
 
 import org.json.JSONArray;
@@ -33,6 +40,13 @@ public class MainScreen extends AppCompatActivity {
     HashMap<String, String> regionMap, citiesMap;
     String cityKey,regionKey;
     List<String> spinnerDataCountry, spinnerDataCity;
+////////////////////////DRAWER LAYOUT/////////////////////////
+List<DrawerPojo> drawerList;
+    DrawerLayout drawerLayout;
+    ListView mDrawerList;
+    DrawerAdapter drawerAdapter;
+    Toolbar toolbar;
+
 
 
     @Override
@@ -48,6 +62,54 @@ public class MainScreen extends AppCompatActivity {
         citiesMap = new HashMap<>();
         getRegionsData();
 
+        toolbar = (Toolbar) findViewById(R.id.appbar);
+        toolbar.setTitle("MY DETAILS");
+        toolbar.inflateMenu(R.menu.toolbar_menu);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                int id = item.getItemId();
+
+                switch (id){
+
+                    case R.id.openMenu:
+
+                        drawerLayout.openDrawer(Gravity.RIGHT);
+                        //     openDrawer();
+                        break;
+
+                }
+
+
+                return true;
+            }
+        });
+
+
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+
+        // drawerLayout.openDrawer(Gravity.RIGHT);
+        drawerList = new ArrayList<>();
+        openDrawer();
+        //////////////////DRAWER////////////////////
+
+
+        drawerList.add(new DrawerPojo("Details"));
+        drawerList.add(new DrawerPojo("My Uploaded Books"));
+        drawerList.add(new DrawerPojo("Requested Books"));
+        drawerList.add(new DrawerPojo("Sharing Requests"));
+        drawerList.add(new DrawerPojo("Shared Books"));
+        drawerList.add(new DrawerPojo("Received Books"));
+        drawerList.add(new DrawerPojo("Upload Book"));
+        drawerList.add(new DrawerPojo("Logout"));
+
+
+
+
+
         spinnerRegions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -61,6 +123,13 @@ public class MainScreen extends AppCompatActivity {
         });
 
 
+
+    }
+
+
+    public void  openDrawer(){
+        drawerAdapter = new DrawerAdapter(this,drawerList,R.layout.drawer_list_item);
+        mDrawerList.setAdapter( drawerAdapter);
 
     }
 

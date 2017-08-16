@@ -29,7 +29,7 @@
                 android:id="@+id/ivEditDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_marginTop="10dp"
                 android:src="@drawable/menu_last_edit_delete" />
 
         </LinearLayout>
@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Book Title:"
+                android:text="Book Title:  "
                 android:textColor="#000"
                 android:gravity="center"
                 android:textStyle="bold"
@@ -72,13 +72,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Author Name:"
+                android:text="Author Name:  "
                 android:textColor="#000"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:textSize="15sp"
                 android:textColor="#000"
                 android:id="@+id/tvAuthorName"

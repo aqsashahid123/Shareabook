@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context="com.pk.shareabook.BookDetail">
+
+
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:background="#6897BB"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/collapsingToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        android:fitsSystemWindows="true"
+        app:contentScrim="?attr/colorPrimary"
+        app:expandedTitleMarginStart="48dp"
+        app:expandedTitleMarginEnd="64dp"
+        app:title="Collapsing Toolbar">
+
+        <!--<ImageView-->
+            <!--android:id="@+id/toolbarImage"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:fitsSystemWindows="true"-->
+
+            <!--app:layout_collapseMode="parallax" />-->
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="170dp"
+            android:layout_gravity="center"
+            app:layout_collapseMode="parallax"
+            android:fitsSystemWindows="true"
+            android:layout_height="170dp"
+            android:src="@drawable/hon"
+android:layout_marginBottom="30dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FFf"/>
+        <!--<include-->
+        <!--layout="@layout/app_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+
+
+        <!--/>-->
+
+
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_collapseMode="pin" />
+    </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book Title"
+                    android:layout_weight="0.5"
+
+                    android:textStyle="bold"
+                    android:textColor="#3498db"
+                    android:textSize="17sp"
+                    android:padding="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cvbnm,"
+                    android:layout_weight="1.5"
+                    android:id="@+id/bookTitle"
+
+                    android:textSize="17sp"
+                    android:padding="15dp"
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book Author"
+                    android:layout_weight="0.5"
+
+                    android:textStyle="bold"
+                    android:textColor="#3498db"
+                    android:textSize="17sp"
+                    android:padding="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cvbnm,"
+                    android:id="@+id/author"
+                    android:layout_weight="1.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Owner"
+
+                    android:textStyle="bold"
+                    android:textColor="#3498db"
+                    android:layout_weight="0.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cvbnm,"
+                    android:id="@+id/owner"
+                    android:layout_weight="1.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Institute"
+
+                    android:textStyle="bold"
+                    android:textColor="#3498db"
+                    android:layout_weight="0.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cvbnm,"
+                    android:id="@+id/institute"
+                    android:layout_weight="1.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location"
+
+                    android:textStyle="bold"
+                    android:textColor="#3498db"
+                    android:layout_weight="0.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cvbnm,"
+                    android:id="@+id/location"
+                    android:layout_weight="1.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"
+                    />
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City"
+                    android:textStyle="bold"
+                    android:textColor="#3498db"
+                    android:layout_weight="0.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cvbnm,"
+                    android:id="@+id/city"
+                    android:layout_weight="1.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Region"
+                    android:textStyle="bold"
+                    android:textColor="#3498db"
+                    android:layout_weight="0.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cvbnm,"
+                    android:id="@+id/tvRegion"
+                    android:layout_weight="1.5"
+                    android:textSize="17sp"
+                    android:padding="15dp"
+                    />
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="150dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:background="@drawable/hon"-->
+    <!--android:layout_height="200dp"></LinearLayout>-->
+
+
+</android.support.design.widget.CoordinatorLayout>
