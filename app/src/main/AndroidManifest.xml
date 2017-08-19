@@ -15,15 +15,15 @@
 
         <!-- android:theme="@style/AppTheme"> -->
         <activity android:name=".Activities.MainActivity">
-            ////////////
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
-            ////////////////
         </activity>
         <activity android:name=".Activities.SignUp" />
         <activity android:name=".Activities.ProfileInfo">
-            /////
-
 
         </activity>
         <activity android:name=".Activities.MainScreen" >
@@ -33,11 +33,6 @@
         </activity>
         <activity android:name=".Activities.UploadBook" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
 
 
@@ -53,13 +48,25 @@
 
 
         </activity>
-        <activity android:name=".Activities.Dashboard">
+        <activity android:name=".Activities.Dashboard"></activity>
 
+        <service
+            android:name=".FCM.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".FCM.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".FCM.RegistrationIntentService"
+            android:exported="false" />
 
-
-
-
-        </activity>
     </application>
 
 </manifest>
