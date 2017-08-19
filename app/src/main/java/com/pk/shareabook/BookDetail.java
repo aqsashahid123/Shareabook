@@ -1,10 +1,15 @@
 package com.pk.shareabook;
 
 import android.app.ProgressDialog;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +40,7 @@ public class BookDetail extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
 
     CircleImageView circularImageView;
+    DrawerLayout drawerLayout;
 
     String id;
     Toolbar toolbar;
@@ -46,6 +52,47 @@ public class BookDetail extends AppCompatActivity {
 
         id = getIntent().getStringExtra("bookId");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.toolbar_menu);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new
+         NavigationView.OnNavigationItemSelectedListener() {
+             @Override
+             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                 return false;
+             }
+         });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                int id = item.getItemId();
+
+                switch (id){
+
+                    case R.id.openMenu:
+
+                        drawerLayout.openDrawer(Gravity.RIGHT);
+
+                        //    drawerLayout.openDrawer(Gravity.RIGHT);
+                        //     openDrawer();
+                        break;
+
+                }
+
+
+                return true;
+            }
+        });
+
+
+
+
+
+
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         circularImageView = (CircleImageView) findViewById(R.id.profile_image);
 
@@ -146,7 +193,7 @@ public class BookDetail extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
                 Toast.makeText(BookDetail.this,"Network Error",Toast.LENGTH_SHORT).show();
-                //     pd.dismiss();
+                     pd.dismiss();
 
             }
         }

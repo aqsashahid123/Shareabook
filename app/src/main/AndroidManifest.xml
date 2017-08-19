@@ -23,10 +23,15 @@
         <activity android:name=".Activities.SignUp" />
         <activity android:name=".Activities.ProfileInfo">
             /////
+
+
         </activity>
-        <activity android:name=".Activities.MainScreen" />
-        <activity android:name=".UploadBook" />
-        <activity android:name=".UploadedBooks">
+        <activity android:name=".Activities.MainScreen" >
+
+
+
+        </activity>
+        <activity android:name=".UploadBook" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +42,21 @@
 
 
         </activity>
+        <activity android:name=".UploadedBooks">
+
+
+
+        </activity>
         <activity android:name=".BookDetail">
+
+
+
+
+        </activity>
+        <activity android:name=".Dashboard">
+
+
+
 
 
         </activity>

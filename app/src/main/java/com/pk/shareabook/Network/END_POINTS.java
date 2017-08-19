@@ -28,6 +28,6 @@ public class END_POINTS {
 
     public  static  String GET_BOOK_DETAILS = BASE_URL + "bookDetails";
 
-
+    public static String GET_ALL_BOOKS = BASE_URL +"getAllBooks";
 
 }

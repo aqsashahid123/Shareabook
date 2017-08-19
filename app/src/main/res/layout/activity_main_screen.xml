@@ -118,17 +118,15 @@ android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
-    <ListView
-        android:id="@+id/left_drawer"
-        android:layout_width="240dp"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:choiceMode="singleChoice"
-        android:divider="#DCDCDC"
-        android:dividerHeight="2dp"
-        android:background="#ffff"/>
-
+        app:menu="@menu/drawer_menu"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/navigation_view"
+        />
 
 
 

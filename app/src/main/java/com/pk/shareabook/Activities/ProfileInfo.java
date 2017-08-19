@@ -3,6 +3,8 @@ package com.pk.shareabook.Activities;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -92,6 +94,8 @@ public class ProfileInfo extends AppCompatActivity {
                     case R.id.openMenu:
 
                         drawerLayout.openDrawer(Gravity.RIGHT);
+
+                    //    drawerLayout.openDrawer(Gravity.RIGHT);
                    //     openDrawer();
                         break;
 
@@ -102,31 +106,42 @@ public class ProfileInfo extends AppCompatActivity {
             }
         });
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
         btnUpdateProfile = (Button)findViewById(R.id.btnUpdateProfile);
         etD_name= (EditText) findViewById(R.id.etDisplayName);
         etFname = (EditText) findViewById(R.id.etFname);
         etLname = (EditText) findViewById(R.id.etLname);
         etIname = (EditText) findViewById(R.id.etIname);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+    //    mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+
+        //////////////////////////////////DRAWER/////////////////////////
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
        // drawerLayout.openDrawer(Gravity.RIGHT);
         drawerList = new ArrayList<>();
-        openDrawer();
+        //openDrawer();
         //////////////////DRAWER////////////////////
 
 
-        drawerList.add(new DrawerPojo("Details"));
-        drawerList.add(new DrawerPojo("My Uploaded Books"));
-        drawerList.add(new DrawerPojo("Requested Books"));
-        drawerList.add(new DrawerPojo("Sharing Requests"));
-        drawerList.add(new DrawerPojo("Shared Books"));
-        drawerList.add(new DrawerPojo("Received Books"));
-        drawerList.add(new DrawerPojo("Upload Book"));
-        drawerList.add(new DrawerPojo("Logout"));
+//        drawerList.add(new DrawerPojo("Details"));
+//        drawerList.add(new DrawerPojo("My Uploaded Books"));
+//        drawerList.add(new DrawerPojo("Requested Books"));
+//        drawerList.add(new DrawerPojo("Sharing Requests"));
+//        drawerList.add(new DrawerPojo("Shared Books"));
+//        drawerList.add(new DrawerPojo("Received Books"));
+//        drawerList.add(new DrawerPojo("Upload Book"));
+//        drawerList.add(new DrawerPojo("Logout"));
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new
+         NavigationView.OnNavigationItemSelectedListener() {
+             @Override
+             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                 return false;
+             }
+         });
 
 
 
@@ -231,12 +246,12 @@ public class ProfileInfo extends AppCompatActivity {
 
     }
 
-    public void  openDrawer(){
-        drawerAdapter = new DrawerAdapter(this,drawerList,R.layout.drawer_list_item);
-        mDrawerList.setAdapter( drawerAdapter);
-
-    }
-
+//    public void  openDrawer(){
+//        drawerAdapter = new DrawerAdapter(this,drawerList,R.layout.drawer_list_item);
+//        mDrawerList.setAdapter( drawerAdapter);
+//
+//    }
+//
 
 
     public void getRegionsData(){

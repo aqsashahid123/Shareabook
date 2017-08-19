@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:context="com.pk.shareabook.UploadedBooks">
-
+    android:layout_height="match_parent"
+    tools:context="com.pk.shareabook.Dashboard">
 
 
     <RelativeLayout
@@ -14,22 +13,19 @@
         android:layout_height="match_parent">
 
         <include
-            layout="@layout/app_bar"
-            android:id="@+id/appBar"
-
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_with_search"
             />
 
-
-
-
-        <ListView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-            android:layout_below="@id/appBar"
-        android:id="@+id/lvMyUploadedBooks"
-        />
-
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
     </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
@@ -44,6 +40,8 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navigation_view"
         />
+
+
 
 
 </android.support.v4.widget.DrawerLayout>

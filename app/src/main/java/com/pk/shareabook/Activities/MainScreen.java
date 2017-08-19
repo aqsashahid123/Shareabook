@@ -63,7 +63,7 @@ List<DrawerPojo> drawerList;
         getRegionsData();
 
         toolbar = (Toolbar) findViewById(R.id.appbar);
-        toolbar.setTitle("MY DETAILS");
+        toolbar.setTitle("Advance Search");
         toolbar.inflateMenu(R.menu.toolbar_menu);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -88,25 +88,25 @@ List<DrawerPojo> drawerList;
         });
 
 
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+       // mDrawerList = (ListView) findViewById(R.id.left_drawer);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
         // drawerLayout.openDrawer(Gravity.RIGHT);
-        drawerList = new ArrayList<>();
-        openDrawer();
-        //////////////////DRAWER////////////////////
+//        drawerList = new ArrayList<>();
+//        openDrawer();
+//        //////////////////DRAWER////////////////////
 
 
-        drawerList.add(new DrawerPojo("Details"));
-        drawerList.add(new DrawerPojo("My Uploaded Books"));
-        drawerList.add(new DrawerPojo("Requested Books"));
-        drawerList.add(new DrawerPojo("Sharing Requests"));
-        drawerList.add(new DrawerPojo("Shared Books"));
-        drawerList.add(new DrawerPojo("Received Books"));
-        drawerList.add(new DrawerPojo("Upload Book"));
-        drawerList.add(new DrawerPojo("Logout"));
-
-
+//        drawerList.add(new DrawerPojo("Details"));
+//        drawerList.add(new DrawerPojo("My Uploaded Books"));
+//        drawerList.add(new DrawerPojo("Requested Books"));
+//        drawerList.add(new DrawerPojo("Sharing Requests"));
+//        drawerList.add(new DrawerPojo("Shared Books"));
+//        drawerList.add(new DrawerPojo("Received Books"));
+//        drawerList.add(new DrawerPojo("Upload Book"));
+//        drawerList.add(new DrawerPojo("Logout"));
+//
+//
 
 
 
@@ -127,11 +127,11 @@ List<DrawerPojo> drawerList;
     }
 
 
-    public void  openDrawer(){
-        drawerAdapter = new DrawerAdapter(this,drawerList,R.layout.drawer_list_item);
-        mDrawerList.setAdapter( drawerAdapter);
-
-    }
+//    public void  openDrawer(){
+//        drawerAdapter = new DrawerAdapter(this,drawerList,R.layout.drawer_list_item);
+//        mDrawerList.setAdapter( drawerAdapter);
+//
+//    }
 
 
     /////////////////

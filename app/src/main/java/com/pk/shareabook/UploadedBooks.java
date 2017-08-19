@@ -4,8 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Activities.ProfileInfo;
+import com.pk.shareabook.Adapters.DrawerAdapter;
 import com.pk.shareabook.Adapters.MyUploadedBooksAdapter;
 import com.pk.shareabook.Network.END_POINTS;
 
@@ -35,14 +42,48 @@ public class UploadedBooks extends AppCompatActivity {
 
     ListView lvMyUploadedBooks;
     ProgressDialog pd;
-
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uploaded_books);
         lvMyUploadedBooks = (ListView) findViewById(R.id.lvMyUploadedBooks);
-//        map = new HashMap<>();
-//        mapList = new ArrayList<>();
+
+
+            toolbar = (Toolbar) findViewById(R.id.appBar);
+
+        toolbar.setTitle("MY BOOKS");
+
+        toolbar.inflateMenu(R.menu.toolbar_menu);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new
+         NavigationView.OnNavigationItemSelectedListener() {
+             @Override
+             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                 return false;
+             }
+         });
+
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.openMenu:
+
+                        drawerLayout.openDrawer(Gravity.RIGHT);
+                        break;
+
+
+                }
+
+                return true;
+            }
+        });
 
 
          pd = new ProgressDialog(UploadedBooks.this);
@@ -66,8 +107,6 @@ public class UploadedBooks extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"No Books Uploaded",Toast.LENGTH_SHORT).show();
 
                     }
-                    //    String regions =   object.get("regions").toString();
-
                     else {
                         JSONArray myUploadedBooks = object.getJSONArray("myUploadedBooks");
 
@@ -75,9 +114,6 @@ public class UploadedBooks extends AppCompatActivity {
 
                             HashMap<String,String> map = new HashMap<>();
 
-                            //  JSONObject bookDetail =(myUploadedBooks.getJSONObject(i));
-
-                         //   JSONObject bookDetail =  myUploadedBooks.getJSONObject(i);
 
                             JSONObject bookDetail =new JSONObject( myUploadedBooks.getString(i));
 
@@ -95,14 +131,6 @@ public class UploadedBooks extends AppCompatActivity {
                             map.put("created_at",bookDetail.getString("created_at"));
 
                             mapList.add(map);
-                          //  map.clear();
-
-
-//                            String abc = bookDetail.getString("region_id");
-//                            String lmn = bookDetail.getString("region_name");
-                        //    regionMap.put(abc, lmn);
-                            //regionsMapList.add(regionMap);
-                           // spinnerDataCountry.add(lmn);
                         }
 
                         MyUploadedBooksAdapter adapter = new MyUploadedBooksAdapter(getApplicationContext(), mapList);
