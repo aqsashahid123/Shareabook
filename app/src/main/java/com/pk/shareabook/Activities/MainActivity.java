@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     if (Integer.valueOf(isActive) == 1) {
 
-                                        Intent intent = new Intent(MainActivity.this, MainScreen.class);
+                                        Intent intent = new Intent(MainActivity.this, Dashboard.class);
                                         startActivity(intent);
 
                                     }

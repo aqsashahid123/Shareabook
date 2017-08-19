@@ -109,7 +109,17 @@ List<DrawerPojo> drawerList;
 
                         break;
                     case (R.id.nav_dashboard):
+                        gm.openActivity(getApplicationContext(),Dashboard.class);
+
                         break;
+
+                    case  (R.id.nav_search):
+
+
+                        gm.openActivity(getApplicationContext(),MainScreen.class);
+
+                        break;
+
 
                     case (R.id.nav_uploaded_Books):
                         gm.openActivity(getApplicationContext(),UploadedBooks.class);

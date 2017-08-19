@@ -101,9 +101,10 @@ android:layout_marginBottom="30dp"
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Book Title"
+
                     android:layout_weight="0.5"
 
                     android:textStyle="bold"
@@ -132,7 +133,7 @@ android:layout_marginBottom="30dp"
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Book Author"
                     android:layout_weight="0.5"
@@ -162,7 +163,7 @@ android:layout_marginBottom="30dp"
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Owner"
 
@@ -192,7 +193,7 @@ android:layout_marginBottom="30dp"
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Institute"
 
@@ -222,7 +223,7 @@ android:layout_marginBottom="30dp"
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Location"
 
@@ -255,7 +256,7 @@ android:layout_marginBottom="30dp"
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="City"
                     android:textStyle="bold"
@@ -285,7 +286,7 @@ android:layout_marginBottom="30dp"
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Region"
                     android:textStyle="bold"

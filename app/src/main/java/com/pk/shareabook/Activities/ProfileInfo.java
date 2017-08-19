@@ -44,14 +44,14 @@ import java.util.Map;
 public class ProfileInfo extends AppCompatActivity {
 
 
-    Spinner spinnerRegion,spinnerCity;
+    Spinner spinnerRegion, spinnerCity;
     ArrayList<String> spinnerDataCity, spinnerDataCountry;
     GeneralMethods gm;
     Toolbar toolbar;
 
 
-    String f_name,l_name,i_name,d_name,cityId,regionId;
-    EditText etFname,etLname,etIname,etD_name;
+    String f_name, l_name, i_name, d_name, cityId, regionId;
+    EditText etFname, etLname, etIname, etD_name,et_institure;
     Button btnUpdateProfile;
 
     String id;
@@ -59,8 +59,8 @@ public class ProfileInfo extends AppCompatActivity {
 
     DrawerAdapter drawerAdapter;
 
-    HashMap<String,String> regionMap;
-    HashMap<String,String> citiesMap;
+    HashMap<String, String> regionMap;
+    HashMap<String, String> citiesMap;
 
     String regionKey;
     String cityKey;
@@ -69,10 +69,10 @@ public class ProfileInfo extends AppCompatActivity {
 
     ///////////////DRAWER////////////////////
     List<DrawerPojo> drawerList;
-        DrawerLayout drawerLayout;
+    DrawerLayout drawerLayout;
 
- //   List<HashMap<String,String>> regionsMapList;
- //   List<HashMap<String,String>> citiesMapList;
+    //   List<HashMap<String,String>> regionsMapList;
+    //   List<HashMap<String,String>> citiesMapList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,10 +80,7 @@ public class ProfileInfo extends AppCompatActivity {
         setContentView(R.layout.activity_profile_info);
 
 
-
-
-
-        gm= new GeneralMethods();
+        gm = new GeneralMethods();
         toolbar = (Toolbar) findViewById(R.id.appbar);
         toolbar.setTitle("MY DETAILS");
         toolbar.inflateMenu(R.menu.toolbar_menu);
@@ -94,14 +91,14 @@ public class ProfileInfo extends AppCompatActivity {
 
                 int id = item.getItemId();
 
-                switch (id){
+                switch (id) {
 
                     case R.id.openMenu:
 
                         drawerLayout.openDrawer(Gravity.RIGHT);
 
-                    //    drawerLayout.openDrawer(Gravity.RIGHT);
-                   //     openDrawer();
+                        //    drawerLayout.openDrawer(Gravity.RIGHT);
+                        //     openDrawer();
                         break;
 
                 }
@@ -113,18 +110,19 @@ public class ProfileInfo extends AppCompatActivity {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-        btnUpdateProfile = (Button)findViewById(R.id.btnUpdateProfile);
-        etD_name= (EditText) findViewById(R.id.etDisplayName);
+        btnUpdateProfile = (Button) findViewById(R.id.btnUpdateProfile);
+        etD_name = (EditText) findViewById(R.id.etDisplayName);
         etFname = (EditText) findViewById(R.id.etFname);
         etLname = (EditText) findViewById(R.id.etLname);
+        et_institure = (EditText) findViewById(R.id.etIname);
         etIname = (EditText) findViewById(R.id.etIname);
-    //    mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        //    mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
 
         //////////////////////////////////DRAWER/////////////////////////
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
-       // drawerLayout.openDrawer(Gravity.RIGHT);
+        // drawerLayout.openDrawer(Gravity.RIGHT);
         drawerList = new ArrayList<>();
         //openDrawer();
         //////////////////DRAWER////////////////////
@@ -141,63 +139,61 @@ public class ProfileInfo extends AppCompatActivity {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new
-         NavigationView.OnNavigationItemSelectedListener() {
-             @Override
-             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                 switch (item.getItemId()){
+                                                                 NavigationView.OnNavigationItemSelectedListener() {
+                                                                     @Override
+                                                                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                                                                         switch (item.getItemId()) {
 
-                     case (R.id.nav_profile):
+                                                                             case (R.id.nav_profile):
 
-                         gm.openActivity(getApplicationContext(), ProfileInfo.class);
+                                                                                 gm.openActivity(getApplicationContext(), ProfileInfo.class);
 
-                         break;
-                     case (R.id.nav_dashboard):
-                         break;
+                                                                                 break;
+                                                                             case (R.id.nav_dashboard):
+                                                                                 break;
 
-                     case (R.id.nav_uploaded_Books):
-                         gm.openActivity(getApplicationContext(),UploadedBooks.class);
-                         break;
-                     case (R.id.nav_upload_Books):
-                         gm.openActivity(getApplicationContext(),UploadBook.class);
-                         break;
-                     case (R.id.nav_requested_books):
-                         gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
-                         break;
-                     case (R.id.nav_sharing_requests):
-                         gm.showToast(getApplicationContext(),"Sharing Request");
-                         break;
-                     case (R.id.nav_shareed_books):
-                         gm.showToast(getApplicationContext(),"Shared BOOKS");
-                         break;
-                     case (R.id.nav_recievedBooks):
-                         gm.showToast(getApplicationContext(),"Recieved Books");
-                         break;
-//                   case ():
-//                       break;
+                                                                             case (R.id.nav_uploaded_Books):
+                                                                                 gm.openActivity(getApplicationContext(), UploadedBooks.class);
+                                                                                 break;
+                                                                             case (R.id.nav_upload_Books):
+                                                                                 gm.openActivity(getApplicationContext(), UploadBook.class);
+                                                                                 break;
+                                                                             case (R.id.nav_requested_books):
+                                                                                 gm.showToast(getApplicationContext(), "REQUESTED BOOKS");
+                                                                                 break;
+                                                                             case (R.id.nav_sharing_requests):
+                                                                                 gm.showToast(getApplicationContext(), "Sharing Request");
+                                                                                 break;
+                                                                             case (R.id.nav_shareed_books):
+                                                                                 gm.showToast(getApplicationContext(), "Shared BOOKS");
+                                                                                 break;
+                                                                             case (R.id.nav_recievedBooks):
+                                                                                 gm.showToast(getApplicationContext(), "Recieved Books");
+                                                                                 break;
 
 
-                 }
+                                                                         }
 
 
-
-
-                 return true;
-             }
-         });
-
-
+                                                                         return true;
+                                                                     }
+                                                                 });
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    id=    pref.getString("id","");
-      f_name=  pref.getString("first_name","");
-        l_name = pref.getString("last_name","");
-       d_name = pref.getString("display_name","");
-        isActive = pref.getString("isActive","");
+        id = pref.getString("id", "");
+        f_name = pref.getString("first_name", "");
+        l_name = pref.getString("last_name", "");
+        d_name = pref.getString("display_name", "");
+        i_name = pref.getString("institute", "");
+        isActive = pref.getString("isActive", "");
+
 
         etLname.setText(l_name);
         etFname.setText(f_name);
         etD_name.setText(d_name);
+        et_institure.setText(i_name);
+
 
 
         spinnerDataCity = new ArrayList<>();
@@ -214,7 +210,7 @@ public class ProfileInfo extends AppCompatActivity {
 
 //        spinnerDataCountry.add("NewYork");
 //        spinnerDataCountry.add("California");
-    //    spinnerDataCountry.add("");
+        //    spinnerDataCountry.add("");
 
 //        spinnerDataCity.add("Mexico");
 //        spinnerDataCity.add("Chicago");
@@ -252,8 +248,7 @@ public class ProfileInfo extends AppCompatActivity {
 //
 //        spinnerRegion.setAdapter(regionAdapter);
 
-    //    ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(ProfileInfo.this, android.R.layout.simple_spinner_item,spinnerDataCity);
-
+        //    ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(ProfileInfo.this, android.R.layout.simple_spinner_item,spinnerDataCity);
 
 
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
@@ -264,7 +259,7 @@ public class ProfileInfo extends AppCompatActivity {
                 l_name = etLname.getText().toString();
                 i_name = etIname.getText().toString();
                 d_name = etD_name.getText().toString();
-                isActive = pref.getString("isActive","");
+                isActive = pref.getString("isActive", "");
 
 
 //                regionId = regionKey;
@@ -275,7 +270,7 @@ public class ProfileInfo extends AppCompatActivity {
                     sendDataUserIsActive();
                 }
 
-                if (isActive.equals("0.5")){
+                if (isActive.equals("0.5")) {
 
                     sendDataUserInActive();
 
@@ -296,12 +291,11 @@ public class ProfileInfo extends AppCompatActivity {
 //
 
 
-    public void getRegionsData(){
+    public void getRegionsData() {
 
         final ProgressDialog pd = new ProgressDialog(ProfileInfo.this);
         pd.setMessage("loading");
         pd.show();
-
 
 
         StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GETREGIONS, new Response.Listener<String>() {
@@ -311,30 +305,31 @@ public class ProfileInfo extends AppCompatActivity {
                 pd.dismiss();
                 try {
                     JSONObject object = new JSONObject(response);
-             //    String regions =   object.get("regions").toString();
+                    //    String regions =   object.get("regions").toString();
 
                     JSONArray regionArray = object.getJSONArray("regions");
 
-                    for (int i =0;i<regionArray.length();i++){
+                    for (int i = 0; i < regionArray.length(); i++) {
 
                         JSONObject obj = new JSONObject(regionArray.getString(i));
 
                         String abc = obj.getString("region_id");
                         String lmn = obj.getString("region_name");
-                        regionMap.put(abc,lmn);
+                        regionMap.put(abc, lmn);
                         //regionsMapList.add(regionMap);
                         spinnerDataCountry.add(lmn);
                     }
 
-                    ArrayAdapter<String> regionAdapter = new ArrayAdapter<String>(ProfileInfo.this, R.layout.bg_spinner_item,spinnerDataCountry);
+                    ArrayAdapter<String> regionAdapter = new ArrayAdapter<String>(ProfileInfo.this, R.layout.bg_spinner_item, spinnerDataCountry);
 
                     spinnerRegion.setAdapter(regionAdapter);
+                  //  spinnerRegion.setSelection(Integer.parseInt(pref.getString("region_id", "")));
 
 
-                   // regionsMapList.add()
+                    // regionsMapList.add()
 
 
-                    String status = object.get( "success").toString();
+                    String status = object.get("success").toString();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -346,16 +341,14 @@ public class ProfileInfo extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getApplicationContext(),"Volley Error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Volley Error", Toast.LENGTH_SHORT).show();
 
             }
         }
-        )
- {
+        ) {
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
 //                params.put("email", email);
 //                params.put("password", password);
 //
@@ -363,326 +356,305 @@ public class ProfileInfo extends AppCompatActivity {
             }
 
 
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(request);
+
+
+    }
+
+    public void getCityData(int pos) {
+
+
+        for (HashMap.Entry<String, String> e : regionMap.entrySet()) {
+
+            String key = e.getKey();
+            String val = e.getValue();
+            if (val == spinnerRegion.getSelectedItem()) {
+
+                regionKey = key;
+                Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
+                getCities(key);
+            }
+
+        }
+
+
+    }
+
+
+    public void getCities(String Key) {
+
+
+        citiesMap.clear();
+        //citiesMapList.clear();
+        spinnerDataCity.clear();
+        regionKey = Key;
+
+        final ProgressDialog pd = new ProgressDialog(ProfileInfo.this);
+        pd.setMessage("loading");
+        pd.show();
+
+
+        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GETCITIES, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    pd.dismiss();
+                    JSONObject object = new JSONObject(response);
+                    //    String regions =   object.get("regions").toString();
+
+                    JSONArray CitiesArray = object.getJSONArray("cities");
+
+                    for (int i = 0; i < CitiesArray.length(); i++) {
+
+                        JSONObject obj = new JSONObject(CitiesArray.getString(i));
+
+                        String abc = obj.getString("city_id");
+                        String lmn = obj.getString("city_name");
+                        citiesMap.put(abc, lmn);
+                        //citiesMapList.add(citiesMap);
+                        spinnerDataCity.add(lmn);
+                        //  spinnerDataCountry.add(lmn);
+                    }
+
+                    ArrayAdapter<String> citiesAdapter = new ArrayAdapter<String>(ProfileInfo.this, R.layout.bg_spinner_item, spinnerDataCity);
+
+                    spinnerCity.setAdapter(citiesAdapter);
+                    //spinnerCity.setSelection(Integer.parseInt(pref.getString("city_id", "")));
+
+
+
+
+                    for (HashMap.Entry<String, String> e : citiesMap.entrySet()) {
+
+                        String key = e.getKey();
+                        String val = e.getValue();
+                        if (val == spinnerCity.getSelectedItem()) {
+
+                            cityKey = key;
+                            Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
+                            //   getCities(key);
+                        }
+
+                    }
+
+
+                    // regionsMapList.add()
+
+
+                    //  String status = object.get( "success").toString();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                // object.get("");
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pd.dismiss();
+                Toast.makeText(getApplicationContext(), "Volley Error", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("region_id", regionKey);
+//                params.put("password", password);
+//
+                return params;
+            }
+
 
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(request);
 
 
-
-
     }
 
-        public void getCityData(int pos){
-
-
-            for (HashMap.Entry<String,String> e : regionMap.entrySet() ){
-
-                String key = e.getKey();
-                String val = e.getValue();
-                if (val==spinnerRegion.getSelectedItem()){
-
-                    regionKey = key;
-                    Toast.makeText(getApplicationContext(),key,Toast.LENGTH_SHORT).show();
-                    getCities(key);
-                }
-
-            }
-
-
-
-
-        }
-
-
-        public void getCities(String Key){
-
-
-    citiesMap.clear();
-    //citiesMapList.clear();
-    spinnerDataCity.clear();
-    regionKey = Key;
-
-    final ProgressDialog pd = new ProgressDialog(ProfileInfo.this);
-    pd.setMessage("loading");
-    pd.show();
-
-
-    StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GETCITIES, new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-
-            try {
-                pd.dismiss();
-                JSONObject object = new JSONObject(response);
-                //    String regions =   object.get("regions").toString();
-
-                JSONArray CitiesArray = object.getJSONArray("cities");
-
-                for (int i =0;i<CitiesArray.length();i++){
-
-                    JSONObject obj = new JSONObject(CitiesArray.getString(i));
-
-                    String abc = obj.getString("city_id");
-                    String lmn = obj.getString("city_name");
-                    citiesMap.put(abc,lmn);
-                    //citiesMapList.add(citiesMap);
-                    spinnerDataCity.add(lmn);
-                    //  spinnerDataCountry.add(lmn);
-                }
-
-                ArrayAdapter<String> citiesAdapter = new ArrayAdapter<String>(ProfileInfo.this, R.layout.bg_spinner_item,spinnerDataCity);
-
-                spinnerCity.setAdapter(citiesAdapter);
-
-
-                for (HashMap.Entry<String,String> e : citiesMap.entrySet() ){
-
-                    String key = e.getKey();
-                    String val = e.getValue();
-                    if (val==spinnerCity.getSelectedItem()){
-
-                        cityKey = key;
-                        Toast.makeText(getApplicationContext(),key,Toast.LENGTH_SHORT).show();
-                     //   getCities(key);
-                    }
-
-                }
-
-
-                // regionsMapList.add()
-
-
-                //  String status = object.get( "success").toString();
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            // object.get("");
-
-        }
-    }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-        pd.dismiss();
-            Toast.makeText(getApplicationContext(),"Volley Error",Toast.LENGTH_SHORT).show();
-
-        }
-    }
-    )
-    {
-        @Override
-        protected Map<String, String> getParams()
-        {
-            Map<String, String>  params = new HashMap<String, String>();
-            params.put("region_id", regionKey);
-//                params.put("password", password);
-//
-            return params;
-        }
-
-
-
-    };
-    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-    requestQueue.add(request);
-
-
-
-
-
-
-}
-
-public void sendDataUserIsActive(){
-
+    public void sendDataUserIsActive() {
 
 
 //    id =  pref.getString("id","");
 //    f_name = pref.getString("first_name","");
 
-    final ProgressDialog pd = new ProgressDialog(ProfileInfo.this);
-    pd.setMessage("loading");
-    pd.show();
+        final ProgressDialog pd = new ProgressDialog(ProfileInfo.this);
+        pd.setMessage("loading");
+        pd.show();
 
 
+        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.UPDATE_PROFILE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                // Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject object = new JSONObject(response);
+                    pd.dismiss();
 
-    StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.UPDATE_PROFILE, new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-       // Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
-            try {
-                JSONObject object = new JSONObject(response);
-                pd.dismiss();
+                    String abcf = object.get("success").toString();
+                    String details = object.get("message").toString();
 
-                 String abcf =   object.get("success").toString();
-                String details = object.get("message").toString();
-
-                if (abcf.equals("0")){
-                    Toast.makeText(getApplicationContext(),details,Toast.LENGTH_SHORT).show();
-
-
-                }
-
-                else {
-
-                    JSONObject userDetails = object.getJSONObject("user_details");
-
-                    String fname = userDetails.get("first_name").toString();
-                    String lname = userDetails.get("last_name").toString();
-                    String iname = userDetails.get("institute").toString();
-                    String dname = userDetails.get("display_name").toString();
-                    String cityId = userDetails.get("city_id").toString();
-                    String regionId = userDetails.get("region_id").toString();
+                    if (abcf.equals("0")) {
+                        Toast.makeText(getApplicationContext(), details, Toast.LENGTH_SHORT).show();
 
 
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.clear();
-                    // editor.putString("","");
+                    } else {
 
-                    editor.putString("id", id);
-                    editor.putString("isActive", isActive);
-                    editor.putString("city_id", cityId);
-                    editor.putString("region_id", regionId);
-                    editor.putString("first_name", fname);
-                    editor.putString("last_name", lname);
-                    editor.putString("institute", iname);
-                    editor.putString("display_name", dname);
-                    editor.apply();
+                        JSONObject userDetails = object.getJSONObject("user_details");
 
-                    Toast.makeText(getApplicationContext(),details,Toast.LENGTH_SHORT).show();
+                        String fname = userDetails.get("first_name").toString();
+                        String lname = userDetails.get("last_name").toString();
+                        String iname = userDetails.get("institute").toString();
+                        String dname = userDetails.get("display_name").toString();
+                        String cityId = userDetails.get("city_id").toString();
+                        String regionId = userDetails.get("region_id").toString();
 
-                }
+
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.clear();
+                        // editor.putString("","");
+
+                        editor.putString("id", id);
+                        editor.putString("isActive", isActive);
+                        editor.putString("city_id", cityId);
+                        editor.putString("region_id", regionId);
+                        editor.putString("first_name", fname);
+                        editor.putString("last_name", lname);
+                        editor.putString("institute", iname);
+                        editor.putString("display_name", dname);
+                        editor.apply();
+
+                        Toast.makeText(getApplicationContext(), details, Toast.LENGTH_SHORT).show();
+
+                    }
 //                Toast.makeText(getApplicationContext(),abcf,Toast.LENGTH_SHORT).show();
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                // object.get("");
+
             }
-            // object.get("");
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
+                Toast.makeText(getApplicationContext(), "Volley Error", Toast.LENGTH_SHORT).show();
+
+            }
         }
-    }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
 
-            Toast.makeText(getApplicationContext(),"Volley Error",Toast.LENGTH_SHORT).show();
 
-        }
+//            pref.getString("first_name","");
+//            pref.getString("first_name","");
+//            pref.getString("first_name","");
+//            pref.getString("first_name","");
+
+
+                params.put("userId", id);
+                params.put("fName", f_name);
+                params.put("lName", l_name);
+                params.put("dName", d_name);
+                params.put("iName", i_name);
+                params.put("city_id", cityKey);
+                params.put("region_id", regionKey);
+//                params.put("password", password);
+//
+                return params;
+            }
+
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(request);
+
+
     }
-    )
-    {
-        @Override
-        protected Map<String, String> getParams()
-        {
-            Map<String, String>  params = new HashMap<String, String>();
+
+    public void sendDataUserInActive() {
 
 
-//            pref.getString("first_name","");
-//            pref.getString("first_name","");
-//            pref.getString("first_name","");
-//            pref.getString("first_name","");
+        final ProgressDialog pd = new ProgressDialog(ProfileInfo.this);
+        pd.setMessage("loading");
+        pd.show();
 
 
-            params.put("userId", id);
-            params.put("fName",f_name);
-            params.put("lName",l_name);
-            params.put("dName",d_name);
-            params.put("iName",i_name);
-            params.put("city_id", cityKey);
-            params.put("region_id",regionKey);
-//                params.put("password", password);
-//
-            return params;
+        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.UPDATE_PRO_USER_INACTIVE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject object = new JSONObject(response);
+                    pd.dismiss();
+
+                    String abcf = object.get("success").toString();
+
+                    if (abcf.equals("1")) {
+
+                        JSONObject userDetails = object.getJSONObject("user_details");
+
+                        String fname = userDetails.get("first_name").toString();
+                        String lname = userDetails.get("last_name").toString();
+                        String iname = userDetails.get("institute").toString();
+                        String dname = userDetails.get("display_name").toString();
+                        String cityId = userDetails.get("city_id").toString();
+                        String regionId = userDetails.get("region_id").toString();
+
+
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.clear();
+                        // editor.putString("","");
+
+                        editor.putString("id", id);
+                        editor.putString("isActive", isActive);
+                        editor.putString("city_id", cityId);
+                        editor.putString("region_id", regionId);
+                        editor.putString("first_name", fname);
+                        editor.putString("last_name", lname);
+                        editor.putString("institute", iname);
+                        editor.putString("display_name", dname);
+                        editor.apply();
+
+                    }
+
+                    if (abcf.equals("0")) {
+
+                        Toast.makeText(getApplicationContext(), "Profile Not updated", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    Toast.makeText(getApplicationContext(), abcf, Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                // object.get("");
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(), "Volley Error", Toast.LENGTH_SHORT).show();
+
+            }
         }
-
-
-
-    };
-    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-    requestQueue.add(request);
-
-
-
-
-}
- public  void    sendDataUserInActive(){
-
-
-
-     final ProgressDialog pd = new ProgressDialog(ProfileInfo.this);
-     pd.setMessage("loading");
-     pd.show();
-
-
-
-     StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.UPDATE_PRO_USER_INACTIVE, new Response.Listener<String>() {
-         @Override
-         public void onResponse(String response) {
-             Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
-             try {
-                 JSONObject object = new JSONObject(response);
-                 pd.dismiss();
-
-                 String abcf =   object.get("success").toString();
-
-                 if (abcf.equals("1")) {
-
-                     JSONObject userDetails = object.getJSONObject("user_details");
-
-                     String fname = userDetails.get("first_name").toString();
-                     String lname = userDetails.get("last_name").toString();
-                     String iname = userDetails.get("institute").toString();
-                     String dname = userDetails.get("display_name").toString();
-                     String cityId = userDetails.get("city_id").toString();
-                     String regionId = userDetails.get("region_id").toString();
-
-
-                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                     SharedPreferences.Editor editor = preferences.edit();
-                     editor.clear();
-                     // editor.putString("","");
-
-                     editor.putString("id", id);
-                     editor.putString("isActive", isActive);
-                     editor.putString("city_id", cityId);
-                     editor.putString("region_id", regionId);
-                     editor.putString("first_name", fname);
-                     editor.putString("last_name", lname);
-                     editor.putString("institute", iname);
-                     editor.putString("display_name", dname);
-                     editor.apply();
-
-                 }
-
-                 if (abcf.equals("0")){
-
-                     Toast.makeText(getApplicationContext(),"Profile Not updated",Toast.LENGTH_SHORT).show();
-                 }
-
-
-                 Toast.makeText(getApplicationContext(),abcf,Toast.LENGTH_SHORT).show();
-
-             } catch (JSONException e) {
-                 e.printStackTrace();
-             }
-             // object.get("");
-
-         }
-     }, new Response.ErrorListener() {
-         @Override
-         public void onErrorResponse(VolleyError error) {
-
-             Toast.makeText(getApplicationContext(),"Volley Error",Toast.LENGTH_SHORT).show();
-
-         }
-     }
-     )
-     {
-         @Override
-         protected Map<String, String> getParams()
-         {
-             Map<String, String>  params = new HashMap<String, String>();
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
 
 
 //            pref.getString("first_name","");
@@ -691,25 +663,24 @@ public void sendDataUserIsActive(){
 //            pref.getString("first_name","");
 
 
-             params.put("userId", id);
-             params.put("fName",f_name);
-             params.put("lName",l_name);
-             params.put("dName",d_name);
-             params.put("iName",i_name);
-             params.put("city_id", cityKey);
-             params.put("region_id",regionKey);
+                params.put("userId", id);
+                params.put("fName", f_name);
+                params.put("lName", l_name);
+                params.put("dName", d_name);
+                params.put("iName", i_name);
+                params.put("city_id", cityKey);
+                params.put("region_id", regionKey);
 //                params.put("password", password);
 //
-             return params;
-         }
+                return params;
+            }
 
 
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(request);
 
-     };
-     RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-     requestQueue.add(request);
-
- }
+    }
 
 
 }
