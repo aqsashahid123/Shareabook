@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Adapters.DrawerAdapter;
+import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.Pojo.DrawerPojo;
 import com.pk.shareabook.R;
@@ -45,7 +46,7 @@ public class ProfileInfo extends AppCompatActivity {
 
     Spinner spinnerRegion,spinnerCity;
     ArrayList<String> spinnerDataCity, spinnerDataCountry;
-
+    GeneralMethods gm;
     Toolbar toolbar;
 
 
@@ -79,6 +80,10 @@ public class ProfileInfo extends AppCompatActivity {
         setContentView(R.layout.activity_profile_info);
 
 
+
+
+
+        gm= new GeneralMethods();
         toolbar = (Toolbar) findViewById(R.id.appbar);
         toolbar.setTitle("MY DETAILS");
         toolbar.inflateMenu(R.menu.toolbar_menu);
@@ -139,7 +144,44 @@ public class ProfileInfo extends AppCompatActivity {
          NavigationView.OnNavigationItemSelectedListener() {
              @Override
              public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                 return false;
+                 switch (item.getItemId()){
+
+                     case (R.id.nav_profile):
+
+                         gm.openActivity(getApplicationContext(), ProfileInfo.class);
+
+                         break;
+                     case (R.id.nav_dashboard):
+                         break;
+
+                     case (R.id.nav_uploaded_Books):
+                         gm.openActivity(getApplicationContext(),UploadedBooks.class);
+                         break;
+                     case (R.id.nav_upload_Books):
+                         gm.openActivity(getApplicationContext(),UploadBook.class);
+                         break;
+                     case (R.id.nav_requested_books):
+                         gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+                         break;
+                     case (R.id.nav_sharing_requests):
+                         gm.showToast(getApplicationContext(),"Sharing Request");
+                         break;
+                     case (R.id.nav_shareed_books):
+                         gm.showToast(getApplicationContext(),"Shared BOOKS");
+                         break;
+                     case (R.id.nav_recievedBooks):
+                         gm.showToast(getApplicationContext(),"Recieved Books");
+                         break;
+//                   case ():
+//                       break;
+
+
+                 }
+
+
+
+
+                 return true;
              }
          });
 

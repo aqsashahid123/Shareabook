@@ -19,10 +19,19 @@
 
         <item android:title="MY BOOKS">
             <menu>
+
+                <item
+                    android:id="@+id/nav_search"
+                    android:title="Advance Book Search"
+                    android:icon="@drawable/menu_search_icon"/>
                 <item
                     android:id="@+id/nav_uploaded_Books"
                     android:title="Uploaded Books"
                     android:icon="@drawable/upload"/>
+                <item
+                    android:id="@+id/nav_upload_Books"
+                    android:title="Upload Books"
+                    android:icon="@drawable/uploadbook"/>
                 <item
                     android:id="@+id/nav_requested_books"
                     android:title="Requested Books"
@@ -36,7 +45,7 @@
                     android:title="Shared Books"
                     android:icon="@drawable/sharedbooks"/>
                 <item
-                    android:id="@+id/nav_send"
+                    android:id="@+id/nav_recievedBooks"
                     android:title="Recieved_Books"
                     android:icon="@drawable/receivedbooks"/>
             </menu>

@@ -1,8 +1,6 @@
-package com.pk.shareabook;
+package com.pk.shareabook.Activities;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,16 +9,20 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
+import com.pk.shareabook.R;
 import com.squareup.picasso.Picasso;
 
 public class UploadBook extends AppCompatActivity {
 
     ImageView ivBookCover;
     EditText etBookTitle;
+    Button uploadBookLogo;
     Toolbar toolbar;
     EditText etAuthor;
     DrawerLayout drawerLayout;
@@ -68,7 +70,45 @@ public class UploadBook extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return false;
+
+               switch (item.getItemId()){
+
+                   case (R.id.nav_profile):
+
+                       gm.openActivity(getApplicationContext(), ProfileInfo.class);
+
+                       break;
+                   case (R.id.nav_dashboard):
+                       break;
+
+                   case (R.id.nav_uploaded_Books):
+                       gm.openActivity(getApplicationContext(),UploadedBooks.class);
+                       break;
+                   case (R.id.nav_upload_Books):
+                       gm.openActivity(getApplicationContext(),UploadBook.class);
+                       break;
+                   case (R.id.nav_requested_books):
+                       gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+                       break;
+                   case (R.id.nav_sharing_requests):
+                       gm.showToast(getApplicationContext(),"Sharing Request");
+                       break;
+                   case (R.id.nav_shareed_books):
+                       gm.showToast(getApplicationContext(),"Shared BOOKS");
+                       break;
+                   case (R.id.nav_recievedBooks):
+                       gm.showToast(getApplicationContext(),"Recieved Books");
+                       break;
+//                   case ():
+//                       break;
+
+
+               }
+
+
+
+
+                return true;
             }
         });
 

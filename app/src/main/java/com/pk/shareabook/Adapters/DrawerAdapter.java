@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.pk.shareabook.Pojo.DrawerPojo;
 import com.pk.shareabook.R;
-import com.pk.shareabook.UploadBook;
-import com.pk.shareabook.UploadedBooks;
+import com.pk.shareabook.Activities.UploadBook;
+import com.pk.shareabook.Activities.UploadedBooks;
 
 import java.util.List;
 

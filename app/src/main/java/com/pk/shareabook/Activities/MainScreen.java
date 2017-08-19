@@ -1,6 +1,8 @@
 package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Adapters.DrawerAdapter;
+import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.Pojo.DrawerPojo;
 import com.pk.shareabook.R;
@@ -46,7 +49,7 @@ List<DrawerPojo> drawerList;
     ListView mDrawerList;
     DrawerAdapter drawerAdapter;
     Toolbar toolbar;
-
+    GeneralMethods gm;
 
 
     @Override
@@ -55,6 +58,8 @@ List<DrawerPojo> drawerList;
         setContentView(R.layout.activity_main_screen);
         spinnerCities = (Spinner) findViewById(R.id.getCity);
         spinnerRegions = (Spinner) findViewById(R.id.getRegions);
+
+        gm = new GeneralMethods();
 
         spinnerDataCity = new ArrayList<>();
         spinnerDataCountry = new ArrayList<>();
@@ -90,6 +95,50 @@ List<DrawerPojo> drawerList;
 
        // mDrawerList = (ListView) findViewById(R.id.left_drawer);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+
+                    case (R.id.nav_profile):
+
+                        gm.openActivity(getApplicationContext(), ProfileInfo.class);
+
+                        break;
+                    case (R.id.nav_dashboard):
+                        break;
+
+                    case (R.id.nav_uploaded_Books):
+                        gm.openActivity(getApplicationContext(),UploadedBooks.class);
+                        break;
+                    case (R.id.nav_upload_Books):
+                        gm.openActivity(getApplicationContext(),UploadBook.class);
+                        break;
+                    case (R.id.nav_requested_books):
+                        gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+                        break;
+                    case (R.id.nav_sharing_requests):
+                        gm.showToast(getApplicationContext(),"Sharing Request");
+                        break;
+                    case (R.id.nav_shareed_books):
+                        gm.showToast(getApplicationContext(),"Shared BOOKS");
+                        break;
+                    case (R.id.nav_recievedBooks):
+                        gm.showToast(getApplicationContext(),"Recieved Books");
+                        break;
+//                   case ():
+//                       break;
+
+
+                }
+
+
+
+
+                return true;
+            }
+        });
 
         // drawerLayout.openDrawer(Gravity.RIGHT);
 //        drawerList = new ArrayList<>();

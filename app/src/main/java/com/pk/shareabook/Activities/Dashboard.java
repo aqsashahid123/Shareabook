@@ -1,4 +1,4 @@
-package com.pk.shareabook;
+package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
@@ -16,7 +16,6 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,8 +25,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Adapters.BooksCardItemsAdapter;
+import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
-import com.squareup.picasso.Picasso;
+import com.pk.shareabook.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +47,7 @@ public class Dashboard extends AppCompatActivity {
     List<HashMap<String,String>> mapList;
     List<String> bookNames;
     EditText etSearch;
+    GeneralMethods gm;
     DrawerLayout drawerLayout;
 
     BooksCardItemsAdapter adapter;
@@ -58,6 +59,7 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
        // cardList = new ArrayList<>();
+        gm = new GeneralMethods();
         mapList = new ArrayList<>();
         bookNames = new ArrayList<>();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -73,7 +75,44 @@ public class Dashboard extends AppCompatActivity {
              NavigationView.OnNavigationItemSelectedListener() {
                  @Override
                  public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                     return false;
+                     switch (item.getItemId()){
+
+                         case (R.id.nav_profile):
+
+                             gm.openActivity(getApplicationContext(), ProfileInfo.class);
+
+                             break;
+                         case (R.id.nav_dashboard):
+                             break;
+
+                         case (R.id.nav_uploaded_Books):
+                             gm.openActivity(getApplicationContext(),UploadedBooks.class);
+                             break;
+                         case (R.id.nav_upload_Books):
+                             gm.openActivity(getApplicationContext(),UploadBook.class);
+                             break;
+                         case (R.id.nav_requested_books):
+                             gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+                             break;
+                         case (R.id.nav_sharing_requests):
+                             gm.showToast(getApplicationContext(),"Sharing Request");
+                             break;
+                         case (R.id.nav_shareed_books):
+                             gm.showToast(getApplicationContext(),"Shared BOOKS");
+                             break;
+                         case (R.id.nav_recievedBooks):
+                             gm.showToast(getApplicationContext(),"Recieved Books");
+                             break;
+//                   case ():
+//                       break;
+
+
+                     }
+
+
+
+
+                     return true;
                  }
              });
 

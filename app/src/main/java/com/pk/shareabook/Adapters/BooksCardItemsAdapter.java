@@ -8,11 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pk.shareabook.BookDetail;
+import com.pk.shareabook.Activities.BookDetail;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.R;
 import com.squareup.picasso.Picasso;

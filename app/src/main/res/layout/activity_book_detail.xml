@@ -7,7 +7,7 @@
     android:id="@+id/drawerLayout"
 
     android:orientation="vertical"
-    tools:context="com.pk.shareabook.BookDetail">
+    tools:context="com.pk.shareabook.Activities.BookDetail">
 
 <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
