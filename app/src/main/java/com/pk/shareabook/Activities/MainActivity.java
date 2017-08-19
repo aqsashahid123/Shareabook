@@ -3,15 +3,9 @@ package com.pk.shareabook.Activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.MenuItem;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +24,6 @@ import com.pk.shareabook.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.GenericArrayType;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
 
-    Toolbar toolbar;
-    DrawerLayout drawerLayout;
 
     String email,password,success,isActive,id,city_id,display_name, firstName,LastName,displayPic,institute,regionId;
 
@@ -58,39 +49,6 @@ public class MainActivity extends AppCompatActivity {
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnSubmit = (Button) findViewById(R.id.btnUpdateProfile);
-        toolbar = (Toolbar) findViewById(R.id.appbar);
-        toolbar.inflateMenu(R.menu.toolbar_menu);
-        toolbar.setTitle("Advance Search");
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new
-             NavigationView.OnNavigationItemSelectedListener() {
-                 @Override
-                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                     return false;
-                 }
-             });
-
-
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case(R.id.openMenu):
-                        drawerLayout.openDrawer(Gravity.RIGHT);
-
-                        break;
-
-
-                }
-
-
-                return true;
-            }
-        });
-
-
 
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
