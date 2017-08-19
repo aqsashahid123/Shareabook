@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1080684913576",
+    "firebase_url": "https://share-a-book-8ea7c.firebaseio.com",
+    "project_id": "share-a-book-8ea7c",
+    "storage_bucket": "share-a-book-8ea7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080684913576:android:5e9f7b802daa2d90",
+        "android_client_info": {
+          "package_name": "com.pk.shareabook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080684913576-evfho3bm0ti89rqungi36trunl1k3730.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pk.shareabook",
+            "certificate_hash": "1abca25c9036a51c611909141d7b5258d2adce64"
+          }
+        },
+        {
+          "client_id": "1080684913576-ce3o17qvre1hfqrvt8s1lcoplpsinrru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0myebXS_s944OrJlrkbe9ZASxpGNzMgQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080684913576-ce3o17qvre1hfqrvt8s1lcoplpsinrru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
