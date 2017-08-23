@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pk.shareabook.Activities.Messages">
+
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/app_bar"
+        />
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/messageView"
+        android:layout_above="@+id/imageView2"
+        android:layout_below="@+id/appbar">
+
+    </ListView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/linearmessage"
+        android:background="#DFDFDF"
+        android:id="@+id/imageView2" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:weightSum="3"
+        android:id="@+id/linearmessage"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/messageTXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="11dp"
+            android:ems="10"
+            android:layout_weight="3.5"
+            android:inputType="textPersonName"
+            android:layout_margin="10dp"
+            android:hint="Enter Message Here .. "
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:layout_weight="0.2"
+            android:background="@android:drawable/ic_menu_send"
+            android:id="@+id/sendmessage"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

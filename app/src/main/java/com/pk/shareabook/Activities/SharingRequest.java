@@ -1,19 +1,16 @@
 package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.pk.shareabook.Adapters.MyUploadedBooksAdapter;
 import com.pk.shareabook.Adapters.SharingRequestAdapter;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
@@ -190,7 +186,7 @@ public class SharingRequest extends AppCompatActivity {
                             mapList.add(map);
                         }
 
-                        SharingRequestAdapter adapter = new SharingRequestAdapter(getApplicationContext(), mapList);
+                        SharingRequestAdapter adapter = new SharingRequestAdapter(SharingRequest.this, mapList);
 
                         lvMyUploadedBooks.setAdapter(adapter);
 

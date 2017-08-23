@@ -1,7 +1,6 @@
 package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -24,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Adapters.DrawerAdapter;
-import com.pk.shareabook.FCM.RegistrationIntentService;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.Pojo.DrawerPojo;
@@ -175,8 +173,7 @@ List<DrawerPojo> drawerList;
             }
         });
 
-        Intent intent = new Intent(MainScreen.this,RegistrationIntentService.class);
-        startService(intent);
+
 
     }
 

@@ -3,6 +3,7 @@ package com.pk.shareabook.FCM;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -12,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.R;
 
 import java.util.HashMap;
@@ -33,14 +35,14 @@ public class RegistrationIntentService extends IntentService {
 
         try {
 
-            SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            String userid = pref.getString("user_id", null);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            String userid = preferences.getString("id", null);
 
             // Make a call to Instance API
             String instanceID = FirebaseInstanceId.getInstance().getToken();
             String senderId = getResources().getString(R.string.gcm_defaultSenderId);
 
-           // Jsonsend(instanceID,userid);
+            Jsonsend(instanceID,userid);
 
             // request token that will be used by the server to send push notifications
 //            String token = instanceID.getToken();
@@ -58,7 +60,7 @@ public class RegistrationIntentService extends IntentService {
     public void Jsonsend(final String token , final String userid)
     {
 
-        StringRequest request = new StringRequest(Request.Method.POST, "",
+        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.REGISTER_TOKEN,
                 new Response.Listener<String>()
                 {
                     @Override
@@ -81,7 +83,7 @@ public class RegistrationIntentService extends IntentService {
 
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("token_id",token);
-                params.put("uid",userid);
+                params.put("userid",userid);
                 return params;
 
             }

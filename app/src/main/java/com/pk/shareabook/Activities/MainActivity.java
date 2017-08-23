@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
+                            progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(),"Volley Error",Toast.LENGTH_SHORT).show();
 
                         }
