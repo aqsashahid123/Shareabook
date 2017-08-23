@@ -30,4 +30,22 @@ public class END_POINTS {
 
     public static String GET_ALL_BOOKS = BASE_URL +"getAllBooks";
 
+    public static String UPLOAD_BOOK_LOGO = "http://share-a-book.pk/beta/upload_book_logo_mobile.php";
+
+    public static String UPLOAD_BOOK = BASE_URL + "upload_book";
+
+    public static  String SEND_REQUEST = BASE_URL + "sendRequest";
+
+    public static String GET_SHARING_REQUEST = BASE_URL + "sharingRequests";
+
+    public static String ACCEPT_REQUEST = BASE_URL + "acceptRequest";
+
+    public static String REJECT_REQUEST = BASE_URL + "rejectRequest";
+
+    public static String MARKED_AS_SHARED = BASE_URL + "markAsShared";
+
+    public static String GET_SHARED_BOOKS = BASE_URL + "sharedBooks";
+
+
+
 }

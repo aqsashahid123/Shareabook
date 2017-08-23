@@ -1,6 +1,8 @@
 package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
@@ -10,6 +12,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,11 +46,13 @@ public class BookDetail extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
 
     CircleImageView circularImageView;
+    EditText etMessage;
+    String senderId,recieverId,message;
     DrawerLayout drawerLayout;
-
+    Button requestBook;
 
     GeneralMethods gm;
-    String id;
+    String bookId,userId;
     Toolbar toolbar;
 
     @Override
@@ -55,10 +62,18 @@ public class BookDetail extends AppCompatActivity {
 
         gm =  new GeneralMethods();
 
-        id = getIntent().getStringExtra("bookId");
+        requestBook  = (Button) findViewById(R.id.requestBook);
+
+
+        bookId = getIntent().getStringExtra("bookId");
+        etMessage = (EditText) findViewById(R.id.etMessage);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.toolbar_menu);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        senderId = preferences.getString("id","");
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -74,6 +89,7 @@ public class BookDetail extends AppCompatActivity {
 
                          break;
                      case (R.id.nav_dashboard):
+                         gm.openActivity(getApplicationContext(), Dashboard.class);
                          break;
 
                      case (R.id.nav_uploaded_Books):
@@ -87,6 +103,8 @@ public class BookDetail extends AppCompatActivity {
                          break;
                      case (R.id.nav_sharing_requests):
                          gm.showToast(getApplicationContext(),"Sharing Request");
+                         gm.openActivity(getApplicationContext(),SharingRequest.class);
+
                          break;
                      case (R.id.nav_shareed_books):
                          gm.showToast(getApplicationContext(),"Shared BOOKS");
@@ -174,6 +192,9 @@ public class BookDetail extends AppCompatActivity {
                         JSONObject obj = object.getJSONObject("bookDetails");
 
                         displayName = obj.getString("display_name");
+
+                       recieverId = obj.getString("owner_id");
+
                         tvOwner.setText(displayName);
 
                         author = obj.getString("author");
@@ -247,11 +268,159 @@ public class BookDetail extends AppCompatActivity {
                 Map<String, String>  params = new HashMap<String, String>();
 
                 // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-                //   preferences.getString("id","");
+                //   preferences.getString("bookId","");
 
-                //      params.put("bookId", result.get("id"));
+                //      params.put("bookId", result.get("bookId"));
 
-                params.put("book_id", id);
+                params.put("book_id", bookId);
+
+
+//                params.put("password", password);
+//
+                return params;
+            }
+
+
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(BookDetail.this);
+        requestQueue.add(request);
+
+
+
+
+        requestBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             message=   etMessage.getText().toString();
+
+                if (senderId.equals(recieverId) ) {
+                    Toast.makeText(getApplicationContext(),"You can not send a book request to yourself",Toast.LENGTH_SHORT).show();
+
+                }
+
+                else {
+                    sendRequest();
+                }
+            }
+        });
+
+
+
+
+
+    }
+
+
+    public void sendRequest(){
+
+        final ProgressDialog pd = new ProgressDialog(BookDetail.this);
+        pd.setMessage("loading");
+        pd.show();
+
+
+
+
+        final StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.SEND_REQUEST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                pd.dismiss();
+
+                Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+
+              //  try {
+//                    JSONObject object = new JSONObject(response);
+//                    String success = object.getString("success");
+//
+//                    if (success.equals("0")){
+//
+//                        Toast.makeText(getApplicationContext(),"No Details found",Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                    else {
+//
+//                        JSONObject obj = object.getJSONObject("bookDetails");
+//
+//                        displayName = obj.getString("display_name");
+//
+//                        recieverId = obj.getString("owner_id");
+//
+//                        tvOwner.setText(displayName);
+//
+//                        author = obj.getString("author");
+//                        tvAuthor.setText(author);
+//                        title = obj.getString("title");
+//                        collapsingToolbarLayout.setTitle(title);
+//
+//
+//                        toolbar.setTitle(title);
+//                        tvTitle.setText(title);
+//                        region = obj.getString("region_name");
+//                        tvRRegion.setText(region);
+//
+//
+//
+//                        //location = obj.getString("bl_location");
+////tvLocations.setText(location);
+//                        institute = obj.getString("institute");
+//                        tvInstitute.setText(institute);
+//                        String  city = obj.getString("city_name");
+//                        tvCity.setText(city);
+//
+//                        imgLogo = obj.getString("logo");
+//                        Picasso.with(getApplicationContext()).load(END_POINTS.GET_BOOK_LOGO + imgLogo).into(circularImageView);
+//
+//
+//                        JSONArray arr = object.getJSONArray("bookLocations");
+//
+//                        //   JSONObject loc = arr.getJSONObject(2);
+//                        for (int i = 0; i< arr.length() ; i++){
+//
+//                            JSONObject obje = arr.getJSONObject(i);
+//                            location = obje.getString("bl_location");
+//                            tvLocations.setText(location);
+//
+//
+//                        }
+
+//                    }
+
+
+
+
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    //  Toast.makeText(getApplicationContext(),)
+//                }
+//                // object.get("");
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(BookDetail.this,"Network Error",Toast.LENGTH_SHORT).show();
+                pd.dismiss();
+
+            }
+        }
+        )
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+                //   preferences.getString("bookId","");
+
+                //      params.put("bookId", result.get("bookId"));
+
+                params.put("bookId", bookId);
+                params.put("senderId",senderId);
+                params.put("receiverId",recieverId);
+                params.put("requestMessage",message);
 
 
 //                params.put("password", password);
@@ -270,6 +439,10 @@ public class BookDetail extends AppCompatActivity {
 
 
 
-
     }
+
+
+
+
+
 }

@@ -310,6 +310,38 @@ android:layout_marginBottom="30dp"
             </LinearLayout>
 
 
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:id="@+id/etMessage"
+                    android:hint="Enter Message to request book"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:layout_margin="20dp"
+
+                    android:padding="15dp"/>
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:text="REQUEST BOOK"
+                    android:layout_weight="0"
+                    android:id="@+id/requestBook"
+                    android:layout_margin="20dp"
+                    android:padding="5dp"
+                    android:background="#3498db"/>
+
+
+
+
+
+
+
 
         </LinearLayout>
 

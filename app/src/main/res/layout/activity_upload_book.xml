@@ -79,13 +79,97 @@ android:id="@+id/drawerLayout"
 
     </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:paddingLeft="20dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:paddingRight="20dp"
+            android:layout_below="@+id/input_bookAutor"
+            android:id="@+id/LAetInstitute"
+            android:paddingTop="10dp"
+            android:textColorHint="#BFBFBF"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etInstitute"
+                android:layout_width="match_parent"
+                android:hint="Institute"
+                android:backgroundTint="#fff"
+                android:textColor="#555"
+                android:layout_height="wrap_content"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/LAetInstitute"-->
+            <!--android:textSize="17sp"-->
+            <!--android:padding="4dp"-->
+            <!--android:id="@+id/tvOne"-->
+            <!--android:textColor="#000"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/tvOne"-->
+            <!--android:padding="4dp"-->
+            <!--android:textSize="17sp"-->
+            <!--android:id="@+id/tvTwo"-->
+            <!--android:textColor="#000"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/tvTwo"-->
+            <!--android:textSize="17sp"-->
+            <!--android:padding="4dp"-->
+            <!--android:id="@+id/tvThree"-->
+            <!--android:textColor="#000"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/tvThree"-->
+            <!--android:textSize="17sp"-->
+            <!--android:padding="4dp"-->
+            <!--android:id="@+id/tvFour"-->
+            <!--android:textColor="#000"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/tvFour"-->
+            <!--android:textSize="17sp"-->
+            <!--android:padding="4dp"-->
+            <!--android:id="@+id/tvFive"-->
+            <!--android:textColor="#000"/>-->
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvLocations"
+            android:layout_below="@+id/LAetInstitute"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:layout_below="@+id/rvLocations"
+            android:id="@+id/inputLocations"
+            android:orientation="horizontal">
+
+
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/inputLocations"
+
         android:layout_width="match_parent"
         android:paddingLeft="20dp"
+        android:layout_weight="1"
         android:layout_marginTop="10dp"
         android:paddingRight="20dp"
-        android:layout_below="@+id/input_bookAutor"
         android:paddingTop="10dp"
         android:textColorHint="#BFBFBF"
         android:layout_height="wrap_content">
@@ -100,6 +184,21 @@ android:id="@+id/drawerLayout"
             />
 
     </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:id="@+id/addDataLocation"
+                android:textColor="#fff"
+                android:textSize="30sp"
+                android:layout_margin="10dp"
+                android:padding="2dp"
+                android:background="@drawable/bg_btn_add_locations"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"

@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,40 +15,13 @@
         android:theme="@style/AppTheme">
 
         <!-- android:theme="@style/AppTheme"> -->
-        <activity android:name=".Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+        <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.SignUp" />
-        <activity android:name=".Activities.ProfileInfo">
-
-        </activity>
-        <activity android:name=".Activities.MainScreen" >
-
-
-
-        </activity>
-        <activity android:name=".Activities.UploadBook" >
-
-
-
-
-        </activity>
-        <activity android:name=".Activities.UploadedBooks">
-
-
-
-        </activity>
-        <activity android:name=".Activities.BookDetail">
-
-
-
-
-        </activity>
+        <activity android:name=".Activities.ProfileInfo" />
+        <activity android:name=".Activities.MainScreen" />
+        <activity android:name=".Activities.UploadBook" />
+        <activity android:name=".Activities.UploadedBooks" />
+        <activity android:name=".Activities.BookDetail" />
         <activity android:name=".Activities.Dashboard"></activity>
 
         <service
@@ -68,6 +41,14 @@
             android:name=".FCM.RegistrationIntentService"
             android:exported="false" />
 
+        <activity android:name=".Activities.SharingRequest">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.MySharedBooks"></activity>
     </application>
 
 </manifest>

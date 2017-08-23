@@ -70,6 +70,7 @@ public class UploadedBooks extends AppCompatActivity {
 
                          break;
                      case (R.id.nav_dashboard):
+                         gm.openActivity(getApplicationContext(), Dashboard.class);
                          break;
 
                      case (R.id.nav_uploaded_Books):
@@ -83,6 +84,7 @@ public class UploadedBooks extends AppCompatActivity {
                          break;
                      case (R.id.nav_sharing_requests):
                          gm.showToast(getApplicationContext(),"Sharing Request");
+                         gm.openActivity(getApplicationContext(),SharingRequest.class);
                          break;
                      case (R.id.nav_shareed_books):
                          gm.showToast(getApplicationContext(),"Shared BOOKS");
@@ -153,7 +155,7 @@ public class UploadedBooks extends AppCompatActivity {
 
                             JSONObject bookDetail =new JSONObject( myUploadedBooks.getString(i));
 
-                            map.put("id",bookDetail.getString("id"));
+                            map.put("bookId",bookDetail.getString("id"));
                             map.put("title",bookDetail.getString("title"));
                             map.put("author",bookDetail.getString("author"));
                             map.put("logo",bookDetail.getString("logo"));
@@ -181,9 +183,9 @@ public class UploadedBooks extends AppCompatActivity {
 //                    lvMyUploadedBooks.setLongClickable(true);
 //                    lvMyUploadedBooks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //                        @Override
-//                        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long bookId) {
 //
-//                            Toast.makeText(getApplicationContext(),mapList.get(position).get("id"),Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(),mapList.get(position).get("bookId"),Toast.LENGTH_SHORT).show();
 //
 //                            return true;
 //                        }
@@ -192,10 +194,10 @@ public class UploadedBooks extends AppCompatActivity {
                     lvMyUploadedBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Toast.makeText(getApplicationContext(),mapList.get(position).get("id"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),mapList.get(position).get("bookId"),Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(getApplicationContext(),BookDetail.class);
-                            intent.putExtra("bookId",mapList.get(position).get("id"));
+                            intent.putExtra("bookId",mapList.get(position).get("bookId"));
                             startActivity(intent);
 
 
@@ -232,7 +234,7 @@ public class UploadedBooks extends AppCompatActivity {
                 Map<String, String>  params = new HashMap<String, String>();
 
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                preferences.getString("id","");
+               // preferences.getString("bookId","");
 
                 params.put("userId", preferences.getString("id",""));
 //                params.put("password", password);

@@ -95,7 +95,7 @@ List<DrawerPojo> drawerList;
         });
 
 
-       // mDrawerList = (ListView) findViewById(R.id.left_drawer);
+       // mDrawerList = (ListView) findViewById(R.bookId.left_drawer);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -109,17 +109,8 @@ List<DrawerPojo> drawerList;
 
                         break;
                     case (R.id.nav_dashboard):
-                        gm.openActivity(getApplicationContext(),Dashboard.class);
-
+                        gm.openActivity(getApplicationContext(), Dashboard.class);
                         break;
-
-                    case  (R.id.nav_search):
-
-
-                        gm.openActivity(getApplicationContext(),MainScreen.class);
-
-                        break;
-
 
                     case (R.id.nav_uploaded_Books):
                         gm.openActivity(getApplicationContext(),UploadedBooks.class);
@@ -132,6 +123,7 @@ List<DrawerPojo> drawerList;
                         break;
                     case (R.id.nav_sharing_requests):
                         gm.showToast(getApplicationContext(),"Sharing Request");
+                        gm.openActivity(getApplicationContext(),SharingRequest.class);
                         break;
                     case (R.id.nav_shareed_books):
                         gm.showToast(getApplicationContext(),"Shared BOOKS");

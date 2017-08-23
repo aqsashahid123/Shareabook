@@ -83,6 +83,7 @@ public class Dashboard extends AppCompatActivity {
 
                              break;
                          case (R.id.nav_dashboard):
+                             gm.openActivity(getApplicationContext(), Dashboard.class);
                              break;
 
                          case (R.id.nav_uploaded_Books):
@@ -96,6 +97,7 @@ public class Dashboard extends AppCompatActivity {
                              break;
                          case (R.id.nav_sharing_requests):
                              gm.showToast(getApplicationContext(),"Sharing Request");
+                             gm.openActivity(getApplicationContext(),SharingRequest.class);
                              break;
                          case (R.id.nav_shareed_books):
                              gm.showToast(getApplicationContext(),"Shared BOOKS");
@@ -217,7 +219,7 @@ public class Dashboard extends AppCompatActivity {
        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GET_ALL_BOOKS, new Response.Listener<String>() {
            @Override
            public void onResponse(String response) {
-
+            Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
                pd.dismiss();
                try {
                    JSONObject object = new JSONObject(response);
@@ -277,16 +279,6 @@ public class Dashboard extends AppCompatActivity {
            {
                Map<String, String>  params = new HashMap<String, String>();
 
-               // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-               //   preferences.getString("id","");
-
-               //      params.put("bookId", result.get("id"));
-
-              // params.put("book_id", id);
-
-
-//                params.put("password", password);
-//
                return params;
            }
 
