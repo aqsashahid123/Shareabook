@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.pk.shareabook.Adapters.BooksAdapterReceivedBooks;
 import com.pk.shareabook.Adapters.BooksCardItemsAdapter;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
@@ -49,6 +50,8 @@ public class RecievedBooks extends AppCompatActivity {
 //    BooksCardItemsAdapter adapter;
 
     BooksCardItemsAdapter adapter;
+
+   // BooksAdapterReceivedBooks adapter;
 
     String id;
 
@@ -111,19 +114,21 @@ public class RecievedBooks extends AppCompatActivity {
                         gm.openActivity(getApplicationContext(), UploadBook.class);
                         break;
                     case (R.id.nav_requested_books):
-                        gm.showToast(getApplicationContext(), "REQUESTED BOOKS");
+                    //    gm.showToast(getApplicationContext(), "REQUESTED BOOKS");
+                        gm.openActivity(getApplicationContext(),RequestedBooks.class);
+
                         break;
                     case (R.id.nav_sharing_requests):
-                        gm.showToast(getApplicationContext(), "Sharing Request");
+                      //  gm.showToast(getApplicationContext(), "Sharing Request");
                         gm.openActivity(getApplicationContext(), SharingRequest.class);
                         break;
                     case (R.id.nav_shareed_books):
                         gm.openActivity(getApplicationContext(), MySharedBooks.class);
 
-                        gm.showToast(getApplicationContext(), "Shared BOOKS");
+                        //gm.showToast(getApplicationContext(), "Shared BOOKS");
                         break;
                     case (R.id.nav_recievedBooks):
-                        gm.showToast(getApplicationContext(), "Recieved Books");
+                      //  gm.showToast(getApplicationContext(), "Recieved Books");
                         gm.openActivity(getApplicationContext(), RecievedBooks.class);
 
                         break;
@@ -131,6 +136,9 @@ public class RecievedBooks extends AppCompatActivity {
                         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         preferences.edit().clear().apply();
                         gm.openActivity(getApplicationContext(), MainActivity.class);
+                        break;
+                    case (R.id.nav_search):
+                        gm.openActivity(getApplicationContext(), MainScreen.class);
                         break;
 
 
@@ -142,14 +150,14 @@ public class RecievedBooks extends AppCompatActivity {
         });
 
 
-        prepareHashMap();
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         // recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        prepareHashMap();
 
     }
 
@@ -160,7 +168,7 @@ public class RecievedBooks extends AppCompatActivity {
         pd.show();
 
 
-        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GET_SHARED_BOOKS, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GET_RECEIVED_BOOKS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
@@ -175,7 +183,7 @@ public class RecievedBooks extends AppCompatActivity {
 
                     } else {
 
-                        JSONArray array = object.getJSONArray("sharedBooks");
+                        JSONArray array = object.getJSONArray("receivedBooks");
                         for (int i = 0; i < array.length(); i++) {
 
                             JSONObject obj = array.getJSONObject(i);
@@ -193,8 +201,8 @@ public class RecievedBooks extends AppCompatActivity {
 
                         }
 
-//                        adapter = new BooksCardItemsAdapter(mapList, getApplicationContext());
-                        adapter = new BooksCardItemsAdapter(mapList,getApplicationContext());
+                        adapter = new BooksCardItemsAdapter(mapList, getApplicationContext());
+                   //     adapter = new BooksAdapterReceivedBooks(RecievedBooks.this,mapList);
 
                         recyclerView.setAdapter(adapter);
 

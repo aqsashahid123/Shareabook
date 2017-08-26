@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
@@ -71,6 +72,8 @@ public class UploadedBooksAdapter extends RecyclerView.Adapter<UploadedBooksAdap
         SingleMap = mapList.get(position);
         holder.tvBookName.setText(SingleMap.get("title"));
         holder.tvAuthorName.setText(SingleMap.get("author"));
+        holder.tvBookName.setTextColor(Color.BLACK);
+        holder.tvAuthorName.setTextColor(Color.BLACK);
         // holder.ivBookCover.setImageBitmap();;
         String imgLogo = SingleMap.get("logo");
 

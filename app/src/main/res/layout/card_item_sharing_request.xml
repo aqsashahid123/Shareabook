@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
     xmlns:card_view="http://schemas.android.com/tools"
-
-
-    android:layout_height="wrap_content">
-
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <android.support.v7.widget.CardView
@@ -34,7 +31,7 @@
                 android:id="@+id/ivEditDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-android:layout_marginTop="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/new_menu"
@@ -66,6 +63,7 @@ android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:maxLines="1"
                 android:padding="5dp"
+                android:textColor="#000"
                 android:text="BOOK NAME"
                 android:textStyle="bold" />
 
@@ -85,12 +83,39 @@ android:layout_marginTop="5dp"
                 android:typeface="serif" />
 
 
+            <TextView
+                android:id="@+id/bookRequesterName"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/bookAuthor"
+                android:gravity="center"
+                android:padding="2dp"
+                android:paddingBottom="10dp"
+                android:text="Requester Name"
+                android:textColor="#000"
+                android:textSize="11sp"
+                android:typeface="serif" />
+            <TextView
+
+                android:layout_width="200dp"
+                android:id="@+id/senderMessage"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/bookRequesterName"
+                android:gravity="center"
+                android:padding="2dp"
+                android:paddingBottom="10dp"
+                android:text="Message"
+                android:textColor="#000"
+                android:textSize="11sp"
+                android:typeface="serif" />
+
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
-
-
-
 
 
 

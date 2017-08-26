@@ -62,7 +62,7 @@ public class BooksAdapterReceivedBooks extends RecyclerView.Adapter<BooksAdapter
     @Override
     public BookHolderReceivedBooks onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item_with_menu_icon,parent);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item_with_menu_icon,parent,false);
 
         return new BookHolderReceivedBooks(view);
     }
@@ -100,7 +100,7 @@ public class BooksAdapterReceivedBooks extends RecyclerView.Adapter<BooksAdapter
 
                               String bookId =  SingleMap.get("book_id");
 
-                           //     bookReceived(bookId);
+                                bookReceived(bookId);
 
 
 //                                SharedPreferences.Editor editor = preferences.edit();

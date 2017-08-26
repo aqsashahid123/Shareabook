@@ -90,19 +90,21 @@ public class UploadedBooks extends AppCompatActivity {
                          gm.openActivity(getApplicationContext(),UploadBook.class);
                          break;
                      case (R.id.nav_requested_books):
-                         gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+                    //     gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+                         gm.openActivity(getApplicationContext(),RequestedBooks.class);
+
                          break;
                      case (R.id.nav_sharing_requests):
-                         gm.showToast(getApplicationContext(),"Sharing Request");
+                      //   gm.showToast(getApplicationContext(),"Sharing Request");
                          gm.openActivity(getApplicationContext(),SharingRequest.class);
                          break;
                      case (R.id.nav_shareed_books):
-                         gm.showToast(getApplicationContext(),"Shared BOOKS");
+                        // gm.showToast(getApplicationContext(),"Shared BOOKS");
                          gm.openActivity(getApplicationContext(), MySharedBooks.class);
 
                          break;
                      case (R.id.nav_recievedBooks):
-                         gm.showToast(getApplicationContext(),"Received Books");
+                     //    gm.showToast(getApplicationContext(),"Received Books");
                          gm.openActivity(getApplicationContext(), RecievedBooks.class);
 
                          break;
@@ -112,6 +114,10 @@ public class UploadedBooks extends AppCompatActivity {
                          gm.openActivity(getApplicationContext(), MainActivity.class);
 
                          break;
+                     case (R.id.nav_search):
+                         gm.openActivity(getApplicationContext(), MainScreen.class);
+                         break;
+
 //                   case ():
 //                       break;
 

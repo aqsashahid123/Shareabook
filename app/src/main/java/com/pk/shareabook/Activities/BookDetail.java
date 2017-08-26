@@ -99,20 +99,22 @@ public class BookDetail extends AppCompatActivity {
                          gm.openActivity(getApplicationContext(),UploadBook.class);
                          break;
                      case (R.id.nav_requested_books):
-                         gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+                        // gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+                         gm.openActivity(getApplicationContext(),RequestedBooks.class);
+
                          break;
                      case (R.id.nav_sharing_requests):
-                         gm.showToast(getApplicationContext(),"Sharing Request");
+                      //   gm.showToast(getApplicationContext(),"Sharing Request");
                          gm.openActivity(getApplicationContext(),SharingRequest.class);
 
                          break;
                      case (R.id.nav_shareed_books):
-                         gm.showToast(getApplicationContext(),"Shared BOOKS");
+                      //   gm.showToast(getApplicationContext(),"Shared BOOKS");
                          gm.openActivity(getApplicationContext(), MySharedBooks.class);
 
                          break;
                      case (R.id.nav_recievedBooks):
-                         gm.showToast(getApplicationContext(),"Recieved Books");
+                        // gm.showToast(getApplicationContext(),"Recieved Books");
                          gm.openActivity(getApplicationContext(), RecievedBooks.class);
 
                          break;
@@ -120,6 +122,10 @@ public class BookDetail extends AppCompatActivity {
                        preferences.edit().clear().apply();
                          gm.openActivity(getApplicationContext(), MainActivity.class);
                          break;
+                     case (R.id.nav_search):
+                         gm.openActivity(getApplicationContext(), MainScreen.class);
+                         break;
+
 //                   case ():
 //                       break;
 
@@ -335,9 +341,28 @@ public class BookDetail extends AppCompatActivity {
 
                 pd.dismiss();
 
-                Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject object = new JSONObject(response);
+                    String success = object.getString("success");
+                    String message = object.getString("message");
+                    if (success.equals("0")){
 
-              //  try {
+                        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                        gm.openActivity(getApplicationContext(),Dashboard.class);
+                    }
+
+
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+
+                //  try {
 //                    JSONObject object = new JSONObject(response);
 //                    String success = object.getString("success");
 //

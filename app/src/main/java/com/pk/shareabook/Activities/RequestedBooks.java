@@ -69,7 +69,7 @@ public class RequestedBooks extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.toolbar_menu);
-        toolbar.setTitle("RequestedBooks Books");
+        toolbar.setTitle("Requested Books");
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -109,19 +109,21 @@ public class RequestedBooks extends AppCompatActivity {
                         gm.openActivity(getApplicationContext(), UploadBook.class);
                         break;
                     case (R.id.nav_requested_books):
-                        gm.showToast(getApplicationContext(), "REQUESTED BOOKS");
+                    //    gm.showToast(getApplicationContext(), "REQUESTED BOOKS");
+                        gm.openActivity(getApplicationContext(),RequestedBooks.class);
+
                         break;
                     case (R.id.nav_sharing_requests):
-                        gm.showToast(getApplicationContext(), "Sharing Request");
+                      //  gm.showToast(getApplicationContext(), "Sharing Request");
                         gm.openActivity(getApplicationContext(), SharingRequest.class);
                         break;
                     case (R.id.nav_shareed_books):
                         gm.openActivity(getApplicationContext(), MySharedBooks.class);
 
-                        gm.showToast(getApplicationContext(), "Shared BOOKS");
+                    //    gm.showToast(getApplicationContext(), "Shared BOOKS");
                         break;
                     case (R.id.nav_recievedBooks):
-                        gm.showToast(getApplicationContext(), "Recieved Books");
+                      //  gm.showToast(getApplicationContext(), "Recieved Books");
                         gm.openActivity(getApplicationContext(), RecievedBooks.class);
 
                         break;
@@ -129,6 +131,9 @@ public class RequestedBooks extends AppCompatActivity {
                         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         preferences.edit().clear().apply();
                         gm.openActivity(getApplicationContext(), MainActivity.class);
+                        break;
+                    case (R.id.nav_search):
+                        gm.openActivity(getApplicationContext(), MainScreen.class);
                         break;
 
 

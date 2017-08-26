@@ -74,6 +74,7 @@ public class Messages extends AppCompatActivity {
                 messagesPojos = new ArrayList<>();
                 progressDialog.dismiss();
                 try {
+
                     JSONObject object = new JSONObject(response);
                     String success = object.get("success").toString();
                     //   String message = object.get("message").toString();

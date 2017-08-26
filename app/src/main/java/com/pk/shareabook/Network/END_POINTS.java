@@ -50,8 +50,15 @@ public class END_POINTS {
 
     public static String MARKED_AS_RECEIVED = BASE_URL+ "markAsReceived";
 
+    public static String GET_RECEIVED_BOOKS = BASE_URL + "receivedBooks";
+
     public static String GET_SEARCHED_BOOKS = BASE_URL + "getSearchedBooks";
 
+    public static String GET_ALL_MESSAGES = BASE_URL + "chatRoom";
+
+    public static String SEND_MESSAGES = BASE_URL + "sendMessage";
+
+    public static String REGISTER_TOKEN = BASE_URL + "registerTokenId";
 
 
 }

@@ -8,6 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -21,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Adapters.SharingRequestAdapter;
+import com.pk.shareabook.Adapters.SharingRequestRvAdapter;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.R;
@@ -35,7 +39,7 @@ import java.util.Map;
 
 public class SharingRequest extends AppCompatActivity {
 
-    ListView lvMyUploadedBooks;
+    RecyclerView lvMyUploadedBooks;
     ProgressDialog pd;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -48,7 +52,7 @@ public class SharingRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sharing_request);
 
-        lvMyUploadedBooks = (ListView) findViewById(R.id.lvMyUploadedBooks);
+        lvMyUploadedBooks = (RecyclerView) findViewById(R.id.lvMyUploadedBooks);
         gm = new GeneralMethods();
 
         toolbar = (Toolbar) findViewById(R.id.appBar);
@@ -81,19 +85,21 @@ public class SharingRequest extends AppCompatActivity {
                      gm.openActivity(getApplicationContext(),UploadBook.class);
                      break;
                  case (R.id.nav_requested_books):
-                     gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+               //      gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
+                     gm.openActivity(getApplicationContext(),RequestedBooks.class);
+
                      break;
                  case (R.id.nav_sharing_requests):
-                     gm.showToast(getApplicationContext(),"Sharing Request");
+                 //    gm.showToast(getApplicationContext(),"Sharing Request");
                      gm.openActivity(getApplicationContext(),SharingRequest.class);
                      break;
                  case (R.id.nav_shareed_books):
-                     gm.showToast(getApplicationContext(),"Shared BOOKS");
+                   //  gm.showToast(getApplicationContext(),"Shared BOOKS");
                      gm.openActivity(getApplicationContext(), MySharedBooks.class);
 
                      break;
                  case (R.id.nav_recievedBooks):
-                     gm.showToast(getApplicationContext(),"Recieved Books");
+                //     gm.showToast(getApplicationContext(),"Recieved Books");
                      gm.openActivity(getApplicationContext(), RecievedBooks.class);
 
                      break;
@@ -104,6 +110,9 @@ public class SharingRequest extends AppCompatActivity {
                      break;
 //                   case ():
 //                       break;
+                 case (R.id.nav_search):
+                     gm.openActivity(getApplicationContext(), MainScreen.class);
+                     break;
 
 
              }
@@ -133,6 +142,11 @@ public class SharingRequest extends AppCompatActivity {
             }
         });
 
+        lvMyUploadedBooks = (RecyclerView) findViewById(R.id.lvMyUploadedBooks);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(SharingRequest.this, 2);
+        lvMyUploadedBooks.setLayoutManager(mLayoutManager);
+        // recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        lvMyUploadedBooks.setItemAnimator(new DefaultItemAnimator());
 
 
 
@@ -195,8 +209,8 @@ public class SharingRequest extends AppCompatActivity {
                             mapList.add(map);
                         }
 
-                        SharingRequestAdapter adapter = new SharingRequestAdapter(SharingRequest.this, mapList);
-
+                       // SharingRequestAdapter adapter = new SharingRequestAdapter(SharingRequest.this, mapList);
+                        SharingRequestRvAdapter adapter = new SharingRequestRvAdapter(SharingRequest.this,mapList);
                         lvMyUploadedBooks.setAdapter(adapter);
 
 
