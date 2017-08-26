@@ -53,7 +53,7 @@ public class SharingRequest extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.appBar);
 
-        toolbar.setTitle("MY BOOKS");
+        toolbar.setTitle("Sharing Request");
 
         toolbar.inflateMenu(R.menu.toolbar_menu);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -89,9 +89,18 @@ public class SharingRequest extends AppCompatActivity {
                      break;
                  case (R.id.nav_shareed_books):
                      gm.showToast(getApplicationContext(),"Shared BOOKS");
+                     gm.openActivity(getApplicationContext(), MySharedBooks.class);
+
                      break;
                  case (R.id.nav_recievedBooks):
                      gm.showToast(getApplicationContext(),"Recieved Books");
+                     gm.openActivity(getApplicationContext(), RecievedBooks.class);
+
+                     break;
+                 case (R.id.nav_logOut):
+                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                     preferences.edit().clear().apply();
+                     gm.openActivity(getApplicationContext(), MainActivity.class);
                      break;
 //                   case ():
 //                       break;

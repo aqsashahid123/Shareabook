@@ -249,7 +249,6 @@ public MyUploadedBooksAdapter(Context mContext,ArrayList<HashMap<String,String>>
 
 
 
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

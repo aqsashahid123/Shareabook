@@ -1,17 +1,26 @@
 package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -22,7 +31,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.pk.shareabook.Adapters.BooksCardItemsAdapter;
 import com.pk.shareabook.Adapters.DrawerAdapter;
+import com.pk.shareabook.FCM.RegistrationIntentService;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.Pojo.DrawerPojo;
@@ -42,6 +53,13 @@ public class MainScreen extends AppCompatActivity {
     Spinner spinnerRegions, spinnerCities;
     HashMap<String, String> regionMap, citiesMap;
     String cityKey,regionKey;
+    BooksCardItemsAdapter adapter;
+    RecyclerView recyclerView;
+    HashMap<String,String> map;
+    LinearLayout rlMain;
+    List<HashMap<String,String>> mapList;
+    Button SendData;
+    EditText etAuthorName,etTitle,etInstitute,etLocations;
     List<String> spinnerDataCountry, spinnerDataCity;
 ////////////////////////DRAWER LAYOUT/////////////////////////
 List<DrawerPojo> drawerList;
@@ -58,12 +76,22 @@ List<DrawerPojo> drawerList;
         setContentView(R.layout.activity_main_screen);
         spinnerCities = (Spinner) findViewById(R.id.getCity);
         spinnerRegions = (Spinner) findViewById(R.id.getRegions);
-
+        SendData = (Button) findViewById(R.id.sendData);
+        rlMain = (LinearLayout) findViewById(R.id.rlMain);
         gm = new GeneralMethods();
+
+
+        etAuthorName = (EditText) findViewById(R.id.bookAuthor);
+        etInstitute = (EditText) findViewById(R.id.etInstitute);
+        etTitle = (EditText) findViewById(R.id.etBookTitle);
+
+        etLocations = (EditText) findViewById(R.id.etLocations);
+
 
         spinnerDataCity = new ArrayList<>();
         spinnerDataCountry = new ArrayList<>();
         regionMap = new HashMap<>();
+        mapList = new ArrayList<>();
         citiesMap = new HashMap<>();
         getRegionsData();
 
@@ -90,6 +118,143 @@ List<DrawerPojo> drawerList;
 
                 return true;
             }
+        });
+
+
+        SendData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                for (HashMap.Entry<String, String> e : citiesMap.entrySet()) {
+
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val == spinnerCities.getSelectedItem()) {
+
+                        cityKey = key;
+                        Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
+                        //   getCities(key);
+                    }
+
+                }
+
+
+
+                StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GET_SEARCHED_BOOKS, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+
+                            Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                            //   pd.dismiss();
+                            try {
+                                JSONObject object = new JSONObject(response);
+                                String success = object.getString("success");
+
+
+                                if (success.equals("0")){
+                                    String message = object.getString("message");
+                                            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                                }
+                                if(success.equals("1")){
+
+                                    JSONArray arr = object.getJSONArray("searchedBooks");
+                                    for (int i = 0;i<arr.length();i++){
+
+                                        JSONObject obj = arr.getJSONObject(i);
+                                        map = new HashMap<>();
+                                        map.put("book_id", obj.getString("id"));
+                                        map.put("bookName", obj.getString("title"));
+                                        map.put("authorName", obj.getString("author"));
+
+                                        //bookNames.add(obj.getString("title"));
+                                        map.put("image", obj.getString("logo"));
+
+                                        map.put("owner_id", obj.getString("owner_id"));
+                                        mapList.add(map);
+
+
+                                    }
+
+
+                                    recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    rlMain.setVisibility(View.GONE);
+                                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(MainScreen.this, 2);
+                                    recyclerView.setLayoutManager(mLayoutManager);
+                                    // recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+                                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                                    adapter = new BooksCardItemsAdapter(mapList,getApplicationContext());
+
+                                    recyclerView.setAdapter(adapter);
+
+
+
+
+                                }
+
+
+
+
+
+
+
+
+
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            // object.get("");
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            Toast.makeText(getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
+
+
+                        }
+                    }
+                    )
+                    {
+                        @Override
+                        protected Map<String, String> getParams()
+                        {
+                            Map<String, String>  params = new HashMap<String, String>();
+
+                            // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+                            //   preferences.getString("id","");
+
+                            //      params.put("bookId", result.get("id"));
+
+
+
+
+
+                            params.put("title", etTitle.getText().toString());
+                            params.put("author", etAuthorName.getText().toString());
+                            params.put("institute", etInstitute.getText().toString());
+                            params.put("location", etLocations.getText().toString());
+                            params.put("region_id", regionKey);
+                            params.put("city_id", cityKey);
+                          //  params.put("location", id);
+
+//                params.put("password", password);
+//
+                            return params;
+                        }
+
+
+
+                    };
+                    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                    requestQueue.add(request);
+
+                }
         });
 
 
@@ -125,9 +290,18 @@ List<DrawerPojo> drawerList;
                         break;
                     case (R.id.nav_shareed_books):
                         gm.showToast(getApplicationContext(),"Shared BOOKS");
+                        gm.openActivity(getApplicationContext(), MySharedBooks.class);
+
                         break;
                     case (R.id.nav_recievedBooks):
                         gm.showToast(getApplicationContext(),"Recieved Books");
+                        gm.openActivity(getApplicationContext(), RecievedBooks.class);
+
+                        break;
+                    case (R.id.nav_logOut):
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        preferences.edit().clear().apply();
+                        gm.openActivity(getApplicationContext(), MainActivity.class);
                         break;
 //                   case ():
 //                       break;
@@ -172,6 +346,13 @@ List<DrawerPojo> drawerList;
 
             }
         });
+
+        Intent intent = new Intent(MainScreen.this,RegistrationIntentService.class);
+        startService(intent);
+
+
+
+
 
 
 

@@ -1,12 +1,13 @@
 package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +27,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Adapters.BooksCardItemsAdapter;
-import com.pk.shareabook.FCM.RegistrationIntentService;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.R;
@@ -72,9 +72,6 @@ public class Dashboard extends AppCompatActivity {
         toolbar.inflateMenu(R.menu.menu_search_toolbar);
 
 
-        Intent intent = new Intent(Dashboard.this,RegistrationIntentService.class);
-        startService(intent);
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new
              NavigationView.OnNavigationItemSelectedListener() {
@@ -106,9 +103,18 @@ public class Dashboard extends AppCompatActivity {
                              break;
                          case (R.id.nav_shareed_books):
                              gm.showToast(getApplicationContext(),"Shared BOOKS");
+                             gm.openActivity(getApplicationContext(), MySharedBooks.class);
+
                              break;
                          case (R.id.nav_recievedBooks):
                              gm.showToast(getApplicationContext(),"Recieved Books");
+                             gm.openActivity(getApplicationContext(), RecievedBooks.class);
+
+                             break;
+                         case (R.id.nav_logOut):
+                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                             preferences.edit().clear().apply();
+                             gm.openActivity(getApplicationContext(), MainActivity.class);
                              break;
 //                   case ():
 //                       break;

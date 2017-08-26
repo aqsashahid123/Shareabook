@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,7 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.pk.shareabook.Adapters.BooksCardItemsAdapter;
+import com.pk.shareabook.Adapters.RequestedBooksAdapter;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.R;
@@ -37,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MySharedBooks extends AppCompatActivity {
+public class RequestedBooks extends AppCompatActivity {
 
     NavigationView navigationView;
     Toolbar toolbar;
@@ -47,7 +46,7 @@ public class MySharedBooks extends AppCompatActivity {
 
     HashMap<String, String> map;
     List<HashMap<String, String>> mapList;
-    BooksCardItemsAdapter adapter;
+    RequestedBooksAdapter adapter;
 
     String id;
 
@@ -55,7 +54,7 @@ public class MySharedBooks extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_shared_books);
+        setContentView(R.layout.activity_recieved_books);
 
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -70,7 +69,7 @@ public class MySharedBooks extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.toolbar_menu);
-        toolbar.setTitle("Shared Books");
+        toolbar.setTitle("RequestedBooks Books");
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -132,6 +131,7 @@ public class MySharedBooks extends AppCompatActivity {
                         gm.openActivity(getApplicationContext(), MainActivity.class);
                         break;
 
+
                 }
 
 
@@ -153,12 +153,12 @@ public class MySharedBooks extends AppCompatActivity {
 
     public void prepareHashMap() {
 
-        final ProgressDialog pd = new ProgressDialog(MySharedBooks.this);
+        final ProgressDialog pd = new ProgressDialog(RequestedBooks.this);
         pd.setMessage("loading");
         pd.show();
 
 
-        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GET_SHARED_BOOKS, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GET_REQUESTED_BOOKS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
@@ -173,14 +173,15 @@ public class MySharedBooks extends AppCompatActivity {
 
                     } else {
 
-                        JSONArray array = object.getJSONArray("sharedBooks");
+                        JSONArray array = object.getJSONArray("requestedBooks");
                         for (int i = 0; i < array.length(); i++) {
 
                             JSONObject obj = array.getJSONObject(i);
                             map = new HashMap<>();
-                            map.put("book_id", obj.getString("id"));
+                            map.put("book_id", obj.getString("request_book_id"));
                             map.put("bookName", obj.getString("title"));
                             map.put("authorName", obj.getString("author"));
+                            map.put("request_status",obj.getString("request_status"));
 
                             //bookNames.add(obj.getString("title"));
                             map.put("image", obj.getString("logo"));
@@ -191,7 +192,7 @@ public class MySharedBooks extends AppCompatActivity {
 
                         }
 
-                        adapter = new BooksCardItemsAdapter(mapList, getApplicationContext());
+                        adapter = new RequestedBooksAdapter(mapList, getApplicationContext());
                         recyclerView.setAdapter(adapter);
 
 
@@ -209,7 +210,7 @@ public class MySharedBooks extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(MySharedBooks.this, "Network Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RequestedBooks.this, "Network Error", Toast.LENGTH_SHORT).show();
                 pd.dismiss();
 
             }
@@ -224,9 +225,10 @@ public class MySharedBooks extends AppCompatActivity {
 
 
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(MySharedBooks.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(RequestedBooks.this);
         requestQueue.add(request);
 
 
     }
+
 }

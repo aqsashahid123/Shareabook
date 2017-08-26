@@ -72,7 +72,7 @@ public class BookDetail extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         senderId = preferences.getString("id","");
 
 
@@ -108,9 +108,17 @@ public class BookDetail extends AppCompatActivity {
                          break;
                      case (R.id.nav_shareed_books):
                          gm.showToast(getApplicationContext(),"Shared BOOKS");
+                         gm.openActivity(getApplicationContext(), MySharedBooks.class);
+
                          break;
                      case (R.id.nav_recievedBooks):
                          gm.showToast(getApplicationContext(),"Recieved Books");
+                         gm.openActivity(getApplicationContext(), RecievedBooks.class);
+
+                         break;
+                     case (R.id.nav_logOut):
+                       preferences.edit().clear().apply();
+                         gm.openActivity(getApplicationContext(), MainActivity.class);
                          break;
 //                   case ():
 //                       break;

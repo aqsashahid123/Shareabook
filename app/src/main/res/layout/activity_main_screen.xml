@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
+
         >
         <include
             android:id="@+id/appbar"
@@ -23,7 +24,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+        android:id="@+id/rlMain"
         android:background="#333"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -39,6 +40,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:hint="Book Title"
+        android:id="@+id/etBookTitle"
         android:layout_marginBottom="10dp"
         android:drawablePadding="10dp"
         android:padding="5dp"
@@ -49,6 +51,7 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:hint="Book Author"
+        android:id="@+id/bookAuthor"
         android:drawableLeft="@drawable/search"
         android:drawablePadding="10dp"
         android:background="#fff"
@@ -58,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
+        android:id="@+id/etInstitute"
         android:drawableLeft="@drawable/search"
         android:drawablePadding="10dp"
         android:hint="Institute"
@@ -70,6 +74,7 @@
         android:background="#fff"
         android:drawablePadding="10dp"
         android:padding="5dp"
+        android:id="@+id/etLocations"
         android:hint="Location"
         android:drawableLeft="@drawable/search"
         android:textSize="20sp"
@@ -99,6 +104,7 @@ android:background="#fff"
     android:layout_height="50dp"
     android:text="SEARCH"
     android:textSize="20sp"
+    android:id="@+id/sendData"
     android:textStyle="bold"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
@@ -109,8 +115,22 @@ android:background="#fff"
 
 </LinearLayout>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:layout_below="@+id/appbar"
+            android:visibility="gone"
 
-</RelativeLayout>
+
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+
+
+
+
+    </RelativeLayout>
 
 
     <FrameLayout

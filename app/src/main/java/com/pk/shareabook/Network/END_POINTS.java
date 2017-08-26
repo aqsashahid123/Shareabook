@@ -46,11 +46,11 @@ public class END_POINTS {
 
     public static String GET_SHARED_BOOKS = BASE_URL + "sharedBooks";
 
-    public static String GET_ALL_MESSAGES = BASE_URL + "chatRoom";
+    public static String GET_REQUESTED_BOOKS = BASE_URL + "requestedBooks";
 
-    public static String SEND_MESSAGES = BASE_URL + "sendMessage";
+    public static String MARKED_AS_RECEIVED = BASE_URL+ "markAsReceived";
 
-    public static String REGISTER_TOKEN = BASE_URL + "registerTokenId";
+    public static String GET_SEARCHED_BOOKS = BASE_URL + "getSearchedBooks";
 
 
 

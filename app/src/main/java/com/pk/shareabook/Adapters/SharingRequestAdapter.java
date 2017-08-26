@@ -1,6 +1,7 @@
 package com.pk.shareabook.Adapters;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,8 +23,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.pk.shareabook.Activities.Messages;
 import com.pk.shareabook.Activities.SharingRequest;
+import com.pk.shareabook.Activities.UploadBook;
+import com.pk.shareabook.Activities.UploadedBooks;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.R;
@@ -43,7 +46,8 @@ public class SharingRequestAdapter extends BaseAdapter {
 
 
     HashMap<String,String> mmmm;
-    Activity context;
+    //Context context;
+    Activity activity;
     ArrayList<HashMap<String,String>> Lmap;
     ProgressDialog pd;
     int p;
@@ -51,9 +55,10 @@ public class SharingRequestAdapter extends BaseAdapter {
     GeneralMethods gm = new GeneralMethods();
     LayoutInflater inflater;
 
-    public SharingRequestAdapter(Activity mContext,ArrayList<HashMap<String,String>> Mmap){
+    public SharingRequestAdapter(Activity mActivity,ArrayList<HashMap<String,String>> Mmap){
 
-        this.context=mContext;
+        //this.context=mContext;
+        this.activity = mActivity;
         this.Lmap=Mmap;
 
 
@@ -84,7 +89,9 @@ public class SharingRequestAdapter extends BaseAdapter {
 
         mmmm = new HashMap<>();
         mmmm = Lmap.get(position);
-        inflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        inflater =(LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        inflater =(LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         p = position;
 
 
@@ -109,7 +116,7 @@ public class SharingRequestAdapter extends BaseAdapter {
 
 
 
-        Picasso.with(context).load(END_POINTS.GET_BOOK_LOGO + mmmm.get("logo")).into(ivBookCover);
+        Picasso.with(activity.getApplicationContext()).load(END_POINTS.GET_BOOK_LOGO + mmmm.get("logo")).into(ivBookCover);
 
         tvAuthorName.setText( mmmm.get("author"));
 
@@ -143,7 +150,7 @@ public class SharingRequestAdapter extends BaseAdapter {
 
                 if (requestStatus.equals("0")) {
 
-                    Context wrapper = new ContextThemeWrapper(context, R.style.MyPopupMenu);
+                    Context wrapper = new ContextThemeWrapper(activity.getApplicationContext(), R.style.MyPopupMenu);
 
                     final PopupMenu popup = new PopupMenu(wrapper, ivEditDelete);
                     popup.getMenuInflater().inflate(R.menu.popup_accept_reject_request, popup.getMenu());
@@ -183,7 +190,7 @@ public class SharingRequestAdapter extends BaseAdapter {
 
                 if (requestStatus.equals("1")){
 
-                    Context wrapper = new ContextThemeWrapper(context, R.style.MyPopupMenu);
+                    Context wrapper = new ContextThemeWrapper(activity.getApplicationContext(), R.style.MyPopupMenu);
 
                     final PopupMenu popup = new PopupMenu(wrapper, ivEditDelete);
                     popup.getMenuInflater().inflate(R.menu.popup_shared_message_reject, popup.getMenu());
@@ -202,9 +209,10 @@ public class SharingRequestAdapter extends BaseAdapter {
                                 case R.id.message:
 
 //
-//
-                                    Intent intent= new Intent(context, Messages.class);
-                                    context.startActivity(intent);
+//                                    mmmm = Lmap.get(position);
+//                                    String bookId = mmmm.get("request_book_id");
+//                                    String reqId = mmmm.get("request_id");
+//                                    RejectRequest(reqId, bookId);
 
 
                                     break;
@@ -240,17 +248,19 @@ public class SharingRequestAdapter extends BaseAdapter {
     }
 
     public void AcceptRequest(final String id){
+        pd = new ProgressDialog(activity.getApplicationContext());
+        pd.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 
+        pd.setMessage("loading");
+        pd.show();
         StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.ACCEPT_REQUEST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
-                pd = new ProgressDialog(context);
-                pd.setMessage("loading");
-                pd.show();
 
 
-                Toast.makeText(context.getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(activity.getApplicationContext(),response,Toast.LENGTH_SHORT).show();
 
                 try {
                     JSONObject object = new JSONObject(response);
@@ -258,13 +268,13 @@ public class SharingRequestAdapter extends BaseAdapter {
                     String message = object.getString("message");
                     if (success.equals("0")){
 
-                    Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
 
                     }
                     if (success.equals("1")){
 
-                        Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
-                        gm.openActivity(context, SharingRequest.class);
+                        Toast.makeText(activity.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                        gm.openActivity(activity.getApplicationContext(), SharingRequest.class);
                       //  notifyDataSetChanged();
                     }
 
@@ -278,7 +288,7 @@ public class SharingRequestAdapter extends BaseAdapter {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(context,"Network Error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity.getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
                      pd.dismiss();
 
             }
@@ -298,7 +308,7 @@ public class SharingRequestAdapter extends BaseAdapter {
 
 
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        RequestQueue requestQueue = Volley.newRequestQueue(activity.getApplicationContext());
         requestQueue.add(request);
 
 
@@ -307,7 +317,9 @@ public class SharingRequestAdapter extends BaseAdapter {
 
             public void RejectRequest(final String requestId, final String bookId){
 
-                pd = new ProgressDialog(context);
+                pd = new ProgressDialog(activity.getApplicationContext());
+                pd.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+
                 pd.setMessage("loading");
                 pd.show();
 
@@ -318,7 +330,7 @@ public class SharingRequestAdapter extends BaseAdapter {
 
                         pd.dismiss();
 
-                        Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity.getApplicationContext(),response,Toast.LENGTH_SHORT).show();
 
                         try {
                             JSONObject object = new JSONObject(response);
@@ -326,14 +338,14 @@ public class SharingRequestAdapter extends BaseAdapter {
                             String message = object.getString("message");
                             if (success.equals("0")){
 
-                                Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
 
                             }
                             if (success.equals("1")){
 
-                                Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                                // notifyDataSetChanged();
-                                gm.openActivity(context, SharingRequest.class);
+                                gm.openActivity(activity.getApplicationContext(), SharingRequest.class);
                             }
 
 
@@ -347,7 +359,7 @@ public class SharingRequestAdapter extends BaseAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(context,"Network Error",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity.getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
                              pd.dismiss();
 
                     }
@@ -367,7 +379,7 @@ public class SharingRequestAdapter extends BaseAdapter {
 
 
                 };
-                RequestQueue requestQueue = Volley.newRequestQueue(context);
+                RequestQueue requestQueue = Volley.newRequestQueue(activity.getApplicationContext());
                 requestQueue.add(request);
 
 
@@ -378,8 +390,9 @@ public class SharingRequestAdapter extends BaseAdapter {
 
 
             public void  MarkAsShared(final String bookId){
+                pd = new ProgressDialog(activity.getApplicationContext());
+                pd.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 
-                pd = new ProgressDialog(context.getApplicationContext());
                 pd.setMessage("loading");
                 pd.show();
 
@@ -390,7 +403,7 @@ public class SharingRequestAdapter extends BaseAdapter {
 
                     pd.dismiss();
 
-                        Toast.makeText(context.getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity.getApplicationContext(),response,Toast.LENGTH_SHORT).show();
 
                         try {
                             JSONObject object = new JSONObject(response);
@@ -398,12 +411,12 @@ public class SharingRequestAdapter extends BaseAdapter {
                             String message = object.getString("message");
                             if (success.equals("0")){
 
-                                Toast.makeText(context.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
 
                             }
                             if (success.equals("1")){
 
-                                Toast.makeText(context.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                              //   notifyDataSetChanged();
                             }
 
@@ -418,7 +431,7 @@ public class SharingRequestAdapter extends BaseAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(context.getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity.getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
                              pd.dismiss();
 
                     }
@@ -438,7 +451,7 @@ public class SharingRequestAdapter extends BaseAdapter {
 
 
                 };
-                RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+                RequestQueue requestQueue = Volley.newRequestQueue(activity.getApplicationContext());
                 requestQueue.add(request);
 
 

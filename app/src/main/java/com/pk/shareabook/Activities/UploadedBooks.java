@@ -9,6 +9,9 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -24,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Adapters.MyUploadedBooksAdapter;
+import com.pk.shareabook.Adapters.UploadedBooksAdapter;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.R;
@@ -38,16 +42,22 @@ import java.util.Map;
 
 public class UploadedBooks extends AppCompatActivity {
 
-    ListView lvMyUploadedBooks;
+  //  RecyclerView recyclerView;
     ProgressDialog pd;
     Toolbar toolbar;
+
+    RecyclerView recyclerView;
+
     DrawerLayout drawerLayout;
     GeneralMethods gm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uploaded_books);
-        lvMyUploadedBooks = (ListView) findViewById(R.id.lvMyUploadedBooks);
+      //  recyclerView = (RecyclerView) findViewById(R.id.lvMyUploadedBooks);
+
+
+
         gm = new GeneralMethods();
 
             toolbar = (Toolbar) findViewById(R.id.appBar);
@@ -88,9 +98,19 @@ public class UploadedBooks extends AppCompatActivity {
                          break;
                      case (R.id.nav_shareed_books):
                          gm.showToast(getApplicationContext(),"Shared BOOKS");
+                         gm.openActivity(getApplicationContext(), MySharedBooks.class);
+
                          break;
                      case (R.id.nav_recievedBooks):
-                         gm.showToast(getApplicationContext(),"Recieved Books");
+                         gm.showToast(getApplicationContext(),"Received Books");
+                         gm.openActivity(getApplicationContext(), RecievedBooks.class);
+
+                         break;
+                     case (R.id.nav_logOut):
+                         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                         preferences.edit().clear().apply();
+                         gm.openActivity(getApplicationContext(), MainActivity.class);
+
                          break;
 //                   case ():
 //                       break;
@@ -123,6 +143,11 @@ public class UploadedBooks extends AppCompatActivity {
             }
         });
 
+        recyclerView = (RecyclerView) findViewById(R.id.lvMyUploadedBooks);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(UploadedBooks.this, 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        // recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
          pd = new ProgressDialog(UploadedBooks.this);
         pd.setMessage("loading");
@@ -171,9 +196,13 @@ public class UploadedBooks extends AppCompatActivity {
                             mapList.add(map);
                         }
 
-                        MyUploadedBooksAdapter adapter = new MyUploadedBooksAdapter(getApplicationContext(), mapList);
 
-                        lvMyUploadedBooks.setAdapter(adapter);
+
+
+
+                        UploadedBooksAdapter adapter = new UploadedBooksAdapter( mapList, UploadedBooks.this);
+
+                        recyclerView.setAdapter(adapter);
 
 
 
@@ -191,19 +220,19 @@ public class UploadedBooks extends AppCompatActivity {
 //                        }
 //                    });
 
-                    lvMyUploadedBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Toast.makeText(getApplicationContext(),mapList.get(position).get("bookId"),Toast.LENGTH_SHORT).show();
-
-                            Intent intent = new Intent(getApplicationContext(),BookDetail.class);
-                            intent.putExtra("bookId",mapList.get(position).get("bookId"));
-                            startActivity(intent);
-
-
-
-                        }
-                    });
+//                    lvMyUploadedBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                            Toast.makeText(getApplicationContext(),mapList.get(position).get("bookId"),Toast.LENGTH_SHORT).show();
+//
+//                            Intent intent = new Intent(getApplicationContext(),BookDetail.class);
+//                            intent.putExtra("bookId",mapList.get(position).get("bookId"));
+//                            startActivity(intent);
+//
+//
+//
+//                        }
+  //                  });
 
 
                     // regionsMapList.add()
@@ -247,11 +276,6 @@ public class UploadedBooks extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(request);
-
-
-
-
-
 
 
 
