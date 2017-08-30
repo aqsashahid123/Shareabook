@@ -1,10 +1,10 @@
 package com.pk.shareabook.Adapters;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
@@ -24,8 +24,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pk.shareabook.Activities.SharingRequest;
-import com.pk.shareabook.Activities.UploadBook;
-import com.pk.shareabook.Activities.UploadedBooks;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.R;
@@ -302,6 +300,10 @@ public class SharingRequestAdapter extends BaseAdapter {
 
 
                 params.put("requestId", id);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+                // preferences.getString("bookId","");
+
+                params.put("id", preferences.getString("id",""));
                 return params;
             }
 
@@ -372,7 +374,10 @@ public class SharingRequestAdapter extends BaseAdapter {
                         Map<String, String>  params = new HashMap<String, String>();
                         params.put("requestId", requestId);
                         params.put("bookId",bookId);
-//
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+                        // preferences.getString("bookId","");
+
+                        params.put("id", preferences.getString("id",""));
                         return params;
                     }
 

@@ -17,15 +17,16 @@
     android:padding="10dp"
     android:id="@+id/tvLoc"
     android:textColor="#000"/>
+
     <Button
+        android:id="@+id/btnSubLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
 
-        android:id="@+id/btnSubLocation"
-        android:textSize="40sp"
+        android:background="@drawable/bg_btn_uploadbook"
+        android:text="-"
         android:textColor="#fff"
-        android:background="@drawable/bg_btn_uploadbook"/>
+        android:textSize="40sp" />
 </LinearLayout>
