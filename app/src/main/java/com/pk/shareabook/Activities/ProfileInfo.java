@@ -50,7 +50,7 @@ public class ProfileInfo extends AppCompatActivity {
     Toolbar toolbar;
 
 
-    String f_name,l_name,i_name,d_name,cityId,regionId;
+    String f_name,l_name,i_name,d_name,cityId,regionId,institute;
     EditText etFname,etLname,etIname,etD_name;
     Button btnUpdateProfile;
 
@@ -149,7 +149,7 @@ public class ProfileInfo extends AppCompatActivity {
                      case (R.id.nav_profile):
 
                          gm.openActivity(getApplicationContext(), ProfileInfo.class);
-
+                         finish();
                          break;
                      case (R.id.nav_dashboard):
                          gm.openActivity(getApplicationContext(), Dashboard.class);
@@ -157,36 +157,42 @@ public class ProfileInfo extends AppCompatActivity {
 
                      case (R.id.nav_uploaded_Books):
                          gm.openActivity(getApplicationContext(),UploadedBooks.class);
+                         finish();
                          break;
                      case (R.id.nav_upload_Books):
                          gm.openActivity(getApplicationContext(),UploadBook.class);
+                         finish();
                          break;
                      case (R.id.nav_requested_books):
                     //     gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
                          gm.openActivity(getApplicationContext(),RequestedBooks.class);
-
+                         finish();
                          break;
                      case (R.id.nav_sharing_requests):
                       //   gm.showToast(getApplicationContext(),"Sharing Request");
                          gm.openActivity(getApplicationContext(),SharingRequest.class);
+                         finish();
                          break;
                      case (R.id.nav_shareed_books):
                         // gm.showToast(getApplicationContext(),"Shared BOOKS");
                          gm.openActivity(getApplicationContext(), MySharedBooks.class);
-
+                         finish();
                          break;
                      case (R.id.nav_recievedBooks):
                        //  gm.showToast(getApplicationContext(),"Recieved Books");
                          gm.openActivity(getApplicationContext(), RecievedBooks.class);
-
+                         finish();
                          break;
                      case (R.id.nav_logOut):
+                         MainActivity.Flag = false;
                          SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                          preferences.edit().clear().apply();
                          gm.openActivity(getApplicationContext(), MainActivity.class);
+                         finish();
                          break;
                      case (R.id.nav_search):
                          gm.openActivity(getApplicationContext(), MainScreen.class);
+                         finish();
                          break;
 
 //                   case ():
@@ -206,22 +212,22 @@ public class ProfileInfo extends AppCompatActivity {
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    id=    pref.getString("bookId","");
+    id=    pref.getString("id","");
       f_name=  pref.getString("first_name","");
         l_name = pref.getString("last_name","");
        d_name = pref.getString("display_name","");
         isActive = pref.getString("isActive","");
+        institute = pref.getString("institute","");
 
         etLname.setText(l_name);
         etFname.setText(f_name);
         etD_name.setText(d_name);
+        etIname.setText(institute);
 
 
         spinnerDataCity = new ArrayList<>();
         spinnerDataCountry = new ArrayList<>();
 
-//        regionsMapList = new ArrayList();
-//        citiesMapList = new ArrayList<>();
 
 
         regionMap = new HashMap<>();
@@ -229,27 +235,12 @@ public class ProfileInfo extends AppCompatActivity {
 
         getRegionsData();
 
-//        spinnerDataCountry.add("NewYork");
-//        spinnerDataCountry.add("California");
-    //    spinnerDataCountry.add("");
-
-//        spinnerDataCity.add("Mexico");
-//        spinnerDataCity.add("Chicago");
-//        spinnerDataCity.add("Barcelona");
-//        spinnerDataCity.add("Manchester");
-//
 
 
         spinnerRegion = (Spinner) findViewById(R.id.region);
         spinnerCity = (Spinner) findViewById(R.id.city);
 
 
-//        spinnerRegion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long bookId) {
-//                getCityData(position);
-//            }
-//        });
 
         spinnerRegion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -286,6 +277,22 @@ public class ProfileInfo extends AppCompatActivity {
 
 //                regionId = regionKey;
 //                cityId = cityKey;
+
+
+                for (HashMap.Entry<String,String> e : citiesMap.entrySet() ){
+
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val==spinnerCity.getSelectedItem()){
+
+                        cityKey = key;
+                        Toast.makeText(getApplicationContext(),key,Toast.LENGTH_SHORT).show();
+                        //   getCities(key);
+                    }
+
+                }
+
+
 
                 if (isActive.equals("1")) {
 
@@ -362,7 +369,7 @@ public class ProfileInfo extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                pd.dismiss();
                 Toast.makeText(getApplicationContext(),"Volley Error",Toast.LENGTH_SHORT).show();
 
             }
@@ -458,18 +465,6 @@ public class ProfileInfo extends AppCompatActivity {
                 spinnerCity.setAdapter(citiesAdapter);
 
 
-                for (HashMap.Entry<String,String> e : citiesMap.entrySet() ){
-
-                    String key = e.getKey();
-                    String val = e.getValue();
-                    if (val==spinnerCity.getSelectedItem()){
-
-                        cityKey = key;
-                        Toast.makeText(getApplicationContext(),key,Toast.LENGTH_SHORT).show();
-                     //   getCities(key);
-                    }
-
-                }
 
 
                 // regionsMapList.add()
@@ -563,7 +558,7 @@ public void sendDataUserIsActive(){
                     editor.clear();
                     // editor.putString("","");
 
-                    editor.putString("bookId", id);
+                    editor.putString("id", id);
                     editor.putString("isActive", isActive);
                     editor.putString("city_id", cityId);
                     editor.putString("region_id", regionId);
@@ -588,6 +583,7 @@ public void sendDataUserIsActive(){
         @Override
         public void onErrorResponse(VolleyError error) {
 
+            pd.dismiss();
             Toast.makeText(getApplicationContext(),"Volley Error",Toast.LENGTH_SHORT).show();
 
         }

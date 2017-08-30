@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tvSignUp;
 
+
+    public static boolean Flag;
+
     EditText etEmail, etPassword;
 
 
@@ -44,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Flag){
+            Intent intent = new Intent(MainActivity.this,Dashboard.class);
+            startActivity(intent);
+            finish();
+
+        }
+
 
         tvSignUp = (TextView)findViewById(R.id.tvSignUp);
         etEmail = (EditText) findViewById(R.id.etEmail);
@@ -144,10 +155,10 @@ public class MainActivity extends AppCompatActivity {
 
                                     }
                                     if (Integer.valueOf(isActive) == 1) {
-
+                                        Flag = true;
                                         Intent intent = new Intent(MainActivity.this, Dashboard.class);
                                         startActivity(intent);
-
+                                        finish();
                                     }
 
                                 }

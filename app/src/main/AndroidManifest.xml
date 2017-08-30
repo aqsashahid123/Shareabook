@@ -15,7 +15,17 @@
         android:theme="@style/AppTheme">
 
         <!-- android:theme="@style/AppTheme"> -->
-        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.MainActivity" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+
+        </activity>
         <activity android:name=".Activities.SignUp" />
         <activity android:name=".Activities.ProfileInfo" />
         <activity android:name=".Activities.MainScreen" >
@@ -52,11 +62,6 @@
 
         </activity>
         <activity android:name=".Activities.RequestedBooks">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
 
 

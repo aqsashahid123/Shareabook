@@ -77,38 +77,43 @@ public class UploadedBooks extends AppCompatActivity {
                      case (R.id.nav_profile):
 
                          gm.openActivity(getApplicationContext(), ProfileInfo.class);
-
+                         finish();
                          break;
                      case (R.id.nav_dashboard):
                          gm.openActivity(getApplicationContext(), Dashboard.class);
+                         //finish();
                          break;
 
                      case (R.id.nav_uploaded_Books):
                          gm.openActivity(getApplicationContext(),UploadedBooks.class);
+                         finish();
                          break;
                      case (R.id.nav_upload_Books):
                          gm.openActivity(getApplicationContext(),UploadBook.class);
+                         finish();
                          break;
                      case (R.id.nav_requested_books):
                     //     gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
                          gm.openActivity(getApplicationContext(),RequestedBooks.class);
-
+                         finish();
                          break;
                      case (R.id.nav_sharing_requests):
                       //   gm.showToast(getApplicationContext(),"Sharing Request");
                          gm.openActivity(getApplicationContext(),SharingRequest.class);
+                         finish();
                          break;
                      case (R.id.nav_shareed_books):
                         // gm.showToast(getApplicationContext(),"Shared BOOKS");
                          gm.openActivity(getApplicationContext(), MySharedBooks.class);
-
+                         finish();
                          break;
                      case (R.id.nav_recievedBooks):
                      //    gm.showToast(getApplicationContext(),"Received Books");
                          gm.openActivity(getApplicationContext(), RecievedBooks.class);
-
+                         finish();
                          break;
                      case (R.id.nav_logOut):
+                         MainActivity.Flag = false;
                          SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                          preferences.edit().clear().apply();
                          gm.openActivity(getApplicationContext(), MainActivity.class);
@@ -116,6 +121,7 @@ public class UploadedBooks extends AppCompatActivity {
                          break;
                      case (R.id.nav_search):
                          gm.openActivity(getApplicationContext(), MainScreen.class);
+                        finish();
                          break;
 
 //                   case ():

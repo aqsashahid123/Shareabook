@@ -80,42 +80,42 @@ public class UploadedBooksAdapter extends RecyclerView.Adapter<UploadedBooksAdap
         Picasso.with(activity.getApplicationContext()).load(END_POINTS.GET_BOOK_LOGO + imgLogo).into(holder.ivBookCover);
 
 
-        holder.tvBookName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("bookId"));
-                // SingleMap = new HashMap<>();
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-
-            }
-        });
-        holder.tvAuthorName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("bookId"));
-                //SingleMap = new HashMap<>();
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-            }
-        });
-        holder.ivBookCover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("bookId"));
-                //  SingleMap = new HashMap<>();
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-            }
-        });
+//        holder.tvBookName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
+//                SingleMap = mapList.get(position);
+//                intent.putExtra("bookId" , SingleMap.get("bookId"));
+//                // SingleMap = new HashMap<>();
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                activity.startActivity(intent);
+//
+//            }
+//        });
+//        holder.tvAuthorName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
+//                SingleMap = mapList.get(position);
+//                intent.putExtra("bookId" , SingleMap.get("bookId"));
+//                //SingleMap = new HashMap<>();
+//
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                activity.startActivity(intent);
+//            }
+//        });
+//        holder.ivBookCover.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
+//                SingleMap = mapList.get(position);
+//                intent.putExtra("bookId" , SingleMap.get("bookId"));
+//                //  SingleMap = new HashMap<>();
+//
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                activity.startActivity(intent);
+//            }
+//        });
 
         holder.ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,7 +186,7 @@ public class UploadedBooksAdapter extends RecyclerView.Adapter<UploadedBooksAdap
 //                                        mmmm = Lmap.get(position);
 
                                         Toast.makeText(activity.getApplicationContext(),SingleMap.get("id"),Toast.LENGTH_SHORT).show();
-                                        deleteBooks(SingleMap.get("id"));
+                                        deleteBooks(SingleMap.get("bookId"));
                                   //      removeAt(p);
                                         editDeleteDialo.dismiss();
 

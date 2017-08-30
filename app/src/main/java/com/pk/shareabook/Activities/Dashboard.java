@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.pk.shareabook.Adapters.BookAdapterWithClick;
 import com.pk.shareabook.Adapters.BooksCardItemsAdapter;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
@@ -52,7 +53,7 @@ public class Dashboard extends AppCompatActivity {
     GeneralMethods gm;
     DrawerLayout drawerLayout;
 
-    BooksCardItemsAdapter adapter;
+    BookAdapterWithClick adapter;
     Toolbar toolbar;
 
 
@@ -82,44 +83,54 @@ public class Dashboard extends AppCompatActivity {
                          case (R.id.nav_profile):
 
                              gm.openActivity(getApplicationContext(), ProfileInfo.class);
+                             finish();
 
                              break;
                          case (R.id.nav_dashboard):
                              gm.openActivity(getApplicationContext(), Dashboard.class);
+                             finish();
                              break;
 
                          case (R.id.nav_uploaded_Books):
                              gm.openActivity(getApplicationContext(),UploadedBooks.class);
+                             finish();
                              break;
                          case (R.id.nav_upload_Books):
                              gm.openActivity(getApplicationContext(),UploadBook.class);
+                             finish();
                              break;
                          case (R.id.nav_requested_books):
                              gm.openActivity(getApplicationContext(),RequestedBooks.class);
-
+                             finish();
                            //  gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
                              break;
                          case (R.id.nav_sharing_requests):
                             // gm.showToast(getApplicationContext(),"Sharing Request");
                              gm.openActivity(getApplicationContext(),SharingRequest.class);
+                             finish();
                              break;
                          case (R.id.nav_shareed_books):
                             // gm.showToast(getApplicationContext(),"Shared BOOKS");
-                             gm.openActivity(getApplicationContext(), MySharedBooks.class);
 
+                             gm.openActivity(getApplicationContext(), MySharedBooks.class);
+                             finish();
                              break;
                          case (R.id.nav_recievedBooks):
 //                             gm.showToast(getApplicationContext(),"Recieved Books");
-                             gm.openActivity(getApplicationContext(), RecievedBooks.class);
 
+                             gm.openActivity(getApplicationContext(), RecievedBooks.class);
+                             finish();
                              break;
                          case (R.id.nav_logOut):
                              SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                              preferences.edit().clear().apply();
+                             MainActivity.Flag = false;
                              gm.openActivity(getApplicationContext(), MainActivity.class);
+                             finish();
                              break;
                          case (R.id.nav_search):
                              gm.openActivity(getApplicationContext(), MainScreen.class);
+                             finish();
                              break;
 
 //                   case ():
@@ -177,7 +188,7 @@ public class Dashboard extends AppCompatActivity {
                                     }
                                 }
 
-                                adapter = new BooksCardItemsAdapter(mm,getApplicationContext());
+                                adapter = new  BookAdapterWithClick(mm,getApplicationContext());
                                 recyclerView.setAdapter(adapter);
 
 
@@ -221,10 +232,7 @@ public class Dashboard extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        //adapter = new BooksCardItemsAdapter(cardList,getApplicationContext());
-
-       // adapter.notifyDataSetChanged();
-    }
+          }
 
    public void prepareHashMap(){
 
@@ -266,7 +274,7 @@ public class Dashboard extends AppCompatActivity {
 
                        }
 
-                       adapter = new BooksCardItemsAdapter(mapList,getApplicationContext());
+                       adapter = new  BookAdapterWithClick(mapList,getApplicationContext());
                        recyclerView.setAdapter(adapter);
 
 

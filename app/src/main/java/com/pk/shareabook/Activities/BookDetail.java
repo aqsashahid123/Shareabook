@@ -33,7 +33,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -50,9 +52,11 @@ public class BookDetail extends AppCompatActivity {
     String senderId,recieverId,message;
     DrawerLayout drawerLayout;
     Button requestBook;
+    List<String> list;
 
     GeneralMethods gm;
     String bookId,userId;
+    String locations;
     Toolbar toolbar;
 
     @Override
@@ -61,7 +65,7 @@ public class BookDetail extends AppCompatActivity {
         setContentView(R.layout.activity_book_detail);
 
         gm =  new GeneralMethods();
-
+        list = new ArrayList<>();
         requestBook  = (Button) findViewById(R.id.requestBook);
 
 
@@ -86,44 +90,51 @@ public class BookDetail extends AppCompatActivity {
                      case (R.id.nav_profile):
 
                          gm.openActivity(getApplicationContext(), ProfileInfo.class);
-
+                         finish();
                          break;
                      case (R.id.nav_dashboard):
                          gm.openActivity(getApplicationContext(), Dashboard.class);
+                        // finish();
                          break;
 
                      case (R.id.nav_uploaded_Books):
                          gm.openActivity(getApplicationContext(),UploadedBooks.class);
+                         finish();
                          break;
                      case (R.id.nav_upload_Books):
                          gm.openActivity(getApplicationContext(),UploadBook.class);
+                         finish();
                          break;
                      case (R.id.nav_requested_books):
                         // gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
                          gm.openActivity(getApplicationContext(),RequestedBooks.class);
-
+                         finish();
                          break;
                      case (R.id.nav_sharing_requests):
                       //   gm.showToast(getApplicationContext(),"Sharing Request");
                          gm.openActivity(getApplicationContext(),SharingRequest.class);
-
+                         finish();
                          break;
                      case (R.id.nav_shareed_books):
                       //   gm.showToast(getApplicationContext(),"Shared BOOKS");
                          gm.openActivity(getApplicationContext(), MySharedBooks.class);
-
+                         finish();
                          break;
                      case (R.id.nav_recievedBooks):
                         // gm.showToast(getApplicationContext(),"Recieved Books");
                          gm.openActivity(getApplicationContext(), RecievedBooks.class);
+                         finish();
 
                          break;
                      case (R.id.nav_logOut):
                        preferences.edit().clear().apply();
+                         MainActivity.Flag = false;
                          gm.openActivity(getApplicationContext(), MainActivity.class);
+                         finish();
                          break;
                      case (R.id.nav_search):
                          gm.openActivity(getApplicationContext(), MainScreen.class);
+                         finish();
                          break;
 
 //                   case ():
@@ -151,8 +162,6 @@ public class BookDetail extends AppCompatActivity {
 
                         drawerLayout.openDrawer(Gravity.RIGHT);
 
-                        //    drawerLayout.openDrawer(Gravity.RIGHT);
-                        //     openDrawer();
                         break;
 
                 }
@@ -242,10 +251,13 @@ public class BookDetail extends AppCompatActivity {
 
                         JSONObject obje = arr.getJSONObject(i);
                             location = obje.getString("bl_location");
-                            tvLocations.setText(location);
+                            list.add(location);
+
 
 
                         }
+                        String s =  android.text.TextUtils.join(", ", list);
+                        tvLocations.setText(s);
 
                     }
 
@@ -353,6 +365,7 @@ public class BookDetail extends AppCompatActivity {
                     else {
                         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                         gm.openActivity(getApplicationContext(),Dashboard.class);
+                        finish();
                     }
 
 
@@ -361,72 +374,6 @@ public class BookDetail extends AppCompatActivity {
 
                     e.printStackTrace();
                 }
-
-                //  try {
-//                    JSONObject object = new JSONObject(response);
-//                    String success = object.getString("success");
-//
-//                    if (success.equals("0")){
-//
-//                        Toast.makeText(getApplicationContext(),"No Details found",Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                    else {
-//
-//                        JSONObject obj = object.getJSONObject("bookDetails");
-//
-//                        displayName = obj.getString("display_name");
-//
-//                        recieverId = obj.getString("owner_id");
-//
-//                        tvOwner.setText(displayName);
-//
-//                        author = obj.getString("author");
-//                        tvAuthor.setText(author);
-//                        title = obj.getString("title");
-//                        collapsingToolbarLayout.setTitle(title);
-//
-//
-//                        toolbar.setTitle(title);
-//                        tvTitle.setText(title);
-//                        region = obj.getString("region_name");
-//                        tvRRegion.setText(region);
-//
-//
-//
-//                        //location = obj.getString("bl_location");
-////tvLocations.setText(location);
-//                        institute = obj.getString("institute");
-//                        tvInstitute.setText(institute);
-//                        String  city = obj.getString("city_name");
-//                        tvCity.setText(city);
-//
-//                        imgLogo = obj.getString("logo");
-//                        Picasso.with(getApplicationContext()).load(END_POINTS.GET_BOOK_LOGO + imgLogo).into(circularImageView);
-//
-//
-//                        JSONArray arr = object.getJSONArray("bookLocations");
-//
-//                        //   JSONObject loc = arr.getJSONObject(2);
-//                        for (int i = 0; i< arr.length() ; i++){
-//
-//                            JSONObject obje = arr.getJSONObject(i);
-//                            location = obje.getString("bl_location");
-//                            tvLocations.setText(location);
-//
-//
-//                        }
-
-//                    }
-
-
-
-
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    //  Toast.makeText(getApplicationContext(),)
-//                }
-//                // object.get("");
 
             }
         }, new Response.ErrorListener() {
@@ -456,26 +403,14 @@ public class BookDetail extends AppCompatActivity {
                 params.put("requestMessage",message);
 
 
-//                params.put("password", password);
-//
                 return params;
             }
-
-
 
         };
         RequestQueue requestQueue = Volley.newRequestQueue(BookDetail.this);
         requestQueue.add(request);
 
-
-
-
-
-
     }
-
-
-
 
 
 }

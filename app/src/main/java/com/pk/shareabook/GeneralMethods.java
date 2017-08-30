@@ -20,6 +20,7 @@ public class GeneralMethods {
         context.startActivity(intent);
 
 
+
     }
 
     public void showToast(Context context, String message){

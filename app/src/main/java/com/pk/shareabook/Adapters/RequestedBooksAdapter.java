@@ -75,46 +75,12 @@ public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAd
         Picasso.with(mContext.getApplicationContext()).load(END_POINTS.GET_BOOK_LOGO + imgLogo).into(holder.ivBookCover);
 
 
-        holder.tvBookName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("book_id"));
-                // SingleMap = new HashMap<>();
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
 
-            }
-        });
-        holder.tvAuthorName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("book_id"));
-                //SingleMap = new HashMap<>();
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-            }
-        });
-        holder.ivBookCover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("book_id"));
-                //  SingleMap = new HashMap<>();
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-            }
-        });
 
         holder.ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SingleMap = new HashMap<String, String>();
                 SingleMap = mapList.get(position);
              String reqStatus =   SingleMap.get("request_status");
                 if (reqStatus.equals("1")){

@@ -269,6 +269,7 @@ List<DrawerPojo> drawerList;
                     case (R.id.nav_profile):
 
                         gm.openActivity(getApplicationContext(), ProfileInfo.class);
+                        finish();
 
                         break;
                     case (R.id.nav_dashboard):
@@ -277,30 +278,34 @@ List<DrawerPojo> drawerList;
 
                     case (R.id.nav_uploaded_Books):
                         gm.openActivity(getApplicationContext(),UploadedBooks.class);
+                        finish();
                         break;
                     case (R.id.nav_upload_Books):
                         gm.openActivity(getApplicationContext(),UploadBook.class);
+                        finish();
                         break;
                     case (R.id.nav_requested_books):
                         gm.openActivity(getApplicationContext(),RequestedBooks.class);
-
+                        finish();
                     //    gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
                         break;
                     case (R.id.nav_sharing_requests):
                       //  gm.showToast(getApplicationContext(),"Sharing Request");
                         gm.openActivity(getApplicationContext(),SharingRequest.class);
+                        finish();
                         break;
                     case (R.id.nav_shareed_books):
                      //   gm.showToast(getApplicationContext(),"Shared BOOKS");
                         gm.openActivity(getApplicationContext(), MySharedBooks.class);
-
+                        finish();
                         break;
                     case (R.id.nav_recievedBooks):
                        // gm.showToast(getApplicationContext(),"Recieved Books");
                         gm.openActivity(getApplicationContext(), RecievedBooks.class);
-
+                        finish();
                         break;
                     case (R.id.nav_logOut):
+                        MainActivity.Flag = false;
                         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         preferences.edit().clear().apply();
                         gm.openActivity(getApplicationContext(), MainActivity.class);
@@ -308,6 +313,7 @@ List<DrawerPojo> drawerList;
 
                     case (R.id.nav_search):
                         gm.openActivity(getApplicationContext(), MainScreen.class);
+                        finish();
                         break;
 
 //                   case ():
@@ -422,7 +428,7 @@ List<DrawerPojo> drawerList;
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                pd.dismiss();
                 Toast.makeText(getApplicationContext(), "Volley Error", Toast.LENGTH_SHORT).show();
 
             }
@@ -507,18 +513,7 @@ List<DrawerPojo> drawerList;
                     spinnerCities.setAdapter(citiesAdapter);
 
 
-                    for (HashMap.Entry<String, String> e : citiesMap.entrySet()) {
 
-                        String key = e.getKey();
-                        String val = e.getValue();
-                        if (val == spinnerCities.getSelectedItem()) {
-
-                            cityKey = key;
-                            Toast.makeText(getApplicationContext(), key, Toast.LENGTH_SHORT).show();
-                            //   getCities(key);
-                        }
-
-                    }
 
 
                     // regionsMapList.add()

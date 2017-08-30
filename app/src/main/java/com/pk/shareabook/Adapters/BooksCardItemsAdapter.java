@@ -70,42 +70,42 @@ public class BooksCardItemsAdapter extends RecyclerView.Adapter<BooksCardItemsAd
         Picasso.with(mContext.getApplicationContext()).load(END_POINTS.GET_BOOK_LOGO + imgLogo).into(holder.ivBookCover);
 
 
-        holder.tvBookName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("book_id"));
-               // SingleMap = new HashMap<>();
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-
-            }
-        });
-        holder.tvAuthorName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("book_id"));
-                //SingleMap = new HashMap<>();
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-            }
-        });
-        holder.ivBookCover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("book_id"));
-              //  SingleMap = new HashMap<>();
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-            }
-        });
+//        holder.tvBookName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext.getApplicationContext(), BookDetail.class);
+//                SingleMap = mapList.get(position);
+//                intent.putExtra("bookId" , SingleMap.get("book_id"));
+//               // SingleMap = new HashMap<>();
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                mContext.startActivity(intent);
+//
+//            }
+//        });
+//        holder.tvAuthorName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext.getApplicationContext(), BookDetail.class);
+//                SingleMap = mapList.get(position);
+//                intent.putExtra("bookId" , SingleMap.get("book_id"));
+//                //SingleMap = new HashMap<>();
+//
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                mContext.startActivity(intent);
+//            }
+//        });
+//        holder.ivBookCover.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext.getApplicationContext(), BookDetail.class);
+//                SingleMap = mapList.get(position);
+//                intent.putExtra("bookId" , SingleMap.get("book_id"));
+//              //  SingleMap = new HashMap<>();
+//
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                mContext.startActivity(intent);
+//            }
+//        });
 
 
 

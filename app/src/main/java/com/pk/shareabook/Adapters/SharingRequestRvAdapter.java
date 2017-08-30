@@ -80,42 +80,6 @@ public class SharingRequestRvAdapter extends RecyclerView.Adapter<SharingRequest
         Picasso.with(activity.getApplicationContext()).load(END_POINTS.GET_BOOK_LOGO + imgLogo).into(holder.ivBookCover);
 
 
-        holder.tvBookName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("book_id"));
-                // SingleMap = new HashMap<>();
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-
-            }
-        });
-        holder.tvAuthorName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("book_id"));
-                //SingleMap = new HashMap<>();
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-            }
-        });
-        holder.ivBookCover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
-                SingleMap = mapList.get(position);
-                intent.putExtra("bookId" , SingleMap.get("book_id"));
-                //  SingleMap = new HashMap<>();
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-            }
-        });
 
 
          String requestStatus= SingleMap.get("request_status");
@@ -442,7 +406,7 @@ public class SharingRequestRvAdapter extends RecyclerView.Adapter<SharingRequest
                     if (success.equals("1")){
 
                         Toast.makeText(activity.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
-                        gm.openActivity(activity.getApplicationContext(), RecievedBooks.class);
+                        gm.openActivity(activity.getApplicationContext(), SharingRequest.class);
                         //   notifyDataSetChanged();
                     }
 
