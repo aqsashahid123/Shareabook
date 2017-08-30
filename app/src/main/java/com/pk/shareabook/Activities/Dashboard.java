@@ -124,7 +124,7 @@ public class Dashboard extends AppCompatActivity {
                          case (R.id.nav_logOut):
                              SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                              preferences.edit().clear().apply();
-                             MainActivity.Flag = false;
+
                              gm.openActivity(getApplicationContext(), MainActivity.class);
                              finish();
                              break;
@@ -132,9 +132,6 @@ public class Dashboard extends AppCompatActivity {
                              gm.openActivity(getApplicationContext(), MainScreen.class);
                              finish();
                              break;
-
-//                   case ():
-//                       break;
 
 
                      }
@@ -155,7 +152,7 @@ public class Dashboard extends AppCompatActivity {
                 switch(item.getItemId()){
 
                     case (R.id.search):
-                        Toast.makeText(getApplicationContext(),"Search",Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(getApplicationContext(),"Search",Toast.LENGTH_SHORT).show();
                         if (etSearch.getVisibility()==View.VISIBLE){
                             etSearch.setVisibility(View.VISIBLE);
                         }
@@ -209,7 +206,7 @@ public class Dashboard extends AppCompatActivity {
 
                         drawerLayout.openDrawer(Gravity.RIGHT);
 
-                        Toast.makeText(getApplicationContext(),"Open Menu",Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getApplicationContext(),"Open Menu",Toast.LENGTH_SHORT).show();
                         break;
 
                 }
@@ -244,7 +241,7 @@ public class Dashboard extends AppCompatActivity {
        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GET_ALL_BOOKS, new Response.Listener<String>() {
            @Override
            public void onResponse(String response) {
-            Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
                pd.dismiss();
                try {
                    JSONObject object = new JSONObject(response);

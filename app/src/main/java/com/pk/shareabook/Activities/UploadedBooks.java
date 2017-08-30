@@ -113,7 +113,6 @@ public class UploadedBooks extends AppCompatActivity {
                          finish();
                          break;
                      case (R.id.nav_logOut):
-                         MainActivity.Flag = false;
                          SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                          preferences.edit().clear().apply();
                          gm.openActivity(getApplicationContext(), MainActivity.class);

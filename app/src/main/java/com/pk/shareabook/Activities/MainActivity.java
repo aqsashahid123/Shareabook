@@ -32,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
     TextView tvSignUp;
 
 
-    public static boolean Flag;
+
 
     EditText etEmail, etPassword;
 
+    boolean loginStatus;
 
     String email,password,success,isActive,id,city_id,display_name, firstName,LastName,displayPic,institute,regionId;
 
@@ -48,12 +49,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (Flag){
+
+
+
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            loginStatus   =  preferences.getBoolean("LoginStatus",false);
+
+        if (loginStatus){
             Intent intent = new Intent(MainActivity.this,Dashboard.class);
             startActivity(intent);
             finish();
 
         }
+
+
 
 
         tvSignUp = (TextView)findViewById(R.id.tvSignUp);
@@ -143,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("region_id", regionId);
                                     editor.putString("first_name", firstName);
                                     editor.putString("last_name", LastName);
+                                    editor.putBoolean("LoginStatus",true);
                                     editor.putString("institute", institute);
                                     editor.putString("display_name", display_name);
                                     editor.apply();
@@ -155,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     }
                                     if (Integer.valueOf(isActive) == 1) {
-                                        Flag = true;
+
                                         Intent intent = new Intent(MainActivity.this, Dashboard.class);
                                         startActivity(intent);
                                         finish();

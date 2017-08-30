@@ -128,7 +128,7 @@ public class BookDetail extends AppCompatActivity {
                          break;
                      case (R.id.nav_logOut):
                        preferences.edit().clear().apply();
-                         MainActivity.Flag = false;
+
                          gm.openActivity(getApplicationContext(), MainActivity.class);
                          finish();
                          break;

@@ -132,7 +132,6 @@ public class RequestedBooks extends AppCompatActivity {
                         finish();
                         break;
                     case (R.id.nav_logOut):
-                        MainActivity.Flag = false;
                         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         preferences.edit().clear().apply();
                         gm.openActivity(getApplicationContext(), MainActivity.class);
@@ -172,7 +171,7 @@ public class RequestedBooks extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.GET_REQUESTED_BOOKS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                 pd.dismiss();
                 try {
                     JSONObject object = new JSONObject(response);
