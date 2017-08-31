@@ -582,6 +582,7 @@ public class UploadBook extends AppCompatActivity {
 
                 String s = android.text.TextUtils.join(",", list);
 
+
 //                int i =0;
 //                for(String s: locationsArray) {
 
