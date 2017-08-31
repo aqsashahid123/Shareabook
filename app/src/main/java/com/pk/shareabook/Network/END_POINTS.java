@@ -60,5 +60,7 @@ public class END_POINTS {
 
     public static String REGISTER_TOKEN = BASE_URL + "registerTokenId";
 
+    public static String UPDATE_BOOK = BASE_URL + "update_book";
+
 
 }

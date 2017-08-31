@@ -76,7 +76,9 @@ public class UploadBook extends AppCompatActivity {
     ArrayList<String> tmpLocationsArray;
     String[] locationsArray;
     Button btnAddDataInArray,uploadBook;
-    TextView tvOne,tv2,tv3,tv4,tv5;
+
+    String statusFlag,bookId;
+
     GeneralMethods gm;
     NavigationView navigationView;
     LocationsAdapter adapt;
@@ -136,6 +138,9 @@ public class UploadBook extends AppCompatActivity {
         uploadBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 postImage();
                 //uploadBook();
             }
@@ -241,6 +246,9 @@ public class UploadBook extends AppCompatActivity {
         bookTitle = getIntent().getStringExtra("bookTitle");
         bookAuthor = getIntent().getStringExtra("bookAuthor");
         bookCover = getIntent().getStringExtra("bookCover");
+        statusFlag = getIntent().getStringExtra("Flag");
+
+
 
 //
         etBookTitle.setText(bookTitle);
@@ -385,10 +393,16 @@ public class UploadBook extends AppCompatActivity {
             public void onResponse(String response) {
 
                 pd.dismiss();
-                if (response!= null){
+                if (response!= null) {
 
                     imageName = response;
-                    uploadBook();
+
+                    if (statusFlag.equals("TRUE")) {
+                        bookId = getIntent().getStringExtra("bookId");
+                        updateBook(bookId);
+                    } else {
+                        uploadBook();
+                    }
                 }
 
                 Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
@@ -514,6 +528,92 @@ public class UploadBook extends AppCompatActivity {
 
 
     }
+
+    public void updateBook(final String bookId){
+
+
+        final ProgressDialog pd = new ProgressDialog(UploadBook.this);
+        pd.setMessage("loading");
+        pd.show();
+
+
+        StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.UPDATE_BOOK, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                pd.dismiss();
+//                if (response!= null){
+//
+//                    imageName = response;
+//
+//                }
+
+                Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(UploadBook.this,"Network Error",Toast.LENGTH_SHORT).show();
+                pd.dismiss();
+
+            }
+        }
+        )
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                String cityId=  preferences.getString("city_id","");
+                String regionId = preferences.getString("region_id","");
+                //      params.put("bookId", result.get("bookId"));
+
+
+                params.put("book_id",bookId);
+                params.put("userId", id);
+                params.put("book_title",etBookTitle.getText().toString());
+                params.put("book_author",etAuthor.getText().toString());
+                params.put("uploaded_book_logo_name",imageName);
+                params.put("book_institute",etInstitute.getText().toString());
+                params.put("book_city_id",cityId);
+                params.put("book_region_id",regionId);
+
+                //    locationsArray = list.toArray(new String[list.size()]);
+//                String k;
+//                String r;
+
+                String s = android.text.TextUtils.join(",", list);
+
+//                int i =0;
+//                for(String s: locationsArray) {
+
+                //  k = s+"," + r;
+//                    params.put("location["+(i++)+"] ", s);
+//                    //r = s;
+//                }
+
+                params.put("location", s);
+//
+                return params;
+            }
+
+
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(UploadBook.this);
+        requestQueue.add(request);
+
+
+
+    }
+
+
+
+
     public void addDataInComments(){
 
 

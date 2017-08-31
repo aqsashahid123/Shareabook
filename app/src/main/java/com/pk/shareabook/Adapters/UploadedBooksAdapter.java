@@ -80,43 +80,6 @@ public class UploadedBooksAdapter extends RecyclerView.Adapter<UploadedBooksAdap
         Picasso.with(activity.getApplicationContext()).load(END_POINTS.GET_BOOK_LOGO + imgLogo).into(holder.ivBookCover);
 
 
-//        holder.tvBookName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
-//                SingleMap = mapList.get(position);
-//                intent.putExtra("bookId" , SingleMap.get("bookId"));
-//                // SingleMap = new HashMap<>();
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                activity.startActivity(intent);
-//
-//            }
-//        });
-//        holder.tvAuthorName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
-//                SingleMap = mapList.get(position);
-//                intent.putExtra("bookId" , SingleMap.get("bookId"));
-//                //SingleMap = new HashMap<>();
-//
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                activity.startActivity(intent);
-//            }
-//        });
-//        holder.ivBookCover.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(activity.getApplicationContext(), BookDetail.class);
-//                SingleMap = mapList.get(position);
-//                intent.putExtra("bookId" , SingleMap.get("bookId"));
-//                //  SingleMap = new HashMap<>();
-//
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                activity.startActivity(intent);
-//            }
-//        });
-
         holder.ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +110,8 @@ public class UploadedBooksAdapter extends RecyclerView.Adapter<UploadedBooksAdap
 
                                 Intent intent = new Intent( activity.getApplicationContext(), UploadBook.class);
                                 intent.putExtra("bookTitle",SingleMap.get("title"));
+                                intent.putExtra("bookId",SingleMap.get("bookId"));
+                                intent.putExtra("Flag","TRUE");
                                 intent.putExtra("bookAuthor",SingleMap.get("author"));
                                 intent.putExtra("bookCover",SingleMap.get("logo"));
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
