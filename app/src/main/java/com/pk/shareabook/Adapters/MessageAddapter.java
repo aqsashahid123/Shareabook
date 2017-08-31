@@ -74,4 +74,7 @@ public class MessageAddapter extends ArrayAdapter<MessagesPojo> {
         return convertView;
 
     }
+
+
+
 }

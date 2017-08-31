@@ -3,7 +3,8 @@ package com.pk.shareabook.Adapters;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
@@ -24,8 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.pk.shareabook.Activities.BookDetail;
-import com.pk.shareabook.Activities.RecievedBooks;
 import com.pk.shareabook.Activities.SharingRequest;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
@@ -238,17 +237,12 @@ public class SharingRequestRvAdapter extends RecyclerView.Adapter<SharingRequest
 
 
     public void AcceptRequest(final String id){
-        pd = new ProgressDialog(activity.getApplicationContext());
-        pd.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 
-        pd.setMessage("loading");
-        pd.show();
         StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.ACCEPT_REQUEST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
 
-                pd.dismiss();
 
               //  Toast.makeText(activity.getApplicationContext(),response,Toast.LENGTH_SHORT).show();
 
@@ -279,7 +273,6 @@ public class SharingRequestRvAdapter extends RecyclerView.Adapter<SharingRequest
             public void onErrorResponse(VolleyError error) {
 
                 Toast.makeText(activity.getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
-                pd.dismiss();
 
             }
         }
@@ -292,6 +285,10 @@ public class SharingRequestRvAdapter extends RecyclerView.Adapter<SharingRequest
 
 
                 params.put("requestId", id);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+                // preferences.getString("bookId","");
+
+                params.put("id", preferences.getString("id",""));
                 return params;
             }
 
@@ -306,18 +303,12 @@ public class SharingRequestRvAdapter extends RecyclerView.Adapter<SharingRequest
 
     public void RejectRequest(final String requestId, final String bookId){
 
-        pd = new ProgressDialog(activity.getApplicationContext());
-        pd.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-
-        pd.setMessage("loading");
-        pd.show();
 
 
         StringRequest request = new StringRequest(Request.Method.POST, END_POINTS.REJECT_REQUEST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
-                pd.dismiss();
 
               //  Toast.makeText(activity.getApplicationContext(),response,Toast.LENGTH_SHORT).show();
 
@@ -349,7 +340,7 @@ public class SharingRequestRvAdapter extends RecyclerView.Adapter<SharingRequest
             public void onErrorResponse(VolleyError error) {
 
                 Toast.makeText(activity.getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
-                pd.dismiss();
+
 
             }
         }
@@ -362,6 +353,10 @@ public class SharingRequestRvAdapter extends RecyclerView.Adapter<SharingRequest
                 params.put("requestId", requestId);
                 params.put("bookId",bookId);
 //
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+                // preferences.getString("bookId","");
+
+                params.put("id", preferences.getString("id",""));
                 return params;
             }
 

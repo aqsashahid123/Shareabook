@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -16,8 +17,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -44,10 +43,6 @@ import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
 import com.pk.shareabook.R;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -148,7 +143,7 @@ public class UploadBook extends AppCompatActivity {
 
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        id =  preferences.getString("id","");
+        id =  preferences.getString("bookId","");
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
@@ -181,54 +176,53 @@ public class UploadBook extends AppCompatActivity {
                    case (R.id.nav_profile):
 
                        gm.openActivity(getApplicationContext(), ProfileInfo.class);
-                       finish();
 
                        break;
                    case (R.id.nav_dashboard):
                        gm.openActivity(getApplicationContext(), Dashboard.class);
-                    //   finish();
                        break;
 
                    case (R.id.nav_uploaded_Books):
                        gm.openActivity(getApplicationContext(),UploadedBooks.class);
-                       finish();
                        break;
                    case (R.id.nav_upload_Books):
                        gm.openActivity(getApplicationContext(),UploadBook.class);
-                       finish();
                        break;
                    case (R.id.nav_requested_books):
                      //  gm.showToast(getApplicationContext(),"REQUESTED BOOKS");
                        gm.openActivity(getApplicationContext(),RequestedBooks.class);
-                       finish();
+
                        break;
                    case (R.id.nav_sharing_requests):
                        //gm.showToast(getApplicationContext(),"Sharing Request");
                        gm.openActivity(getApplicationContext(),SharingRequest.class);
-                       finish();
                        break;
                    case (R.id.nav_shareed_books):
                        //gm.showToast(getApplicationContext(),"Shared BOOKS");
                        gm.openActivity(getApplicationContext(), MySharedBooks.class);
-                       finish();
+
                        break;
                    case (R.id.nav_recievedBooks):
                        //gm.showToast(getApplicationContext(),"Recieved Books");
                        gm.openActivity(getApplicationContext(), RecievedBooks.class);
-                       finish();
+
                        break;
                    case (R.id.nav_logOut):
                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                        preferences.edit().clear().apply();
 
                        gm.openActivity(getApplicationContext(), MainActivity.class);
-                        finish();
+
                        break;
 
                    case (R.id.nav_search):
                        gm.openActivity(getApplicationContext(), MainScreen.class);
-                       finish();
                        break;
+
+
+//                   case ():
+//                       break;
+
 
                }
 
@@ -500,21 +494,21 @@ public class UploadBook extends AppCompatActivity {
                 params.put("book_city_id",cityId);
                 params.put("book_region_id",regionId);
 
-            //    locationsArray = list.toArray(new String[list.size()]);
+                locationsArray = list.toArray(new String[list.size()]);
 //                String k;
 //                String r;
 
-               String s = android.text.TextUtils.join(",", list);
+     //          String s = android.text.TextUtils.join(",", list);
 
-//                int i =0;
-//                for(String s: locationsArray) {
+                int i =0;
+                for(String s: locationsArray) {
 
                   //  k = s+"," + r;
-//                    params.put("location["+(i++)+"] ", s);
-//                    //r = s;
-//                }
+                    params.put("location["+(i++)+"] ", s);
+                    //r = s;
+                }
 
-                params.put("location", s);
+              //  params.put("location", s);
 //
                 return params;
             }
