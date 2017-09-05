@@ -14,6 +14,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.pk.shareabook.Activities.MainActivity;
+import com.pk.shareabook.Activities.Messages;
 import com.pk.shareabook.R;
 
 
@@ -24,13 +25,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-         showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"),remoteMessage.getData().get("important"));
 
           // showNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody(),"important");
 
         // Volley_helper volley_helper = new Volley_helper();
         Intent intent = null;
 
+        if(remoteMessage.getData().get("title").equals("New Message Recieved"))
+        {
+            showNotificationMessages(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"),remoteMessage.getData().get("important"),
+                    remoteMessage.getData().get("reciever_id"),remoteMessage.getData().get("chat_id"));
+
+
+        }
+
+        else{
+            showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"),remoteMessage.getData().get("important"));
+
+        }
 
 
         /*    SharedPreferences preferences = getSharedPreferences("Notifications",MODE_PRIVATE);
@@ -139,6 +151,60 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         stackBuilder.addParentStack(MainActivity.class);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("type", type);
+
+// Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(intent);
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        getApplicationContext(),
+                        0,
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+//
+//        Uri path = Uri.parse("android.resource://"+mContext.getPackageName()+"/"+R.raw.one);
+//        Uri sound = Uri.parse("file:///android_asset/one.mp3");
+
+        // NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        String tickerText = "New Message! : " + body;
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                getApplicationContext());
+        Notification notification = null;
+        notification = mBuilder.setTicker("New Message!")
+                .setAutoCancel(true)
+                .setContentTitle(title)
+                .setContentText(body)
+//                    .setDefaults(Notification.DEFAULT_ALL)
+                .setTicker(tickerText)
+                .setPriority(Notification.PRIORITY_HIGH)
+                .setWhen(System.currentTimeMillis())
+                .setStyle(new NotificationCompat.InboxStyle())
+                // .setStyle(inboxStyle)
+                .setContentIntent(resultPendingIntent)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+//                    .setSound(sound)
+//                    .setLargeIcon(anImage)
+                .setSmallIcon(R.drawable.app_icon)
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(mNotificationId, notification);
+
+
+    }
+
+
+
+    private void showNotificationMessages(String title, String body, String type,String recieverId,String chet_id) {
+
+//        int icon = R.mipmap.ic_launcher;
+
+        int mNotificationId = NOTIFY_ME_ID;
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+        stackBuilder.addParentStack(Messages.class);
+        Intent intent = new Intent(this, Messages.class);
+      //  intent.putExtra("update", "true");
+        intent.putExtra("RecieverId", "recieverId");
 
 // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(intent);

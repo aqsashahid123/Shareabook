@@ -2,7 +2,9 @@ package com.pk.shareabook.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +37,7 @@ public class Messages extends AppCompatActivity {
     ArrayList<MessagesPojo> messagesPojos;
     EditText messageEDT;
     Button SendMessage;
-    String messageEntered;
+    String messageEntered,senderId,RecieverId,chat_id;
     MessageAddapter messageAddapter;
 
     @Override
@@ -49,6 +51,14 @@ public class Messages extends AppCompatActivity {
         {
             getMessagesupdate();
         }
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Messages.this);
+
+
+        senderId = preferences.getString("id","");
+        RecieverId = intent.getStringExtra("RecieverId");
+        chat_id = intent.getStringExtra("chat_id");
+
 
         mlistView = (ListView) findViewById(R.id.messageView);
         messageEDT = (EditText) findViewById(R.id.messageTXT);
@@ -144,8 +154,8 @@ public class Messages extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("userId", "12");
-                params.put("chat_of_request_id", "6");
+                params.put("userId",senderId);
+                params.put("chat_of_request_id", chat_id);
 
                 return params;
             }
@@ -216,8 +226,8 @@ public class Messages extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("userId", "12");
-                params.put("chat_of_request_id", "6");
+                params.put("userId", senderId);
+                params.put("chat_of_request_id", chat_id);
 
                 return params;
             }
@@ -255,9 +265,9 @@ public class Messages extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("from", "23");
-                params.put("chat_of_request_id", "6");
-                params.put("to", "12");
+                params.put("from",senderId);
+                params.put("chat_of_request_id", chat_id);
+                params.put("to", RecieverId);
                 params.put("message", messageEntered);
 
                 return params;

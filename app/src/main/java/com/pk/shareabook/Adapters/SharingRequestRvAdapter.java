@@ -3,6 +3,7 @@ package com.pk.shareabook.Adapters;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.view.ContextThemeWrapper;
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.pk.shareabook.Activities.Messages;
 import com.pk.shareabook.Activities.SharingRequest;
 import com.pk.shareabook.GeneralMethods;
 import com.pk.shareabook.Network.END_POINTS;
@@ -168,11 +170,11 @@ public class SharingRequestRvAdapter extends RecyclerView.Adapter<SharingRequest
                                     break;
                                 case R.id.message:
 
-//
-//                                    mmmm = Lmap.get(position);
-//                                    String bookId = mmmm.get("request_book_id");
-//                                    String reqId = mmmm.get("request_id");
-//                                    RejectRequest(reqId, bookId);
+                                    Intent intent = new Intent(activity, Messages.class);
+                                    intent.putExtra("RecieverId",SingleMap.get("request_sender_id"));
+                                    intent.putExtra("chat_id", SingleMap.get("request_id"));
+                                    activity.startActivity(intent);
+
 
 
                                     break;
